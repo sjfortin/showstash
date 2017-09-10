@@ -1,5 +1,5 @@
 {
-  "name": "express_router_lecture_angular",
+  "name": "showstash",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "nodemon server/server.js",
     "start": "node server/server.js"
   },
-  "author": "Scott Bromander, Kris Szafranski",
+  "author": "Sam Fortin",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.4",
