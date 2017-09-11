@@ -2,19 +2,21 @@ myApp.controller('LoginController', function($http, $location, UserService) {
     console.log('LoginController created');
     var vm = this;
     vm.user = {
-      username: '',
-      password: ''
+      email: '',
+      password: '',
+      first_name: '',
+      last_name: ''
     };
     vm.message = '';
 
     vm.login = function() {
       console.log('LoginController -- login');
-      if(vm.user.username === '' || vm.user.password === '') {
-        vm.message = "Enter your username and password!";
+      if(vm.user.email === '' || vm.user.password === '') {
+        vm.message = "Enter your email and password!";
       } else {
         console.log('LoginController -- login -- sending to server...', vm.user);
         $http.post('/', vm.user).then(function(response) {
-          if(response.data.username) {
+          if(response.data.email) {
             console.log('LoginController -- login -- success: ', response.data);
             // location works with SPA (ng-route)
             $location.path('/user'); // http://localhost:5000/#/user
@@ -31,8 +33,8 @@ myApp.controller('LoginController', function($http, $location, UserService) {
 
     vm.registerUser = function() {
       console.log('LoginController -- registerUser');
-      if(vm.user.username === '' || vm.user.password === '') {
-        vm.message = "Choose a username and password!";
+      if (vm.user.email === '' || vm.user.password === '' || vm.user.first_name === '' || vm.user.last_name === '') {
+        vm.message = "Please enter your name, email, or password.";
       } else {
         console.log('LoginController -- registerUser -- sending to server...', vm.user);
         $http.post('/register', vm.user).then(function(response) {
