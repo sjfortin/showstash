@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>ShowStash</title>
-        <link rel="stylesheet" href="styles/style.css">
 
-        <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
-        <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
-        <script type="text/javascript" src="scripts/client.js"></script>
+<head>
+    <title>ShowStash</title>
 
-        <!-- Controllers -->
-        <script type="text/javascript" src="scripts/controllers/info.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/show.controller.js"></script>
+    <!-- Angular and Angular-Route -->
+    <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
+    <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
 
-        <!-- Services -->
-        <script type="text/javascript" src="scripts/services/user.service.js"></script>
-        <script type="text/javascript" src="scripts/services/show.service.js"></script>
-    </head>
+    <!-- Angular Material -->
+    <link href="vendors/angular-material/angular-material.css" rel="stylesheet" type="text/css">
+    <script src="vendors/angular-material/angular-animate.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-material/angular-aria.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-material/angular-messages.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-material/angular-material.min.js" charset="utf-8"></script>
 
-    <body ng-app="ShowStashApp">
-      <header ng-include="'/views/partials/header.html'"></header>
+    <!-- Client Scripts -->
+    <script type="text/javascript" src="scripts/client.js"></script>
 
-      <main ng-view></main>
+    <!-- Controllers -->
+    <script type="text/javascript" src="scripts/controllers/info.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/show.controller.js"></script>
 
-    </body>
+    <!-- Services -->
+    <script type="text/javascript" src="scripts/services/user.service.js"></script>
+    <script type="text/javascript" src="scripts/services/show.service.js"></script>
+
+    <!-- CSS -->
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body ng-app="ShowStashApp">
+    <header ng-include="'/views/partials/header.html'"></header>
+
+    <main ng-view></main>
+
+</body>
+
 </html>
