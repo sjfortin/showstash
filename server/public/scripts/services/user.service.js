@@ -1,4 +1,4 @@
-myApp.factory('UserService', function($http, $location){
+app.factory('UserService', function($http, $location){
   console.log('UserService Loaded');
 
   var userObject = {};
@@ -9,9 +9,11 @@ myApp.factory('UserService', function($http, $location){
     getuser : function(){
       console.log('UserService -- getuser');
       $http.get('/user').then(function(response) {
-          if(response.data.email) {
+          if(response.data.email) {            
               // user has a curret session on the server
               userObject.email = response.data.email;
+              userObject.first_name = response.data.first_name;
+              userObject.last_namep = response.data.last_namep;
               console.log('UserService -- getuser -- User Data: ', userObject.email);
           } else {
               console.log('UserService -- getuser -- failure');

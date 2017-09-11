@@ -1,12 +1,12 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var app = angular.module('ShowStashApp', ['ngRoute']);
 
 /// Routes ///
-myApp.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
-  console.log('myApp -- config')
+  console.log('app -- config')
   $routeProvider
-    .when('/home', {
-      templateUrl: '/views/templates/home.html',
+    .when('/login', {
+      templateUrl: '/views/templates/login.html',
       controller: 'LoginController as lc',
     })
     .when('/register', {
@@ -16,6 +16,15 @@ myApp.config(function($routeProvider, $locationProvider) {
     .when('/user', {
       templateUrl: '/views/templates/user.html',
       controller: 'UserController as uc',
+      resolve: {
+        getuser : function(UserService){
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/shows', {
+      templateUrl: '/views/templates/shows.html',
+      controller: 'ShowsController as sc',
       resolve: {
         getuser : function(UserService){
           return UserService.getuser();
@@ -32,6 +41,6 @@ myApp.config(function($routeProvider, $locationProvider) {
       }
     })
     .otherwise({
-      redirectTo: 'home'
+      redirectTo: 'login'
     });
 });
