@@ -2,5 +2,11 @@
 <div class="container">
     <h1>My Shows</h1>
     <p>{{sc}}</p>
+    <div class="show-row" ng-repeat="show in sc.shows.data" style="margin:20px 0;">
+        <div class="band">{{show.band}}</div>
+        <div class="show-date">{{show.show_date | date: shortdate}}</div>
+        <div class="venue">{{show.venue_name}} | {{show.venue_city}}, {{show.venue_state}}</div>
+        <div class="button"><button>View Details</button></div>
+    </div>
     <button class="btn btn-default" ng-click="uc.userService.logout()">Log Out</button>
 </div>

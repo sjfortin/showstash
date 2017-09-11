@@ -9,9 +9,9 @@ CREATE TABLE users
 CREATE TABLE venues
 (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
-    city VARCHAR(80) NOT NULL,
-    state VARCHAR(10)
+    venue_name VARCHAR(120) NOT NULL,
+    venue_city VARCHAR(80) NOT NULL,
+    venue_state VARCHAR(10)
 );
 CREATE TABLE users_shows
 (

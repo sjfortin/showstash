@@ -5,17 +5,15 @@ var pool = require('../modules/pool');
 // Handles Ajax request for user information if user is authenticated
 router.get('/', function (req, res) {
     console.log('get /user route');
+    console.log('this is the req.user', req.user);
     // check if logged in
     if (req.isAuthenticated()) {
-        console.log('this is the req.body', req.body);
-        console.log('this is the req.user', req.user);
-
         pool.connect(function (errDatabase, client, done) {
             if (errDatabase) {
                 console.log('Error connecting to database', err);
                 res.sendStatus(500);
             } else {
-                client.query('SELECT * FROM users_shows', function (errQuery, data) {
+                client.query('SELECT * FROM users_shows LEFT OUTER JOIN venues ON venues.id = users_shows.venue_id  WHERE user_id=$1;', [req.user.id], function (errQuery, data) {
                     done();
                     if (errQuery) {
                         console.log('Error making database query', errQuery);
