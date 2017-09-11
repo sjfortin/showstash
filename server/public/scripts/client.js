@@ -1,4 +1,4 @@
-var app = angular.module('ShowStashApp', ['ngRoute']);
+var app = angular.module('ShowStashApp', ['ngRoute', 'ngMaterial']);
 
 /// Routes ///
 app.config(function($routeProvider, $locationProvider) {
@@ -24,7 +24,7 @@ app.config(function($routeProvider, $locationProvider) {
     })
     .when('/shows', {
       templateUrl: '/views/templates/shows.html',
-      controller: 'ShowsController as sc',
+      controller: 'ShowController as sc',
       resolve: {
         getuser : function(UserService){
           return UserService.getuser();
