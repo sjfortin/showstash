@@ -1,4 +1,26 @@
-var app = angular.module('ShowStashApp', ['ngRoute', 'ngMaterial']);
+var app = angular.module('ShowStashApp', ['ngRoute', 'ngMaterial']).config(function ($mdThemingProvider) {
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue', {
+      'default': '900',
+      'hue-1': '100',
+      'hue-2': '500',
+      'hue-3': 'A100'
+    })
+    .accentPalette('grey', {
+      'default': '50',
+      'hue-1': '100',
+      'hue-2': '500',
+      'hue-3': 'A100'
+    })
+    .backgroundPalette('blue', {
+      'default': '50',
+      'hue-1': '100',
+      'hue-2': '500',
+      'hue-3': 'A100'
+    });
+
+});
 
 /// Routes ///
 app.config(function ($routeProvider, $locationProvider) {
