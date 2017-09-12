@@ -5,10 +5,10 @@
             <div class="band">{{show.band}}</div>
             <div class="show-date">{{show.show_date | date: shortdate}}</div>
             <div class="venue">{{show.venue_name}} | {{show.venue_city}}, {{show.venue_state}}</div>
-            <div class="button"><button>View Details</button></div>
+            <div class="button"><md-button class="md-raised md-primary">View Details</md-button></div>
         </div>
     </div>
 </div>
 <div layout="row" layout-padding layout-margin>
-    <button class="btn btn-default" ng-click="sc.userService.logout()">Log Out</button>
+    <md-button class="md-raised md-accent" ng-click="sc.userService.logout()">Log Out</md-button>
 </div>

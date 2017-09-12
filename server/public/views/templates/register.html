@@ -1,25 +1,28 @@
-<div class="container">
-  <h1 class="lead">Register User</h1>
-  <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
-  <form ng-submit="lc.registerUser()">
-    <div>
-        <label for="first_name">First Name:</label>
-        <input type="text" ng-model="lc.user.first_name" />
+<div layout="row" layout-padding>
+    <div flex="50">
+        <h1>Register User</h1>
+        <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
+            <form ng-submit="lc.registerUser()">
+                <md-input-container class="md-block">
+                    <label>First Name</label>
+                    <input type="text" ng-model="lc.user.first_name" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Last Name</label>
+                    <input type="text" ng-model="lc.user.last_name" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input type="text" ng-model="lc.user.email" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Password</label>
+                    <input type="password" ng-model="lc.user.password" />
+                </md-input-container>
+                <div>
+                    <md-button type="submit" class="md-raised md-primary">Register</md-button>
+                    <md-button ng-href="#home">Cancel</md-button>
+                </div>
+            </form>
     </div>
-    <div>
-        <label for="last_name">Last Name:</label>
-        <input type="text" ng-model="lc.user.last_name" />
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="text" ng-model="lc.user.email" />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" ng-model="lc.user.password" />
-    </div>
-    <input class="btn btn-default" type="submit" name="submit" value="Register" />
-    <a href="#home">Cancel</a>
-  </form>
-
 </div>

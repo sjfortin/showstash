@@ -1,4 +1,4 @@
-<div layout="row" layout-padding layout-align="center center">
+<div layout="row" layout-padding>
     <div flex="50">
         <h1>Login</h1>
         <h1 role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
@@ -12,8 +12,8 @@
                     <input type="password" ng-model="lc.user.password" />
                 </md-input-container>
                 <div>
-                    <md-button type="submit">Log In</md-button>
-                    <a href="#register">Register</a>
+                    <md-button type="submit" class="md-raised md-primary">Log In</md-button>
+                    <md-button ng-href="#register">Register</md-button>
                 </div>
             </form>
     </div>

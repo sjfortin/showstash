@@ -1,7 +1,7 @@
 var app = angular.module('ShowStashApp', ['ngRoute', 'ngMaterial']);
 
 /// Routes ///
-app.config(function($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
   console.log('app -- config')
   $routeProvider
@@ -17,7 +17,7 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: '/views/templates/user.html',
       controller: 'UserController as uc',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }
@@ -26,7 +26,16 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: '/views/templates/shows.html',
       controller: 'ShowController as sc',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/add', {
+      templateUrl: '/views/templates/add.html',
+      controller: 'ShowController as sc',
+      resolve: {
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }
@@ -35,7 +44,7 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: '/views/templates/info.html',
       controller: 'InfoController',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }

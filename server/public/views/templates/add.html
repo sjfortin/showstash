@@ -1,8 +1,31 @@
-<form ng-submit="sc.addShow()">
-    <input type="text" value="ng-model='sc.newShow.band'" placeholder="Band">
-    <input type="date" value="ng-model='sc.newShow.date'" placeholder="Date">
-    <input type="text" value="ng-model='sc.newShow.venue'" placeholder="Venue">
-    <input type="text" value="ng-model='sc.newShow.city'" placeholder="City">
-    <input type="text" value="ng-model='sc.newShow.state'" placeholder="State">
-    <button type="submit">Add Show</button>
-</form>
+<div ng-include="'views/partials/nav.html'"></div>
+<div layout="row" layout-padding>
+    <div flex="50">
+        <h1>Add a Show</h1>
+        <form ng-submit="sc.addShow()">
+            <md-input-container class="md-block">
+                <label>Band</label>
+                <input type="text" ng-model="sc.newShow.band">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Date</label>
+                <input type="date" ng-model="sc.newShow.date">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Venue</label>
+                <input type="text" ng-model="sc.newShow.venue">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>City</label>
+                <input type="text" ng-model="sc.newShow.city">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>State</label>
+                <input type="text" ng-model="sc.newShow.state">
+            </md-input-container>
+            <div>
+                <md-button type="submit" class="md-raised md-primary">Add Show</md-button>
+            </div>
+        </form>
+    </div>
+</div>
