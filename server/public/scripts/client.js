@@ -77,9 +77,9 @@ app.config(function ($routeProvider, $locationProvider) {
         }
       }
     })
-    .when('/info', {
-      templateUrl: '/views/templates/info.html',
-      controller: 'InfoController',
+    .when('/profile', {
+      templateUrl: '/views/templates/profile.html',
+      controller: 'LoginController as lc',
       resolve: {
         getuser: function (UserService) {
           return UserService.getuser();

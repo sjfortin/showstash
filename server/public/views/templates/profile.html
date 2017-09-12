@@ -1,0 +1,27 @@
+<div ng-include="'views/partials/nav.html'"></div>
+
+<div layout="row" layout-padding>
+    <div flex="50">
+        <h1>My Profile</h1>
+        {{lc}}
+        <p>Update your email address and password here.</p>
+            <form ng-submit="lc.updateProfile()">
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input type="text" ng-model="lc.user.email" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Old Password</label>
+                    <input type="password" ng-model="lc.user.old_password" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>New Password</label>
+                    <input type="password" ng-model="lc.user.password" />
+                </md-input-container>
+                <div>
+                    <md-button type="submit" class="md-raised md-primary">Update Profile</md-button>
+                    <md-button ng-href="#shows">Cancel</md-button>
+                </div>
+            </form>
+    </div>
+</div>

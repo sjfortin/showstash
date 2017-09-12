@@ -8,6 +8,8 @@ app.controller('LoginController', function($http, $location, UserService) {
     };
     vm.message = '';
 
+    vm.userObject = UserService.userObject;
+
     vm.login = function() {
       if(vm.user.email === '' || vm.user.password === '') {
         vm.message = "Enter your email and password!";
