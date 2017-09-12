@@ -1,15 +1,17 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div layout="row" layout-padding>
     <div flex="50">
-        <h1>Add a Show</h1>
-        <form ng-submit="sc.addShow()">
+        <h1>Search API here</h1>
+    </div>
+    <div flex="50">
+        <h1>Manually Add a Show</h1>
+        <form>
             <md-input-container class="md-block">
                 <label>Band</label>
                 <input type="text" ng-model="sc.newShow.band">
             </md-input-container>
             <md-input-container class="md-block">
-                <label>Date</label>
-                <input type="date" ng-model="sc.newShow.date">
+                <md-datepicker ng-model="sc.newShow.show_date" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Venue</label>
@@ -19,12 +21,17 @@
                 <label>City</label>
                 <input type="text" ng-model="sc.newShow.city">
             </md-input-container>
-            <md-input-container class="md-block">
+            <md-input-container>
                 <label>State</label>
-                <input type="text" ng-model="sc.newShow.state">
+                <md-select ng-model="sc.newShow.state">
+                    <!-- <md-option><em>None</em></md-option> -->
+                    <md-option ng-repeat="state in sc.states" ng-value="state">
+                        {{state}}
+                    </md-option>
+                </md-select>
             </md-input-container>
             <div>
-                <md-button type="submit" class="md-raised md-primary">Add Show</md-button>
+                <md-button type="submit" class="md-raised md-primary" ng-click="sc.addShow()">Add Show</md-button>
             </div>
         </form>
     </div>

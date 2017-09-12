@@ -9,7 +9,7 @@ CREATE TABLE users
 CREATE TABLE venues
 (
     id SERIAL PRIMARY KEY,
-    venue_name VARCHAR(120) NOT NULL,
+    venue_name VARCHAR(80) NOT NULL,
     venue_city VARCHAR(80) NOT NULL,
     venue_state VARCHAR(10)
 );
@@ -18,9 +18,11 @@ CREATE TABLE users_shows
     id SERIAL PRIMARY KEY,
     band VARCHAR(80) NOT NULL,
     show_date DATE NOT NULL,
+    venue VARCHAR(120) NOT NULL,
+    city VARCHAR(80) NOT NULL,
+    state VARCHAR(10),
     notes VARCHAR(256),
-    user_id INT REFERENCES users,
-    venue_id INT REFERENCES venues
+    user_id INT REFERENCES users
 );
 -- CREATE TABLE friends
 -- (

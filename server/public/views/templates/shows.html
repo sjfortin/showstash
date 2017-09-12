@@ -1,14 +1,20 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div layout="row" layout-padding layout-margin>
+<div layout="row" layout-padding>
     <div flex>
-        <div class="show-row" ng-repeat="show in sc.shows.data" style="margin:20px 0;">
-            <div class="band">{{show.band}}</div>
-            <div class="show-date">{{show.show_date | date: shortdate}}</div>
-            <div class="venue">{{show.venue_name}} | {{show.venue_city}}, {{show.venue_state}}</div>
-            <div class="button"><md-button class="md-raised md-primary">View Details</md-button></div>
-        </div>
+        <h1>My Shows</h1>
+        <md-list-item class="md-3-line secondary-button-padding" ng-click="doPrimaryAction($event)" ng-repeat="show in sc.shows.data">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{show.band}}</h3>
+                <h4>{{show.show_date | date: shortdate}}</h4>
+                <p>{{show.venue}} | {{show.city}}, {{show.state}}</p>
+            </div>
+            <md-button class="md-secondary md-raised md-primary" ng-click="doSecondaryAction($event)">Edit Show</md-button>
+            <md-divider></md-divider>
+        </md-list-item>
     </div>
 </div>
-<div layout="row" layout-padding layout-margin>
-    <md-button class="md-raised md-accent" ng-click="sc.userService.logout()">Log Out</md-button>
+<div layout="row" layout-padding>
+    <div flex>
+        <md-button class="md-raised md-accent" ng-click="sc.userService.logout()">Log Out</md-button>
+    </div>
 </div>
