@@ -2,9 +2,7 @@ app.service('UserService', function ($http, $location) {
 
   var self = this;
 
-  self.userObject = {
-
-  };
+  self.userObject = {};
 
   self.getuser = function () {
     $http.get('/user').then(function (response) {

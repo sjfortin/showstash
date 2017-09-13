@@ -2,6 +2,24 @@
 <div layout="row" layout-padding>
     <div flex="50">
         <h1>Search API here</h1>
+        <md-input-container class="md-block">
+            <label>Band</label>
+            <input type="text" ng-model="sc.searchShow.band">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>City</label>
+            <input type="text" ng-model="sc.searchShow.city">
+        </md-input-container>
+        <div>
+            <md-button type="submit" class="md-raised md-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.band, sc.searchShow.city)">Search Show</md-button>
+        </div>
+        <div class="searchResult" style="margin:40px 0; border-bottom: 1px solid #eee;" ng-repeat="setlist in sc.setlist.data.data.setlist">
+            <h1>{{setlist.artist.name}}</h1>
+            <p>{{setlist.artist.eventDate | date: fullDate}}</p>
+            <p>{{setlist.eventDate | date: fullDate}}</p>
+            <p>{{setlist.venue.name}} | {{setlist.venue.city.name}}, {{setlist.venue.city.stateCode}}</p>
+            <md-button class="md-raised md-primary" ng-click="addSearchedShow()">Add Show</md-button>
+        </div>
     </div>
     <div flex="50">
         <h1>Manually Add a Show</h1>

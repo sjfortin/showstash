@@ -17,7 +17,7 @@ app.controller('LoginController', function($http, $location, UserService) {
         $http.post('/', vm.user).then(function(response) {
           if(response.data.email) {
             // location works with SPA (ng-route)
-            $location.path('/user'); // http://localhost:5000/#/user
+            $location.path('/shows'); // http://localhost:5000/#/user
           } else {
             vm.message = "Please try again.";
           }
