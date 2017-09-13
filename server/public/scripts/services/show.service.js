@@ -6,6 +6,7 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
     self.setlist = {
         data: []
     };
+    self.manualAddForm = false;
 
     self.states = {
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
@@ -32,18 +33,7 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
             });
     };
 
-    // self.getSetListFm = function () {
-    //     $http({
-    //         method: 'GET',
-    //         url: '/setlist',
-    //     }).then(function (response) {
-    //         console.log('This is the set list info!!!! Yea baby', response);
-    //         self.setlist.data = response;
-    //     });
-    // }
-    
     self.searchShow = function (band, city) {
-        console.log('getting search');
         $http({
             method: 'GET',
             url: '/setlist/search',
@@ -51,10 +41,48 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
                 band: band,
                 city: city
             }
-        }).then(function (response) {
-            console.log('This is the search info!', response);
-            self.setlist.data = response;
-        });
+        }).then(
+            function (response) {
+                console.log('search response', response);
+
+                self.setlist.data = response;
+                if (response.status === 204) {
+                    self.manualAddForm = true;
+                } else {
+                    self.manualAddForm = false;
+                }
+            },
+            function (data) {
+                console.log('this is an error', data.config.params);
+            });
+    }
+
+    self.addSearchedShow = function (band, date, venue, city, state) {
+        var formattedDate = toDate(date);
+        console.log('formattedDate', formattedDate);
+        
+            $http({
+                method: 'POST',
+                url: '/setlist/addShow',
+                data: {
+                    band: band,
+                    show_date: formattedDate,
+                    venue: venue,
+                    city: city,
+                    state: state
+                }
+            })
+                .then(
+                function (response) {
+                    console.log('search show add', response);
+                    $location.path('/add');
+                }
+                )
+    }
+
+    function toDate(dateStr) {
+        const [day, month, year] = dateStr.split("-")
+        return new Date(year, month - 1, day)
     }
 
 }]);

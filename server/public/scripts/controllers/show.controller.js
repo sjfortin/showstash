@@ -9,6 +9,7 @@ app.controller('ShowController', ['ShowService', '$mdToast', function (ShowServi
     self.shows = ShowService.shows;
     self.states = ShowService.states.list;
     self.newShow = {};
+    self.setlist = ShowService.setlist;
 
     // Call the add show function
     self.addShow = function (event) {
@@ -16,5 +17,4 @@ app.controller('ShowController', ['ShowService', '$mdToast', function (ShowServi
         self.newShow = {};
     }
 
-    self.setlist = ShowService.setlist;
 }]);
