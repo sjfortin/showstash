@@ -1,4 +1,4 @@
-app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $location, $mdToast) {
+app.service('ShowService', ['$route', '$http', '$routeParams', '$location', '$mdToast', function ($route, $http, $routeParams, $location, $mdToast) {
     var self = this;
     self.shows = {
         data: []
@@ -6,6 +6,11 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
     self.setlist = {
         data: []
     };
+
+    self.currentShow = {
+        details: {}
+    }
+
     self.manualAddForm = false;
 
     self.searching = false;
@@ -96,6 +101,19 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
                 };
             })
     };
+
+    // Request to get individual show details
+    self.getShowDetails = function (showId) {
+        $http({
+            url: '/shows/details',
+            method: 'GET',
+            params: {
+                id: showId
+            }
+        }).then(function (response) {
+            self.currentShow.details = response.data;
+        });
+    }
 
     // Clear search results
     self.clearSearchResults = function () {

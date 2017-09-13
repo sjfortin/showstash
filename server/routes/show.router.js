@@ -31,6 +31,26 @@ router.get('/', function (req, res) {
     }
 });
 
+router.get('/details', function (req, res) {
+    if (req.isAuthenticated()) {
+        pool.connect(function (errorConnectingToDatabase, client, done) {
+            if (errorConnectingToDatabase) {
+                console.log('Error connecting to Database', errorConnectingToDatabase);
+                res.sendStatus(500);
+            } else {
+                client.query('SELECT * FROM users_shows WHERE id=$1', [req.query.id], function (errorMakingQuery, result) {
+                    if (errorMakingQuery) {
+                        console.log('Error Making Query', errorMakingQuery);
+                        res.sendStatus(500);
+                    } else {
+                        res.send(result.rows);
+                    }
+                });
+            }
+        });
+    }
+});
+
 
 // POST new show to database via manual entry form
 router.post('/', function (req, res) {

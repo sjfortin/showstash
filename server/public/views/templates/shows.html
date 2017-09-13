@@ -9,13 +9,13 @@
                 <md-option value="-show_date">Date (Desc)</md-option>
             </md-select>
         </md-input-container>
-        <md-list-item class="md-3-line secondary-button-padding" ng-click="doPrimaryAction($event)" ng-repeat="show in sc.shows.data | orderBy: sc.orderShowsBy">
+        <md-list-item class="md-3-line secondary-button-padding" ng-repeat="show in sc.shows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
             <div class="md-list-item-text" layout="column">
                 <h3>{{show.band}}</h3>
                 <h4>{{show.show_date | date: shortdate}}</h4>
                 <p>{{show.venue}} | {{show.city}}, {{show.state}}</p>
             </div>
-            <md-button class="md-secondary md-raised md-primary" ng-click="doSecondaryAction($event)">Edit Show</md-button>
+            <md-button class="md-secondary md-raised md-primary">Edit Show</md-button>
             <md-divider></md-divider>
         </md-list-item>
         <div ng-if="!sc.shows.data.length">Add some shows!</div>
