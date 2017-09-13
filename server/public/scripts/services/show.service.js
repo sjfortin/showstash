@@ -8,10 +8,13 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
     };
     self.manualAddForm = false;
 
+    self.searching = false;
+
     self.states = {
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
     };
 
+    // GET My shows from the db
     self.getShows = function () {
         $http.get('/shows')
             .then(function (response) {
@@ -19,6 +22,7 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
             });
     };
 
+    // Manual Add Show
     self.addShow = function (newShow) {
         $http.post('/shows', newShow)
             .then(function () {
@@ -32,7 +36,9 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
             });
     };
 
+    // GET the search results
     self.searchShow = function (band, city) {
+        self.searching = true;
         $http({
             method: 'GET',
             url: '/setlist/search',
@@ -43,8 +49,10 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
         }).then(
             function (response) {
                 console.log('search response', response);
+                self.searching = false;
 
                 self.setlist.data = response;
+
                 if (response.status === 204) {
                     self.manualAddForm = true;
                 } else {
@@ -54,11 +62,11 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
             function (data) {
                 console.log('this is an error', data.config.params);
             });
-    }
+    };
 
     // Function to post a show from the add result in search results
     self.addSearchedShow = function (band, date, venue, city, state, version) {
-        
+
         // setlist api date needs to be coverted to proper postgreSQL date format
         var formattedDate = toDate(date);
 
@@ -87,12 +95,19 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
                     data: []
                 };
             })
+    };
+
+    // Clear search results
+    self.clearSearchResults = function () {
+        self.setlist = {
+            data: []
+        };
     }
 
     // change date format coming back from setlist.fm
     function toDate(dateStr) {
         const [day, month, year] = dateStr.split("-")
         return new Date(year, month - 1, day)
-    }
+    };
 
 }]);

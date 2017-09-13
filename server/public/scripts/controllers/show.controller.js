@@ -1,18 +1,17 @@
 app.controller('ShowController', ['ShowService', '$mdToast', function (ShowService, $mdToast) {
     var self = this;
 
-    self.ShowService = ShowService;
+    self.ShowService = ShowService; // access to all things ShowService
     
-    // GET My Shows list on controller load
-    ShowService.getShows();
+    ShowService.getShows(); // GET My Shows list on controller load
     
-    self.shows = ShowService.shows;
-    self.states = ShowService.states.list;
-    self.newShow = {};
-    self.setlist = ShowService.setlist;
-    self.orderShowsBy = '-show_date';
+    self.shows = ShowService.shows; // my shows from the users_shows table
+    self.states = ShowService.states.list; // state list for dropdown menu
+    self.newShow = {}; // placeholder object for a newShow being added
+    self.setlist = ShowService.setlist; // setlist data from the setlist search results
+    self.orderShowsBy = '-show_date'; // default show orderBy
 
-    // Call the add show function
+    // Manual add show POST call
     self.addShow = function (event) {
         ShowService.addShow(self.newShow);
         self.newShow = {};

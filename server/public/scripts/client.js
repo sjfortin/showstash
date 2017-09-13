@@ -74,6 +74,9 @@ app.config(function ($routeProvider, $locationProvider) {
       resolve: {
         getuser: function (UserService) {
           return UserService.getuser();
+        },
+        clearSearch: function(ShowService) {
+          return ShowService.clearSearchResults();
         }
       }
     })

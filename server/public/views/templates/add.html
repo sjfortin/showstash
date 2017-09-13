@@ -12,15 +12,23 @@
         </md-input-container>
         <div>
             <md-button type="submit" class="md-raised md-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.band, sc.searchShow.city)">Search Show</md-button>
-        </div>
-        <div class="searchResult" style="margin:40px 0; border-bottom: 1px solid #eee;" ng-repeat="setlist in sc.setlist.data.data.setlist">
-            <h1>{{setlist.artist.name}}</h1>
-            <p>{{setlist.eventDate | date: fullDate}}</p>
-            <p>{{setlist.venue.name}} | {{setlist.venue.city.name}}, {{setlist.venue.city.stateCode}}</p>
-            <md-button class="md-raised md-primary" ng-click="sc.ShowService.addSearchedShow(setlist.artist.name, setlist.eventDate, setlist.venue.name, setlist.venue.city.name, setlist.venue.city.stateCode, setlist.versionId)">Add Show</md-button>
+            <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-if="sc.ShowService.searching"></md-progress-circular>
         </div>
 
-        <!-- This is the logic to show manual add form if concert cannot be found -->
+        <!-- Search Results -->
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="setlist in sc.setlist.data.data.setlist">
+                <div class="md-list-item-text">
+                    <h3>{{setlist.artist.name}}</h3>
+                    <p>{{setlist.eventDate | date: fullDate}}</p>
+                    <p>{{setlist.venue.name}} | {{setlist.venue.city.name}}, {{setlist.venue.city.stateCode}}</p>
+                </div>
+                <md-button class="md-raised md-primary md-secondary" ng-click="sc.ShowService.addSearchedShow(setlist.artist.name, setlist.eventDate, setlist.venue.name, setlist.venue.city.name, setlist.venue.city.stateCode, setlist.versionId)">Add Show</md-button>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+
+        <!-- Logic to show manual add form if no search results -->
         <div ng-if="sc.ShowService.manualAddForm">
             <h3>Sorry, no results! Search again or add your own show details.</h3>
             <form>
