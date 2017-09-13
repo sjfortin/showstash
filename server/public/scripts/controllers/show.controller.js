@@ -10,6 +10,7 @@ app.controller('ShowController', ['ShowService', '$mdToast', function (ShowServi
     self.states = ShowService.states.list;
     self.newShow = {};
     self.setlist = ShowService.setlist;
+    self.orderShowsBy = '-show_date';
 
     // Call the add show function
     self.addShow = function (event) {

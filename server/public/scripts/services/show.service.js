@@ -27,7 +27,6 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
                     $mdToast.simple()
                         .textContent('Show has been added!')
                         .action('OK')
-                        .capsule(true)
                         .hideDelay(3000)
                 );
             });
@@ -57,29 +56,40 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
             });
     }
 
-    self.addSearchedShow = function (band, date, venue, city, state) {
-        var formattedDate = toDate(date);
-        console.log('formattedDate', formattedDate);
+    // Function to post a show from the add result in search results
+    self.addSearchedShow = function (band, date, venue, city, state, version) {
         
-            $http({
-                method: 'POST',
-                url: '/setlist/addShow',
-                data: {
-                    band: band,
-                    show_date: formattedDate,
-                    venue: venue,
-                    city: city,
-                    state: state
-                }
+        // setlist api date needs to be coverted to proper postgreSQL date format
+        var formattedDate = toDate(date);
+
+        $http({
+            method: 'POST',
+            url: '/setlist/addShow',
+            data: {
+                band: band,
+                show_date: formattedDate,
+                venue: venue,
+                city: city,
+                state: state,
+                version_id: version
+            }
+        }).then(
+            function (response) {
+                console.log('search show add', response);
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Show has been added!')
+                        .action('OK')
+                        .hideDelay(3000)
+                );
+                $location.path('/shows');
+                self.setlist = {
+                    data: []
+                };
             })
-                .then(
-                function (response) {
-                    console.log('search show add', response);
-                    $location.path('/add');
-                }
-                )
     }
 
+    // change date format coming back from setlist.fm
     function toDate(dateStr) {
         const [day, month, year] = dateStr.split("-")
         return new Date(year, month - 1, day)

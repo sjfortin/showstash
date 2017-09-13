@@ -16,6 +16,7 @@ CREATE TABLE venues
 CREATE TABLE users_shows
 (
     id SERIAL PRIMARY KEY,
+    version_id INT,
     band VARCHAR(80) NOT NULL,
     show_date DATE NOT NULL,
     venue VARCHAR(120) NOT NULL,
@@ -24,6 +25,7 @@ CREATE TABLE users_shows
     notes VARCHAR(256),
     user_id INT REFERENCES users
 );
+
 -- CREATE TABLE friends
 -- (
 --     id SERIAL PRIMARY KEY,

@@ -1,7 +1,7 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div layout="row" layout-padding>
-    <div flex="50">
-        <h1>Search API here</h1>
+    <div flex>
+        <h1>Search setlist.fm</h1>
         <md-input-container class="md-block">
             <label>Band</label>
             <input type="text" ng-model="sc.searchShow.band">
@@ -17,8 +17,10 @@
             <h1>{{setlist.artist.name}}</h1>
             <p>{{setlist.eventDate | date: fullDate}}</p>
             <p>{{setlist.venue.name}} | {{setlist.venue.city.name}}, {{setlist.venue.city.stateCode}}</p>
-            <md-button class="md-raised md-primary" ng-click="sc.ShowService.addSearchedShow(setlist.artist.name, setlist.eventDate, setlist.venue.name, setlist.venue.city.name, setlist.venue.city.stateCode)">Add Show</md-button>
+            <md-button class="md-raised md-primary" ng-click="sc.ShowService.addSearchedShow(setlist.artist.name, setlist.eventDate, setlist.venue.name, setlist.venue.city.name, setlist.venue.city.stateCode, setlist.versionId)">Add Show</md-button>
         </div>
+
+        <!-- This is the logic to show manual add form if concert cannot be found -->
         <div ng-if="sc.ShowService.manualAddForm">
             <h3>Sorry, no results! Search again or add your own show details.</h3>
             <form>

@@ -39,9 +39,10 @@ router.get('/search', function (req, res) {
     });
 });
 
+// POST to db => Search result add button
 router.post('/addShow', function (req, res) {
     console.log('this is the search req.body', req.body);
-    
+
     var userID = req.user.id;
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
@@ -49,15 +50,25 @@ router.post('/addShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [req.body.band, req.body.show_date, req.body.venue, req.body.city, req.body.state, userID], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        res.sendStatus(201);
-                    }
-                });
+                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, version_id, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7);',
+                    [
+                        req.body.band,
+                        req.body.show_date,
+                        req.body.venue,
+                        req.body.city,
+                        req.body.state,
+                        req.body.version_id,
+                        userID
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(201);
+                        }
+                    });
             }
         });
     }
