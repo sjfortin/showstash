@@ -8,35 +8,25 @@ var request = require('request');
 
 var setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
 
-router.get('/', function (req, res) {
-    console.log('get setlist has been hit');
-
-    request(setlist, function (error, response, body) {
-        if (response && response.statusCode == 200) {
-            res.send(body);
-        } else {
-            console.log('error', error);
-            res.sendStatus(500);
-        }
-    });
-});
-
+// GET search results from setlist.fm
 router.get('/search', function (req, res) {
-    request({
-        url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.band + '&cityName=' + req.query.city + '&p=1',
-        headers: {
-            'Accept': 'application/json',
-            'x-api-key': setListApiKey,
-            'User-Agent': 'request'
-        }
-    }, function (error, response, body) {
-        if (response && response.statusCode == 200) {
-            res.send(body);
-        } else {
-            console.log('error', error);
-            res.sendStatus(204);
-        }
-    });
+    if (req.isAuthenticated()) {
+        request({
+            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.band + '&cityName=' + req.query.city + '&p=1',
+            headers: {
+                'Accept': 'application/json',
+                'x-api-key': setListApiKey,
+                'User-Agent': 'request'
+            }
+        }, function (error, response, body) {
+            if (response && response.statusCode == 200) {
+                res.send(body);
+            } else {
+                console.log('error', error);
+                res.sendStatus(500);
+            }
+        });
+    }
 });
 
 // POST to db => Search result add button

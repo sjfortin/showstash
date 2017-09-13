@@ -68,8 +68,8 @@ app.config(function ($routeProvider, $locationProvider) {
         }
       }
     })
-    .when('/add', {
-      templateUrl: '/views/templates/add.html',
+    .when('/add-show', {
+      templateUrl: '/views/templates/add-show.html',
       controller: 'ShowController as sc',
       resolve: {
         getuser: function (UserService) {

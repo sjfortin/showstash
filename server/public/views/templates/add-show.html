@@ -1,6 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div layout="row" layout-padding>
-    <div flex>
+    <div flex="50">
         <h1>Search setlist.fm</h1>
         <md-input-container class="md-block">
             <label>Band</label>
@@ -17,52 +17,20 @@
 
         <!-- Search Results -->
         <md-list>
-            <md-list-item class="md-3-line" ng-repeat="setlist in sc.setlist.data.data.setlist">
+            <md-list-item class="md-3-line" ng-repeat="show in sc.searchShowResults.data.data.setlist">
                 <div class="md-list-item-text">
-                    <h3>{{setlist.artist.name}}</h3>
-                    <p>{{setlist.eventDate | date: fullDate}}</p>
-                    <p>{{setlist.venue.name}} | {{setlist.venue.city.name}}, {{setlist.venue.city.stateCode}}</p>
+                    <h3>{{show.artist.name}}</h3>
+                    <p>{{show.eventDate | date: fullDate}}</p>
+                    <p>{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}</p>
                 </div>
-                <md-button class="md-raised md-primary md-secondary" ng-click="sc.ShowService.addSearchedShow(setlist.artist.name, setlist.eventDate, setlist.venue.name, setlist.venue.city.name, setlist.venue.city.stateCode, setlist.versionId)">Add Show</md-button>
+                <md-button class="md-raised md-primary md-secondary" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId)">Add Show</md-button>
                 <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
         </md-list>
 
-        <!-- Logic to show manual add form if no search results -->
-        <div ng-if="sc.ShowService.manualAddForm">
-            <h3>Sorry, no results! Search again or add your own show details.</h3>
-            <form>
-                <md-input-container class="md-block">
-                    <label>Band</label>
-                    <input type="text" ng-model="sc.newShow.band">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <md-datepicker ng-model="sc.newShow.show_date" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Venue</label>
-                    <input type="text" ng-model="sc.newShow.venue">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>City</label>
-                    <input type="text" ng-model="sc.newShow.city">
-                </md-input-container>
-                <md-input-container>
-                    <label>State</label>
-                    <md-select ng-model="sc.newShow.state">
-                        <md-option ng-repeat="state in sc.states" ng-value="state">
-                            {{state}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <div>
-                    <md-button type="submit" class="md-raised md-primary" ng-click="sc.addShow()">Add Show</md-button>
-                </div>
-            </form>
-        </div>
     </div>
-    <!-- <div flex="50">
-        <h1>Manually Add a Show</h1>
+    <div flex="50">
+        <h1>Add Your Own Show</h1>
         <form>
             <md-input-container class="md-block">
                 <label>Band</label>
@@ -92,4 +60,4 @@
             </div>
         </form>
     </div>
-</div> -->
+</div>

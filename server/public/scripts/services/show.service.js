@@ -1,37 +1,42 @@
-app.service('ShowService', ['$route', '$http', '$routeParams', '$location', '$mdToast', function ($route, $http, $routeParams, $location, $mdToast) {
+app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $location, $mdToast) {
     var self = this;
-    self.shows = {
-        data: []
-    };
-    self.setlist = {
-        data: []
-    };
 
+    // Object to store my shows
+    self.myShows = {};
+
+    // Object to store show search results
+    self.searchShowResults = {};
+
+    // Object to store current show details
     self.currentShow = {
         details: {}
     }
 
-    self.manualAddForm = false;
-
+    // Set searching to false initially
     self.searching = false;
 
+    // List of states for the state dropdown menu
     self.states = {
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
     };
 
-    // GET My shows from the db
+    // GET My Shows from users_shows table
     self.getShows = function () {
-        $http.get('/shows')
+        $http.get('/shows/myShows')
             .then(function (response) {
-                self.shows.data = response.data;
+                self.myShows.data = response.data;
             });
     };
 
-    // Manual Add Show
+    // User POST to users_shows table
     self.addShow = function (newShow) {
-        $http.post('/shows', newShow)
+        $http({
+            method: 'POST',
+            url: '/shows/addShowManually',
+            data: newShow
+        })
             .then(function () {
-                $location.path('/add');
+                $location.path('/shows');
                 $mdToast.show(
                     $mdToast.simple()
                         .textContent('Show has been added!')
@@ -41,12 +46,12 @@ app.service('ShowService', ['$route', '$http', '$routeParams', '$location', '$md
             });
     };
 
-    // GET the search results
+    // GET Search Results from server
     self.searchShow = function (band, city) {
         self.searching = true;
         $http({
             method: 'GET',
-            url: '/setlist/search',
+            url: '/shows/searchResults',
             params: {
                 band: band,
                 city: city
@@ -55,21 +60,14 @@ app.service('ShowService', ['$route', '$http', '$routeParams', '$location', '$md
             function (response) {
                 console.log('search response', response);
                 self.searching = false;
-
-                self.setlist.data = response;
-
-                if (response.status === 204) {
-                    self.manualAddForm = true;
-                } else {
-                    self.manualAddForm = false;
-                }
+                self.searchShowResults.data = response;
             },
             function (data) {
                 console.log('this is an error', data.config.params);
             });
     };
 
-    // Function to post a show from the add result in search results
+    // POST from Search Results add button
     self.addSearchedShow = function (band, date, venue, city, state, version) {
 
         // setlist api date needs to be coverted to proper postgreSQL date format
@@ -77,7 +75,7 @@ app.service('ShowService', ['$route', '$http', '$routeParams', '$location', '$md
 
         $http({
             method: 'POST',
-            url: '/setlist/addShow',
+            url: '/shows/addSearchedShow',
             data: {
                 band: band,
                 show_date: formattedDate,
@@ -89,35 +87,41 @@ app.service('ShowService', ['$route', '$http', '$routeParams', '$location', '$md
         }).then(
             function (response) {
                 console.log('search show add', response);
+                $location.path('/shows');
                 $mdToast.show(
                     $mdToast.simple()
                         .textContent('Show has been added!')
                         .action('OK')
                         .hideDelay(3000)
                 );
-                $location.path('/shows');
                 self.setlist = {
                     data: []
                 };
             })
     };
 
-    // Request to get individual show details
-    self.getShowDetails = function (showId) {
-        $http({
-            url: '/shows/details',
-            method: 'GET',
-            params: {
-                id: showId
-            }
-        }).then(function (response) {
-            self.currentShow.details = response.data;
-        });
-    }
+    // GET individual show details
+    // self.getShowDetails = function (showId) {
+    //     $http({
+    //         url: '/shows/showDetails',
+    //         method: 'GET',
+    //         params: {
+    //             id: showId
+    //         }
+    //     }).then(function (response) {
+    //         self.currentShow.details = response.data;
+    //     });
+    // }
+
+    /*
+    ----------------
+    HELPER FUNCTIONS
+    ----------------
+    */
 
     // Clear search results
     self.clearSearchResults = function () {
-        self.setlist = {
+        self.searchShowResults = {
             data: []
         };
     }

@@ -2,8 +2,14 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../modules/pool');
 
-// get all shows route
-router.get('/', function (req, res) {
+// Using requst module to make HTTP requests from the server
+// https://www.npmjs.com/package/request
+var request = require('request');
+
+var setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
+
+// GET My Shows from users_shows table
+router.get('/myShows', function (req, res) {
     // check if logged in
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
@@ -31,29 +37,8 @@ router.get('/', function (req, res) {
     }
 });
 
-router.get('/details', function (req, res) {
-    if (req.isAuthenticated()) {
-        pool.connect(function (errorConnectingToDatabase, client, done) {
-            if (errorConnectingToDatabase) {
-                console.log('Error connecting to Database', errorConnectingToDatabase);
-                res.sendStatus(500);
-            } else {
-                client.query('SELECT * FROM users_shows WHERE id=$1', [req.query.id], function (errorMakingQuery, result) {
-                    if (errorMakingQuery) {
-                        console.log('Error Making Query', errorMakingQuery);
-                        res.sendStatus(500);
-                    } else {
-                        res.send(result.rows);
-                    }
-                });
-            }
-        });
-    }
-});
-
-
-// POST new show to database via manual entry form
-router.post('/', function (req, res) {
+// User POST to users_shows table
+router.post('/addShowManually', function (req, res) {
     var userID = req.user.id;
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
@@ -68,6 +53,84 @@ router.post('/', function (req, res) {
                         res.sendStatus(500);
                     } else {
                         res.sendStatus(201);
+                    }
+                });
+            }
+        });
+    }
+});
+
+
+// GET Search Results from server
+router.get('/searchResults', function (req, res) {
+    if (req.isAuthenticated()) {
+        request({
+            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.band + '&cityName=' + req.query.city + '&p=1',
+            headers: {
+                'Accept': 'application/json',
+                'x-api-key': setListApiKey,
+                'User-Agent': 'request'
+            }
+        }, function (error, response, body) {
+            if (response && response.statusCode == 200) {
+                res.send(body);
+            } else {
+                console.log('error', error);
+                res.sendStatus(500);
+            }
+        });
+    }
+});
+
+// POST from Search Results add button
+router.post('/addSearchedShow', function (req, res) {
+    console.log('this is the search req.body', req.body);
+
+    var userID = req.user.id;
+    if (req.isAuthenticated()) {
+        pool.connect(function (errDatabase, client, done) {
+            if (errDatabase) {
+                console.log('Error connecting to database', errDatabase);
+                res.sendStatus(500);
+            } else {
+                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, version_id, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7);',
+                    [
+                        req.body.band,
+                        req.body.show_date,
+                        req.body.venue,
+                        req.body.city,
+                        req.body.state,
+                        req.body.version_id,
+                        userID
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(201);
+                        }
+                    });
+            }
+        });
+    }
+});
+
+// GET individual show details
+router.get('/showDetails', function (req, res) {
+    if (req.isAuthenticated()) {
+        pool.connect(function (errorConnectingToDatabase, client, done) {
+            if (errorConnectingToDatabase) {
+                console.log('Error connecting to Database', errorConnectingToDatabase);
+                res.sendStatus(500);
+            } else {
+                client.query('SELECT * FROM users_shows WHERE id=$1', [req.query.id], function (errorMakingQuery, result) {
+                    if (errorMakingQuery) {
+                        console.log('Error Making Query', errorMakingQuery);
+                        res.sendStatus(500);
+                    } else {
+                        res.send(result.rows);
                     }
                 });
             }
