@@ -91,7 +91,7 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when('/show/:id', {
       templateUrl: 'views/templates/show.html',
-      controller: 'ShowController as sc'
+      controller: 'ShowDetailController as sdc'
     })
     .otherwise({
       redirectTo: 'login'

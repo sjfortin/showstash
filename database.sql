@@ -16,13 +16,14 @@ CREATE TABLE venues
 CREATE TABLE users_shows
 (
     id SERIAL PRIMARY KEY,
-    version_id INT,
+    version_id VARCHAR(80),
     band VARCHAR(80) NOT NULL,
     show_date DATE NOT NULL,
     venue VARCHAR(120) NOT NULL,
     city VARCHAR(80) NOT NULL,
     state VARCHAR(10),
     notes VARCHAR(256),
+    setlist TEXT[],
     user_id INT REFERENCES users
 );
 

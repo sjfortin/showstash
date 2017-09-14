@@ -23,7 +23,7 @@
                     <p>{{show.eventDate | date: fullDate}}</p>
                     <p>{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}</p>
                 </div>
-                <md-button class="md-raised md-primary md-secondary" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId)">Add Show</md-button>
+                <md-button class="md-raised md-primary md-secondary" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)">Add Show</md-button>
                 <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
         </md-list>

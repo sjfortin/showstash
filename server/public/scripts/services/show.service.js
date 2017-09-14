@@ -68,10 +68,13 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
     };
 
     // POST from Search Results add button
-    self.addSearchedShow = function (band, date, venue, city, state, version) {
+    self.addSearchedShow = function (band, date, venue, city, state, version, sets) {
 
         // setlist api date needs to be coverted to proper postgreSQL date format
         var formattedDate = toDate(date);
+
+        // Format set data to send to database
+        var formattedSets = getSetData(sets);
 
         $http({
             method: 'POST',
@@ -82,7 +85,8 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
                 venue: venue,
                 city: city,
                 state: state,
-                version_id: version
+                version_id: version,
+                setlist: formattedSets
             }
         }).then(
             function (response) {
@@ -99,19 +103,6 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
                 };
             })
     };
-
-    // GET individual show details
-    // self.getShowDetails = function (showId) {
-    //     $http({
-    //         url: '/shows/showDetails',
-    //         method: 'GET',
-    //         params: {
-    //             id: showId
-    //         }
-    //     }).then(function (response) {
-    //         self.currentShow.details = response.data;
-    //     });
-    // }
 
     /*
     ----------------
@@ -131,5 +122,15 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
         const [day, month, year] = dateStr.split("-")
         return new Date(year, month - 1, day)
     };
+
+    function getSetData(sets) {
+        var songArray = [];
+        sets.forEach(function (set) {
+            set.song.forEach(function (song) {
+                songArray.push(song.name);
+            })
+        });
+        return songArray;
+    }
 
 }]);

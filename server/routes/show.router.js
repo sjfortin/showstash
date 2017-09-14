@@ -76,7 +76,7 @@ router.get('/searchResults', function (req, res) {
                 res.send(body);
             } else {
                 console.log('error', error);
-                res.sendStatus(500);
+                res.sendStatus(204);
             }
         });
     }
@@ -93,7 +93,7 @@ router.post('/addSearchedShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, version_id, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7);',
+                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);',
                     [
                         req.body.band,
                         req.body.show_date,
@@ -101,7 +101,8 @@ router.post('/addSearchedShow', function (req, res) {
                         req.body.city,
                         req.body.state,
                         req.body.version_id,
-                        userID
+                        userID,
+                        req.body.setlist
                     ],
                     function (errQuery, data) {
                         done();
@@ -119,22 +120,30 @@ router.post('/addSearchedShow', function (req, res) {
 
 // GET individual show details
 router.get('/showDetails', function (req, res) {
+    // check if logged in
     if (req.isAuthenticated()) {
-        pool.connect(function (errorConnectingToDatabase, client, done) {
-            if (errorConnectingToDatabase) {
-                console.log('Error connecting to Database', errorConnectingToDatabase);
+        pool.connect(function (errDatabase, client, done) {
+            if (errDatabase) {
+                console.log('Error connecting to database', err);
                 res.sendStatus(500);
             } else {
-                client.query('SELECT * FROM users_shows WHERE id=$1', [req.query.id], function (errorMakingQuery, result) {
-                    if (errorMakingQuery) {
-                        console.log('Error Making Query', errorMakingQuery);
+                client.query('SELECT * FROM users_shows WHERE id=$1;', [req.query.id], function (errQuery, data) {
+                    done();
+                    if (errQuery) {
+                        console.log('Error making database query', errQuery);
                         res.sendStatus(500);
                     } else {
-                        res.send(result.rows);
+                        console.log(data.rows);
+                        res.send(data.rows);
                     }
                 });
             }
         });
+    } else {
+        // failure best handled on the server. do redirect here.
+        console.log('not logged in');
+        // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
+        res.send(false);
     }
 });
 

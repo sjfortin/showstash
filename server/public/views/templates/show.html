@@ -1,7 +1,14 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div layout="row" layout-padding layout-align="center center">
     <div flex>
-        <h1>{{sc.currentShow}}</h1>
-        <p>Hi</p>
+        <p>{{sdc.currentShow}}</p>
+        <h1>{{sdc.currentShow.details[0].band}}</h1>
+        <p>{{sdc.currentShow.details[0].show_date | date:fullDate}}</p>
+        <p>{{sdc.currentShow.details[0].band}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</p>
+        <h3 ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h3>
+        <ul>
+            <li ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</li>
+        </ul>
+        <p ng-if="!sdc.currentShow.details[0].setlist.length">No setlist information available. Add your own!</p>
     </div>
 </div>
