@@ -1,20 +1,28 @@
-<div layout="row" layout-padding>
-    <div flex="50">
-        <h1>Login</h1>
-        <h1 role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
-            <form ng-submit="lc.login()">
-                <md-input-container class="md-block">
-                    <label>Email Address</label>
-                    <input type="text" ng-model="lc.user.email" />
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Password:</label>
-                    <input type="password" ng-model="lc.user.password" />
-                </md-input-container>
-                <div>
-                    <md-button type="submit" class="md-raised md-primary">Log In</md-button>
-                    <md-button ng-href="#register">Register</md-button>
+<div ng-include="'views/partials/header.html'"></div>
+<section class="section">
+    <div class="container">
+        <h1 class="title">Login</h1>
+        <form ng-submit="lc.login()">
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
                 </div>
-            </form>
+            </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Password" ng-model="lc.user.password">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-primary">Login</button>
+                </div>
+                <div class="control">
+                    <a href="/#/register" class="button is-link">Register</a>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
+</section>

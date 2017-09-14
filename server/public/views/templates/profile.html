@@ -1,27 +1,37 @@
 <div ng-include="'views/partials/nav.html'"></div>
+<div ng-include="'views/partials/header.html'"></div>
 
-<div layout="row" layout-padding>
-    <div flex="50">
-        <h1>My Profile</h1>
-        {{lc}}
-        <p>Update your email address and password here.</p>
-            <form ng-submit="lc.updateProfile()">
-                <md-input-container class="md-block">
-                    <label>Email</label>
-                    <input type="text" ng-model="lc.user.email" />
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Old Password</label>
-                    <input type="password" ng-model="lc.user.old_password" />
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>New Password</label>
-                    <input type="password" ng-model="lc.user.password" />
-                </md-input-container>
-                <div>
-                    <md-button type="submit" class="md-raised md-primary">Update Profile</md-button>
-                    <md-button ng-href="#shows">Cancel</md-button>
+<section class="section">
+    <div class="container">
+        <h1 class="title">My Profile</h1>
+        <h1 class="subtitle is-5">Update your email address and password here.</h1>
+        <form ng-submit="lc.updateProfile()">
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
                 </div>
-            </form>
+            </div>
+            <div class="field">
+                <label class="label">Old Password</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Old Password" ng-model="lc.user.old_password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">New Password</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="New Password" ng-model="lc.user.password">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-primary">Update Profile</button>
+                </div>
+                <div class="control">
+                    <a ng-href="/#/shows" class="button is-link">Cancel</a>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
+</section>

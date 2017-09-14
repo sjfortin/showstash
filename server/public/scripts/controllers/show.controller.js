@@ -1,4 +1,4 @@
-app.controller('ShowController', ['$routeParams', 'ShowService', '$http', '$mdToast', function ($routeParams, ShowService, $http, $mdToast) {
+app.controller('ShowController', ['$routeParams', 'ShowService', '$http', function ($routeParams, ShowService, $http) {
     var self = this;
 
     self.ShowService = ShowService; // access to all things ShowService

@@ -1,10 +1,14 @@
 <div ng-controller="HeaderController as hc">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2 flex md-truncate>ShowStash</h2>
-            <a href="#/profile">
-                <md-icon aria-label="account_circle" class="material-icons">account_circle</md-icon></a>
-            <md-button class="md-raised md-accent" ng-click="hc.userService.logout()">Log Out</md-button>
+    <section class="hero is-dark">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    ShowStash
+                </h1>
+                <h2 class="subtitle">
+                    Your Concert History
+                </h2>
+            </div>
         </div>
-    </md-toolbar>
+    </section>
 </div>
