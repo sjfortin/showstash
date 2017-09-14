@@ -1,4 +1,4 @@
-var app = angular.module('ShowStashApp', ['ngRoute', 'ngMaterial'])
+var app = angular.module('ShowStashApp', ['ngRoute'])
 
 
 // app.config(function ($mdThemingProvider) {

@@ -1,4 +1,4 @@
-app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $location, $mdToast) {
+app.service('ShowService', ['$http', '$location', function ($http, $location) {
     var self = this;
 
     // Object to store my shows
@@ -37,12 +37,6 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
         })
             .then(function () {
                 $location.path('/shows');
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Show has been added!')
-                        .action('OK')
-                        .hideDelay(3000)
-                );
             });
     };
 
@@ -92,12 +86,6 @@ app.service('ShowService', ['$http', '$location', '$mdToast', function ($http, $
             function (response) {
                 console.log('search show add', response);
                 $location.path('/shows');
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Show has been added!')
-                        .action('OK')
-                        .hideDelay(3000)
-                );
                 self.setlist = {
                     data: []
                 };

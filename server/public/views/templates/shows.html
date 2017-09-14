@@ -1,23 +1,50 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div layout="row" layout-padding>
-    <div flex>
-        <h1>My Shows</h1>
-        <md-input-container>
-            <label>Order By:</label>
-            <md-select ng-model="sc.orderShowsBy">
-                <md-option value="show_date">Date (Asc)</md-option>
-                <md-option value="-show_date">Date (Desc)</md-option>
-            </md-select>
-        </md-input-container>
-        <md-list-item class="md-3-line secondary-button-padding" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
-            <div class="md-list-item-text" layout="column">
-                <h3>{{show.band}}</h3>
-                <h4>{{show.show_date | date: shortdate}}</h4>
-                <p>{{show.venue}} | {{show.city}}, {{show.state}}</p>
+<div ng-include="'views/partials/header.html'"></div>
+<section class="section">
+    <div class="container">
+        <h1 class="title">My Shows</h1>
+        <div class="field">
+            <label class="label">Order Shows by:</label>
+            <div class="control">
+                <div class="select is-primary">
+                    <select ng-model="sc.orderShowsBy">
+                        <option value="-show_date">Date (Most Recent)</option>
+                        <option value="show_date">Date (Oldest)</option>
+                    </select>
+                </div>
             </div>
-            <md-button class="md-secondary md-raised md-primary">Edit Show</md-button>
-            <md-divider></md-divider>
-        </md-list-item>
+        </div>
+        <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
+            <!-- <figure class="media-left">
+                <p class="image is-64x64">
+                    <img src="http://bulma.io/images/placeholders/128x128.png">
+                </p>
+            </figure> -->
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{show.band}}</strong> <small>{{show.show_date | date: fullDate}}</small>
+                        <br> {{show.venue}} | {{show.city}}, {{show.state}}
+                    </p>
+                </div>
+                <nav class="level is-mobile">
+                    <div class="level-left">
+                        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-reply"></i></span>
+        </a>
+                        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+        </a>
+                        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-heart"></i></span>
+        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="media-right">
+                <button class="button">Delete</button>
+            </div>
+        </article>
         <div ng-if="!sc.myShows.data.length">Add some shows!</div>
     </div>
-</div>
+</section>

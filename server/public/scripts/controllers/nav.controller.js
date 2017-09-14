@@ -1,6 +1,4 @@
-app.controller('NavController', function () {
+app.controller('NavController', ['UserService', function (UserService) {
     var self = this;
-    this.goto = function (page) {
-        console.log('goto', page);
-    }
-});
+    self.userService = UserService;
+}]);
