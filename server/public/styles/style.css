@@ -1,7 +1,12 @@
+body,
 button,
+input,
 select,
-html,
-textarea,
-input {
+textarea {
     font-family: 'Lato', sans-serif;
+}
+
+p.setlist-item {
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid #f1f1f1;
 }

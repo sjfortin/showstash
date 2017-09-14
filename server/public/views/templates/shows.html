@@ -14,6 +14,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
             <!-- <figure class="media-left">
                 <p class="image is-64x64">
@@ -29,21 +30,21 @@
                 </div>
                 <nav class="level is-mobile">
                     <div class="level-left">
-                        <a class="level-item">
-          <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                        <a class="level-item" ng-href="/#/show/{{show.id}}">
+          <span class="icon is-small"><i class="fa fa-info-circle"></i></span> Details
         </a>
                         <a class="level-item">
-          <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+          <span class="icon is-small"><i class="fa fa-pencil"></i></span> Edit
         </a>
                         <a class="level-item">
-          <span class="icon is-small"><i class="fa fa-heart"></i></span>
+          <span class="icon is-small"><i class="fa fa-trash"></i></span> Delete
         </a>
                     </div>
                 </nav>
             </div>
-            <div class="media-right">
+            <!-- <div class="media-right">
                 <button class="button">Delete</button>
-            </div>
+            </div> -->
         </article>
         <div ng-if="!sc.myShows.data.length">Add some shows!</div>
     </div>

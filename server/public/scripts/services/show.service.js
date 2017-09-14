@@ -12,9 +12,6 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
         details: {}
     }
 
-    // Set searching to false initially
-    self.searching = false;
-
     // List of states for the state dropdown menu
     self.states = {
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
@@ -42,7 +39,6 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
 
     // GET Search Results from server
     self.searchShow = function (band, city) {
-        self.searching = true;
         $http({
             method: 'GET',
             url: '/shows/searchResults',
@@ -53,7 +49,6 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
         }).then(
             function (response) {
                 console.log('search response', response);
-                self.searching = false;
                 self.searchShowResults.data = response;
             },
             function (data) {

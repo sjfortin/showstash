@@ -1,28 +1,45 @@
-<div layout="row" layout-padding>
-    <div flex="50">
-        <h1>Register User</h1>
+<div ng-include="'views/partials/header.html'"></div>
+<section class="section">
+    <div class="container">
+        <h1 class="title">Register User</h1>
         <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
             <form ng-submit="lc.registerUser()">
-                <md-input-container class="md-block">
-                    <label>First Name</label>
-                    <input type="text" ng-model="lc.user.first_name" />
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Last Name</label>
-                    <input type="text" ng-model="lc.user.last_name" />
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Email</label>
-                    <input type="text" ng-model="lc.user.email" />
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Password</label>
-                    <input type="password" ng-model="lc.user.password" />
-                </md-input-container>
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="First Name" ng-model="lc.user.first_name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Last Name" ng-model="lc.user.last_name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="Password" ng-model="lc.user.password">
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" class="button is-primary">Register</button>
+                    </div>
+                    <div class="control">
+                        <a ng-href="/#/home" class="button is-link">Cancel</a>
+                    </div>
+                </div>
                 <div>
                     <md-button type="submit" class="md-raised md-primary">Register</md-button>
                     <md-button ng-href="#home">Cancel</md-button>
                 </div>
             </form>
     </div>
-</div>
+</section>

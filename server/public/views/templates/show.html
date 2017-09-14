@@ -1,14 +1,13 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div layout="row" layout-padding layout-align="center center">
-    <div flex>
-        <p>{{sdc.currentShow}}</p>
-        <h1>{{sdc.currentShow.details[0].band}}</h1>
-        <p>{{sdc.currentShow.details[0].show_date | date:fullDate}}</p>
-        <p>{{sdc.currentShow.details[0].band}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</p>
-        <h3 ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h3>
-        <ul>
-            <li ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</li>
-        </ul>
+<div ng-include="'views/partials/header.html'"></div>
+<section class="section">
+    <div class="container">
+        <p style="font-size:10px;">{{sdc.currentShow}}</p>
+        <h1 class="title">{{sdc.currentShow.details[0].band}}</h1>
+        <h1 class="subtitle">{{sdc.currentShow.details[0].show_date | date:fullDate}}</h1>
+        <h1 class="title is-5 has-text-weight-light">{{sdc.currentShow.details[0].venue}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</h1>
+        <h3 class="is-size-5 has-text-weight-bold" ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h3>
+        <p class="setlist-item" ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</p>
         <p ng-if="!sdc.currentShow.details[0].setlist.length">No setlist information available. Add your own!</p>
     </div>
-</div>
+</section>
