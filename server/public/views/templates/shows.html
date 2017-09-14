@@ -30,21 +30,11 @@
                 </div>
                 <nav class="level is-mobile">
                     <div class="level-left">
-                        <a class="level-item" ng-href="/#/show/{{show.id}}">
-          <span class="icon is-small"><i class="fa fa-info-circle"></i></span> Details
-        </a>
-                        <a class="level-item">
-          <span class="icon is-small"><i class="fa fa-pencil"></i></span> Edit
-        </a>
-                        <a class="level-item">
-          <span class="icon is-small"><i class="fa fa-trash"></i></span> Delete
-        </a>
+                        <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small"><i class="fa fa-music"></i></span> Show Details</a>
+                        <a class="level-item has-text-danger" ng-click="sc.ShowService.deleteShow(show.id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete</a>
                     </div>
                 </nav>
             </div>
-            <!-- <div class="media-right">
-                <button class="button">Delete</button>
-            </div> -->
         </article>
         <div ng-if="!sc.myShows.data.length">Add some shows!</div>
     </div>

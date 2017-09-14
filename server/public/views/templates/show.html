@@ -2,10 +2,18 @@
 <div ng-include="'views/partials/header.html'"></div>
 <section class="section">
     <div class="container">
+        <p>
+            <a ng-href="/#/shows" class="is-size-7"><i class="fa fa-chevron-left" aria-hidden="true"></i> back to shows</a>
+        </p>
         <p style="font-size:10px;">{{sdc.currentShow}}</p>
         <h1 class="title">{{sdc.currentShow.details[0].band}}</h1>
         <h1 class="subtitle">{{sdc.currentShow.details[0].show_date | date:fullDate}}</h1>
         <h1 class="title is-5 has-text-weight-light">{{sdc.currentShow.details[0].venue}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</h1>
+        <div class="field is-smalls">
+            <div class="control">
+                <button ng-click="sdc.showEditForm()" class="button is-primary is-small"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span><span>Edit</span></button>
+            </div>
+        </div>
         <h3 class="is-size-5 has-text-weight-bold" ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h3>
         <p class="setlist-item" ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</p>
         <p ng-if="!sdc.currentShow.details[0].setlist.length">No setlist information available. Add your own!</p>

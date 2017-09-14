@@ -37,7 +37,7 @@ app.config(function ($routeProvider, $locationProvider) {
         getuser: function (UserService) {
           return UserService.getuser();
         },
-        clearSearch: function(ShowService) {
+        clearSearch: function (ShowService) {
           return ShowService.clearSearchResults();
         }
       }
@@ -58,4 +58,12 @@ app.config(function ($routeProvider, $locationProvider) {
     .otherwise({
       redirectTo: 'login'
     });
+});
+
+// Custom filters
+app.filter('searchDateFilter', function () {
+  return function (date) {
+    const [day, month, year] = date.split("-")
+    return new Date(year, month - 1, day)
+  }
 });

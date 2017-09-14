@@ -1,85 +1,90 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-include="'views/partials/header.html'"></div>
-<div class="container">
-    <div class="columns">
-        <div class="column is-half">
-            <h1 class="title">Search setlist.fm</h1>
-            <div class="field">
-                <label class="label">Band</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Band" ng-model="sc.searchShow.band">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">City</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="City" ng-model="sc.searchShow.city">
-                </div>
-            </div>
-            <div class="control">
-                <button class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.band, sc.searchShow.city)">Seach Shows</button>
-            </div>
-
-            <!-- Search Results -->
-            <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
-            <div class="card" ng-repeat="show in sc.searchShowResults.data.data.setlist">
-                <header class="card-header">
-                    <p class="card-header-title">{{show.artist.name}}</p>
-                </header>
-                <div class="card-content">
-                    <div class="content">
-                        <h5 class="title is-5">{{show.eventDate | date: fullDate}}</h5>
-                        <h5 class="subtitle is-7">{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}</h5>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-half">
+                <h1 class="title">Search setlist.fm</h1>
+                <div class="field">
+                    <label class="label">Band</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Band" ng-model="sc.searchShow.band">
                     </div>
                 </div>
-                <footer class="card-footer">
-                    <a ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)"
-                        class="card-footer-item">Add Show</a>
-                </footer>
-            </div>
-        </div>
-        <div class="column is-half">
-            <h1 class="title">Add Your Own Show</h1>
-            <div class="field">
-                <label class="label">Band</label>
+                <div class="field">
+                    <label class="label">City</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="City" ng-model="sc.searchShow.city">
+                    </div>
+                </div>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Band" ng-model="sc.newShow.band">
+                    <button class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.band, sc.searchShow.city)">Seach Shows</button>
+                </div>
+
+                <!-- Search Results -->
+                <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
+                <p class="is-size-7">{{sc.searchShowResults.data.data.setlist}}</p>
+                <div class="card" ng-repeat="show in sc.searchShowResults.data.data.setlist">
+                    <header class="card-header">
+                        <p class="card-header-title">{{show.artist.name}}</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <h5 class="title is-6">{{show.eventDate | searchDateFilter | date: fullDate}}</h5>
+                            <h5 class="subtitle is-6">{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}</h5>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)"
+                            class="card-footer-item">Add Show</a>
+                    </footer>
                 </div>
             </div>
-            <div class="field">
-                <label class="label">Date</label>
-                <div class="control">
-                    <datepicker date-format="MMMM d, y" button-prev="<i class='fa fa-arrow-left'></i>" button-next="<i class='fa fa-arrow-right'></i>">
-                        <input class="input" ng-model="sc.newShow.show_date" type="text" placeholder="Select Date" />
-                    </datepicker>
+
+            <!-- Manual add show form -->
+            <div class="column is-half">
+                <h1 class="title">Add Your Own Show</h1>
+                <div class="field">
+                    <label class="label">Band</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Band" ng-model="sc.newShow.band">
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="label">Venue</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Venue" ng-model="sc.newShow.venue">
+                <div class="field">
+                    <label class="label">Date</label>
+                    <div class="control">
+                        <datepicker date-format="MMMM d, y" button-prev="<i class='fa fa-arrow-left'></i>" button-next="<i class='fa fa-arrow-right'></i>">
+                            <input class="input" ng-model="sc.newShow.show_date" type="text" placeholder="Select Date" />
+                        </datepicker>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="label">City</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="City" ng-model="sc.newShow.city">
+                <div class="field">
+                    <label class="label">Venue</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Venue" ng-model="sc.newShow.venue">
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="label">State</label>
-                <div class="select">
-                <select ng-model="sc.newShow.state">
+                <div class="field">
+                    <label class="label">City</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="City" ng-model="sc.newShow.city">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">State</label>
+                    <div class="select">
+                        <select ng-model="sc.newShow.state">
                     <option value="" disabled selected>Please Select</option>
                     <option ng-repeat="state in sc.states" ng-value="state">{{state}}</option>
                 </select>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <button ng-click="sc.addShow()" class="button is-primary">Add Show</button>
+                <div class="field">
+                    <div class="control">
+                        <button ng-click="sc.addShow()" class="button is-primary">Add Show</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

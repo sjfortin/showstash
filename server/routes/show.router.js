@@ -147,6 +147,36 @@ router.get('/showDetails', function (req, res) {
     }
 });
 
+// Delete show route
+router.delete('/deleteShow', function (req, res) {
+    if (req.isAuthenticated()) {
+        var showID = req.query.id;
+        pool.connect(function (errorConnectingToDatabase, client, done) {
+            if (errorConnectingToDatabase) {
+                console.log('Error connecting to database', errorConnectingToDatabase);
+                res.sendStatus(500);
+            } else {
+                client.query('DELETE FROM users_shows WHERE id=$1',
+                    [showID],
+                    function (errorMakingQuery, result) {
+                        done();
+                        if (errorMakingQuery) {
+                            console.log('Error making database query', errorMakingQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(200);
+                        }
+                    });
+            }
+        });
+    } else {
+        // failure best handled on the server. do redirect here.
+        console.log('not logged in');
+        // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
+        res.send(false);
+    }
+});
+
 // clear all server session information about this user
 router.get('/logout', function (req, res) {
     // Use passport's built-in method to log out the user

@@ -60,7 +60,7 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
     self.addSearchedShow = function (band, date, venue, city, state, version, sets) {
 
         // setlist api date needs to be coverted to proper postgreSQL date format
-        var formattedDate = toDate(date);
+        var formattedDate = self.toDate(date);
 
         // Format set data to send to database
         var formattedSets = getSetData(sets);
@@ -87,6 +87,20 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
             })
     };
 
+    // DELETE individual show
+    self.deleteShow = function (showId) {
+        $http({
+            url: '/shows/deleteShow',
+            method: 'DELETE',
+            params: {
+                id: showId
+            }
+        }).then(function (response) {
+            console.log('delete response', response.data);
+            self.getShows();
+        });
+    };
+
     /*
     ----------------
     HELPER FUNCTIONS
@@ -101,11 +115,12 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
     }
 
     // change date format coming back from setlist.fm
-    function toDate(dateStr) {
+    self.toDate = function (dateStr) {
         const [day, month, year] = dateStr.split("-")
         return new Date(year, month - 1, day)
     };
 
+    // Create array of songs from the setlist data object
     function getSetData(sets) {
         var songArray = [];
         sets.forEach(function (set) {
