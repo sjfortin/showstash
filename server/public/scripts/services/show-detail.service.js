@@ -1,4 +1,4 @@
-app.service('ShowDetailService', ['$http', function ($http) {
+app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($http, $location, toastr) {
     var self = this;
 
     // Object to store current show details
@@ -34,10 +34,9 @@ app.service('ShowDetailService', ['$http', function ($http) {
             url: '/shows/editShow',
             data: currentShow
         })
-            .then(function () {
-                console.log('edit completed!');
-                
-                // $location.path('/shows');
+            .then(function () {    
+                console.log('success alert!');
+                toastr.success('Show has been edited');
             });
     };
 

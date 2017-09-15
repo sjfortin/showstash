@@ -1,4 +1,7 @@
 <div ng-if="sdc.editingMode">
+    <p>
+        <a ng-click="sdc.editingMode = !sdc.editingMode" class="is-size-7"><i class="fa fa-chevron-left" aria-hidden="true"></i> back</a>
+    </p>
     <h1 class="title">Edit This Show</h1>
     <div class="field">
         <label class="label">Artist</label>
@@ -41,4 +44,12 @@
             <a ng-click="sdc.editingMode = !sdc.editingMode" class="button is-link">Cancel</a>
         </div>
     </div>
+</div>
+
+<div class="modal" id="editSuccess">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <p>Success!</p>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
 </div>

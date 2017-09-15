@@ -1,7 +1,7 @@
-var app = angular.module('ShowStashApp', ['ngRoute'])
+var app = angular.module('ShowStashApp', ['ngRoute', 'toastr'])
 
 /// Routes ///
-app.config(function ($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider, toastrConfig) {
   $locationProvider.hashPrefix('');
   $routeProvider
     .when('/login', {
@@ -58,6 +58,10 @@ app.config(function ($routeProvider, $locationProvider) {
     .otherwise({
       redirectTo: 'login'
     });
+
+  angular.extend(toastrConfig, {
+    closeButton: true
+  });
 });
 
 // Custom filters

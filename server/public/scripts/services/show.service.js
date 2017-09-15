@@ -1,4 +1,4 @@
-app.service('ShowService', ['$http', '$location', function ($http, $location) {
+app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $location, toastr) {
     var self = this;
 
     // Object to store my shows
@@ -33,6 +33,7 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
             data: newShow
         })
             .then(function () {
+                toastr.success('Show added!', 'Boo yah!');
                 $location.path('/shows');
             });
     };
@@ -59,6 +60,13 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
     // POST from Search Results add button
     self.addSearchedShow = function (artist, mbid, date, venue, city, state, version, sets) {
 
+        // Check to see if the show already has been added
+        // self.myShows.data.forEach(function(show){
+        //     if(version === show.version_id) {
+        //         toastr.warning('You have already added this show.');
+        //     }
+        // });
+
         // setlist api date needs to be coverted to proper postgreSQL date format
         var formattedDate = self.toDate(date);
 
@@ -81,6 +89,7 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
         }).then(
             function (response) {
                 console.log('search show add', response);
+                toastr.success('Show added!', 'Keep going!');
                 $location.path('/shows');
                 self.setlist = {
                     data: []
@@ -98,6 +107,7 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
             }
         }).then(function (response) {
             console.log('delete response', response.data);
+            toastr.success('Show Deleted!');
             self.getShows();
         });
     };
