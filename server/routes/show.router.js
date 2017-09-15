@@ -37,7 +37,7 @@ router.get('/myShows', function (req, res) {
     }
 });
 
-// User POST to users_shows table
+// POST manual shows to users_shows table
 router.post('/addShowManually', function (req, res) {
     var userID = req.user.id;
     if (req.isAuthenticated()) {
@@ -46,7 +46,7 @@ router.post('/addShowManually', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [req.body.band, req.body.show_date, req.body.venue, req.body.city, req.body.state, userID], function (errQuery, data) {
+                client.query('INSERT INTO users_shows (artist, show_date, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [req.body.artist, req.body.show_date, req.body.venue, req.body.city, req.body.state, userID], function (errQuery, data) {
                     done();
                     if (errQuery) {
                         console.log('Error making database query', errQuery);
@@ -65,7 +65,7 @@ router.post('/addShowManually', function (req, res) {
 router.get('/searchResults', function (req, res) {
     if (req.isAuthenticated()) {
         request({
-            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.band + '&cityName=' + req.query.city + '&p=1',
+            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.artist + '&cityName=' + req.query.city + '&p=1',
             headers: {
                 'Accept': 'application/json',
                 'x-api-key': setListApiKey,
@@ -93,9 +93,10 @@ router.post('/addSearchedShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (band, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);',
+                client.query('INSERT INTO users_shows (artist, mbid, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);',
                     [
-                        req.body.band,
+                        req.body.artist,
+                        req.body.mbid,
                         req.body.show_date,
                         req.body.venue,
                         req.body.city,
@@ -174,6 +175,29 @@ router.delete('/deleteShow', function (req, res) {
         console.log('not logged in');
         // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
         res.send(false);
+    }
+});
+
+// POST manual shows to users_shows table
+router.post('/editShow', function (req, res) {
+    console.log('req.body', req.body.details[0]);
+    if (req.isAuthenticated()) {
+        pool.connect(function (errDatabase, client, done) {
+            if (errDatabase) {
+                console.log('Error connecting to database', errDatabase);
+                res.sendStatus(500);
+            } else {
+                client.query('UPDATE users_shows SET artist=$1, show_date=$2, venue=$3, city=$4, state=$5 WHERE id=$6;', [req.body.details[0].artist, req.body.details[0].show_date, req.body.details[0].venue, req.body.details[0].city, req.body.details[0].state, req.body.details[0].id], function (errQuery, data) {
+                    done();
+                    if (errQuery) {
+                        console.log('Error making database query', errQuery);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    }
+                });
+            }
+        });
     }
 });
 

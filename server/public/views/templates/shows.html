@@ -3,7 +3,7 @@
 <section class="section">
     <div class="container">
         <h1 class="title">My Shows</h1>
-        <div class="field">
+        <div class="field" ng-if="sc.myShows.data.length">
             <label class="label">Order Shows by:</label>
             <div class="control">
                 <div class="select is-primary">
@@ -24,7 +24,7 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>{{show.band}}</strong> <small>{{show.show_date | date: fullDate}}</small>
+                        <strong>{{show.artist}}</strong> <small>{{show.show_date | date: fullDate}}</small>
                         <br> {{show.venue}} | {{show.city}}, {{show.state}}
                     </p>
                 </div>
@@ -36,6 +36,6 @@
                 </nav>
             </div>
         </article>
-        <div ng-if="!sc.myShows.data.length">Add some shows!</div>
+        <div ng-if="!sc.myShows.data.length"><p>You don't have any shows. <a href="/#/add-show">Add some!</a></p></div>
     </div>
 </section>

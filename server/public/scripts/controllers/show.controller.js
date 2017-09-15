@@ -11,10 +11,10 @@ app.controller('ShowController', ['$routeParams', 'ShowService', '$http', functi
     self.newShow = {}; // placeholder object for a newShow being added
     self.searchShowResults = ShowService.searchShowResults; // setlist data from the setlist search results
     self.orderShowsBy = '-show_date'; // default show orderBy
-    self.currentShow = ShowService.currentShow;
+    self.currentShow = ShowService.currentShow; // object for the individual show
 
     // Manual add show POST call
-    self.addShow = function (event) {
+    self.addShow = function () {
         ShowService.addShow(self.newShow);
         self.newShow = {};
     }   

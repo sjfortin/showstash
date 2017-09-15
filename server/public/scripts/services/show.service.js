@@ -38,12 +38,12 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
     };
 
     // GET Search Results from server
-    self.searchShow = function (band, city) {
+    self.searchShow = function (artist, city) {
         $http({
             method: 'GET',
             url: '/shows/searchResults',
             params: {
-                band: band,
+                artist: artist,
                 city: city
             }
         }).then(
@@ -57,7 +57,7 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
     };
 
     // POST from Search Results add button
-    self.addSearchedShow = function (band, date, venue, city, state, version, sets) {
+    self.addSearchedShow = function (artist, mbid, date, venue, city, state, version, sets) {
 
         // setlist api date needs to be coverted to proper postgreSQL date format
         var formattedDate = self.toDate(date);
@@ -69,7 +69,8 @@ app.service('ShowService', ['$http', '$location', function ($http, $location) {
             method: 'POST',
             url: '/shows/addSearchedShow',
             data: {
-                band: band,
+                artist: artist,
+                mbid: mbid,
                 show_date: formattedDate,
                 venue: venue,
                 city: city,

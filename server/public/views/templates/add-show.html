@@ -6,9 +6,9 @@
             <div class="column is-half">
                 <h1 class="title">Search setlist.fm</h1>
                 <div class="field">
-                    <label class="label">Band</label>
+                    <label class="label">Artist</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Band" ng-model="sc.searchShow.band">
+                        <input class="input" type="text" placeholder="Artist" ng-model="sc.searchShow.artist">
                     </div>
                 </div>
                 <div class="field">
@@ -18,12 +18,11 @@
                     </div>
                 </div>
                 <div class="control">
-                    <button class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.band, sc.searchShow.city)">Seach Shows</button>
+                    <button class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city)">Seach Shows</button>
                 </div>
 
                 <!-- Search Results -->
                 <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
-                <p class="is-size-7">{{sc.searchShowResults.data.data.setlist}}</p>
                 <div class="card" ng-repeat="show in sc.searchShowResults.data.data.setlist">
                     <header class="card-header">
                         <p class="card-header-title">{{show.artist.name}}</p>
@@ -35,7 +34,7 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)"
+                        <a ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)"
                             class="card-footer-item">Add Show</a>
                     </footer>
                 </div>
@@ -45,17 +44,15 @@
             <div class="column is-half">
                 <h1 class="title">Add Your Own Show</h1>
                 <div class="field">
-                    <label class="label">Band</label>
+                    <label class="label">Artist</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Band" ng-model="sc.newShow.band">
+                        <input class="input" type="text" placeholder="Artist" ng-model="sc.newShow.artist">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Date</label>
                     <div class="control">
-                        <datepicker date-format="MMMM d, y" button-prev="<i class='fa fa-arrow-left'></i>" button-next="<i class='fa fa-arrow-right'></i>">
-                            <input class="input" ng-model="sc.newShow.show_date" type="text" placeholder="Select Date" />
-                        </datepicker>
+                        <input class="input" type="date" ng-model="sc.newShow.show_date">
                     </div>
                 </div>
                 <div class="field">

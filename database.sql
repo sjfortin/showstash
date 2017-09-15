@@ -17,7 +17,8 @@ CREATE TABLE users_shows
 (
     id SERIAL PRIMARY KEY,
     version_id VARCHAR(80),
-    band VARCHAR(80) NOT NULL,
+    artist VARCHAR(80) NOT NULL,
+    mbid VARCHAR(80),
     show_date DATE NOT NULL,
     venue VARCHAR(120) NOT NULL,
     city VARCHAR(80) NOT NULL,

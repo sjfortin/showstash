@@ -1,4 +1,4 @@
-var app = angular.module('ShowStashApp', ['ngRoute', '720kb.datepicker'])
+var app = angular.module('ShowStashApp', ['ngRoute'])
 
 /// Routes ///
 app.config(function ($routeProvider, $locationProvider) {
@@ -66,4 +66,9 @@ app.filter('searchDateFilter', function () {
     const [day, month, year] = date.split("-")
     return new Date(year, month - 1, day)
   }
+});
+
+// Set xeditable theme
+app.run(function(editableOptions) {
+  editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
