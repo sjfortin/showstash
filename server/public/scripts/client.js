@@ -67,8 +67,3 @@ app.filter('searchDateFilter', function () {
     return new Date(year, month - 1, day)
   }
 });
-
-// Set xeditable theme
-app.run(function(editableOptions) {
-  editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
