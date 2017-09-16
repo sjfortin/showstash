@@ -4,7 +4,6 @@ app.controller('ShowController', ['$routeParams', 'ShowService', '$http', functi
     self.ShowService = ShowService; // access to all things ShowService
     
     ShowService.getShows(); // GET My Shows list on controller load
-    // ShowService.getShowDetails($routeParams.id); // GET individual concert details
     
     self.myShows = ShowService.myShows; // my shows from the users_shows table
     self.states = ShowService.states.list; // state list for dropdown menu

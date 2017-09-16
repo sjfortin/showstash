@@ -178,8 +178,8 @@ router.delete('/deleteShow', function (req, res) {
     }
 });
 
-// POST manual shows to users_shows table
-router.post('/editShow', function (req, res) {
+// UPDATE user shows from the edit form
+router.put('/editShow', function (req, res) {
     console.log('req.body', req.body.details[0]);
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
@@ -201,6 +201,27 @@ router.post('/editShow', function (req, res) {
     }
 });
 
+// Add notes to the users_shows table
+router.put('/addNote', function (req, res) {
+    if (req.isAuthenticated()) {
+        pool.connect(function (errDatabase, client, done) {
+            if (errDatabase) {
+                console.log('Error connecting to database', errDatabase);
+                res.sendStatus(500);
+            } else {
+                client.query('UPDATE users_shows SET notes=$1 WHERE id=$2;', [req.body.details[0].notes, req.body.details[0].id], function (errQuery, data) {
+                    done();
+                    if (errQuery) {
+                        console.log('Error making database query', errQuery);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    }
+                });
+            }
+        });
+    }
+});
 // clear all server session information about this user
 router.get('/logout', function (req, res) {
     // Use passport's built-in method to log out the user

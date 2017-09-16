@@ -13,7 +13,13 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
       controller: 'LoginController as lc'
     })
     .when('/home', {
-      templateUrl: '/views/templates/home.html'
+      templateUrl: '/views/templates/home.html',
+      controller: 'UserController as uc',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
     })
     .when('/user', {
       templateUrl: '/views/templates/user.html',
@@ -56,7 +62,12 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
     })
     .when('/show/:id', {
       templateUrl: 'views/templates/show.html',
-      controller: 'ShowDetailController as sdc'
+      controller: 'ShowDetailController as sdc',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
     })
     .otherwise({
       redirectTo: 'login'

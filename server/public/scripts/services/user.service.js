@@ -22,7 +22,7 @@ app.service('UserService', function ($http, $location) {
 
   self.logout = function () {
     $http.get('/user/logout').then(function (response) {
-      $location.path("/home");
+      $location.path("/login");
     });
   }
 

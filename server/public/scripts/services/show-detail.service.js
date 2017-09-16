@@ -6,6 +6,10 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
         details: {}
     }
 
+    self.editingMode = {
+        status: false
+    }
+
     // State list
     self.states = {
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
@@ -27,17 +31,33 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
         });
     };
 
-    // POST to edited show info to users_shows table
-    self.editShow = function (currentShow) {
+    // PUT edited show info to users_shows table
+    self.editShow = function (currentShow, showId) {
         $http({
-            method: 'POST',
+            method: 'PUT',
             url: '/shows/editShow',
             data: currentShow
         })
-            .then(function () {    
-                console.log('success alert!');
+            .then(function () {                
                 toastr.success('Show has been edited');
+            }, function(error){
+                console.log('error', error);
+                toastr.error('Edit failed');
             });
     };
 
+    // POST show note to users_shows table
+    self.addNote = function () {
+        $http({
+            method: 'PUT',
+            url: '/shows/addNote',
+            data: self.currentShow
+        })
+            .then(function () {                
+                toastr.success('Note has been added');
+            }, function(error){
+                console.log('error', error);
+                toastr.error('Adding note failed');
+            });
+    };
 }]);
