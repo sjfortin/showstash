@@ -3,6 +3,7 @@
     <div ng-if="!sdc.addingFriend">
         <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
         <hr>
+        <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show yet.</em></p>
         <article class="media" ng-repeat="friend in sdc.friends.list">
             <div class="media-content">
                 <div class="content">

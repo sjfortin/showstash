@@ -6,6 +6,7 @@
         <article class="media">
             <div class="media-content">
                 <div class="content">
+                    <p ng-if="!sdc.currentShow.details[0].notes"><em>You haven't added any notes for this show.</em></p>
                     <p>{{sdc.currentShow.details[0].notes}}</p>
                 </div>
             </div>
