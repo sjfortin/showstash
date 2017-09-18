@@ -10,6 +10,11 @@ textarea {
     max-width: 300px;
 }
 
+.logo-image {
+    width: 150px;
+    padding: 5px 10px;
+}
+
 p.setlist-item {
     padding: 3px 0;
     border-bottom: 1px solid #f1f1f1;
