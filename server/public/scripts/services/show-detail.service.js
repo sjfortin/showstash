@@ -24,10 +24,10 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
                 id: showId
             }
         }).then(function (response) {
+            console.log('self.currentShow', self.currentShow.details);
             self.currentShow.details = response.data;
             var newDate = new Date(self.currentShow.details[0].show_date);
             self.currentShow.details[0].show_date = newDate;
-            console.log('self.currentShow', self.currentShow.details);
         });
     };
 
@@ -38,13 +38,19 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
             url: '/shows/editShow',
             data: currentShow
         })
-            .then(function () {                
+            .then(function () {
                 toastr.success('Show has been edited');
-            }, function(error){
+            }, function (error) {
                 console.log('error', error);
                 toastr.error('Edit failed');
             });
     };
+
+    /*
+    ---------------
+    NOTES
+    ---------------
+    */
 
     // POST show note to users_shows table
     self.addNote = function () {
@@ -53,11 +59,78 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
             url: '/shows/addNote',
             data: self.currentShow
         })
-            .then(function () {                
+            .then(function () {
                 toastr.success('Note has been added');
-            }, function(error){
+            }, function (error) {
                 console.log('error', error);
                 toastr.error('Adding note failed');
             });
     };
+
+
+    /* 
+    ---------------
+    FRIENDS
+    ---------------
+    */
+
+    self.newFriend = {
+        data: []
+    };
+
+    self.addingFriend = {
+        status: false
+    }
+
+    // object stores all friends
+    self.friends = {
+        list: []
+    };
+
+    // GET friends
+    self.getFriends = function (showId) {
+        $http({
+            url: '/friends/getFriends',
+            method: 'GET',
+            params: {
+                id: showId
+            }
+        }).then(function (response) {
+            console.log('response', response.data);
+            self.friends.list = response.data;
+        });
+    };
+
+    // Add friend
+    self.addFriend = function (newFriend) {
+        $http({
+            method: 'POST',
+            url: '/friends/addFriend',
+            data: newFriend
+        })
+            .then(function (response) {
+                toastr.success('Friend has been added');
+                let userShowId = response.data[0].user_show;
+                self.getFriends(userShowId);
+            }, function (error) {
+                console.log('error', error);
+                toastr.error('Adding friend failed');
+            });
+    };
+
+    // Delete friend
+    self.deleteFriend = function (friendId) {        
+        $http({
+            method: 'DELETE',
+            url: '/friends/deleteFriend',
+            params: {
+                id: friendId
+            }
+        })
+            .then(function (response) {
+                toastr.success('Friend has been deleted');
+                let userShowId = response.data[0].user_show;
+                self.getFriends(userShowId);
+            })
+    }
 }]);

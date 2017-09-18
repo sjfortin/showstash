@@ -8,20 +8,20 @@
         <div class="columns">
             <div class="column is-half">
                 <!-- Show Details -->
-                <div ng-if="!sdc.editingMode" ng-include="'views/partials/show/show-details.html'"></div>
+                <div ng-if="!sdc.editingMode" ng-include="'views/partials/show/details.html'"></div>
 
                 <!-- Edit Show Form -->
-                <div ng-if="sdc.editingMode" ng-include="'views/partials/show/edit-show.html'"></div>
+                <div ng-if="sdc.editingMode" ng-include="'views/partials/show/edit.html'"></div>
 
                 <!-- Setlist Info -->
                 <div ng-include="'views/partials/show/setlist.html'"></div>
             </div>
             <div class="column is-half">
                 <!-- Show Notes -->
-                <div ng-include="'views/partials/show/show-notes.html'"></div>
+                <div ng-include="'views/partials/show/notes.html'"></div>
 
                 <!-- Friends -->
-                <div ng-include="'views/partials/show/show-friends.html'"></div>
+                <div ng-include="'views/partials/show/friends.html'"></div>
             </div>
         </div>
     </div>
