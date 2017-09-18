@@ -1,3 +1,5 @@
-<h1 class="title" ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h1>
-<p class="setlist-item" ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</p>
-<p ng-if="!sdc.currentShow.details[0].setlist.length">Setlist not available.</p>
+<div class="box">
+    <h1 class="title" ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h1>
+    <p class="setlist-item" ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</p>
+    <p ng-if="!sdc.currentShow.details[0].setlist.length">Setlist not available.</p>
+</div>

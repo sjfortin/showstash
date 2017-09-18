@@ -1,21 +1,30 @@
-<h1 class="title">
-    Show Notes</h1>
-<p ng-if="!sdc.addingNote">{{sdc.currentShow.details[0].notes}}</p>
-<p><a ng-if="!sdc.addingNote" ng-click="sdc.addingNote = !sdc.addingNote" class="button is-small is-primary">
-    <span ng-if="!sdc.currentShow.details[0].notes">Add Note</span>
-    <span ng-if="sdc.currentShow.details[0].notes">Edit Note</span></a></p>
-<div ng-if="sdc.addingNote">
-    <div class="field">
-        <div class="control">
-            <textarea class="textarea" placeholder="Show Notes" ng-model="sdc.currentShow.details[0].notes"></textarea>
-        </div>
+<div class="box">
+    <div ng-if="!sdc.addingNote">
+        <p><span class="title is-5">Notes</span> <a ng-if="!sdc.addingNote" ng-click="sdc.addingNote = !sdc.addingNote" class="button is-small is-primary is-pulled-right">
+    <span ng-if="!sdc.currentShow.details[0].notes">Add Notes</span>
+    <span ng-if="sdc.currentShow.details[0].notes">Edit Notes</span></a></p>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>{{sdc.currentShow.details[0].notes}}</p>
+                </div>
+            </div>
+        </article>
     </div>
-    <div class="field is-grouped">
-        <div class="control">
-            <button ng-click="sdc.addNote(); sdc.addingNote = !sdc.addingNote" class="button is-primary">Save Note</button>
+    <div ng-if="sdc.addingNote">
+        <h3 class="title is-5">Notes</h3>
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea" placeholder="Show Notes" ng-model="sdc.currentShow.details[0].notes"></textarea>
+            </div>
         </div>
-        <div class="control">
-            <a ng-click="sdc.addingNote = !sdc.addingNote" class="button is-link">Cancel</a>
+        <div class="field is-grouped">
+            <div class="control">
+                <button ng-click="sdc.addNote(); sdc.addingNote = !sdc.addingNote" class="button is-primary">Save Note</button>
+            </div>
+            <div class="control">
+                <a ng-click="sdc.addingNote = !sdc.addingNote" class="button is-link">Cancel</a>
+            </div>
         </div>
     </div>
 </div>
