@@ -78,10 +78,6 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
         data: []
     };
 
-    self.addingFriend = {
-        status: false
-    }
-
     // object stores all friends
     self.friends = {
         list: []

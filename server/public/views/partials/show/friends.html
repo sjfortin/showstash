@@ -1,23 +1,26 @@
 <h1 class="title">Friends </h1>
-<p><a class="button is-small is-primary">Add Friend</a></p>
-<div class="field">
-    <div class="control">
-        <input class="input" type="text" placeholder="First Name" ng-model="sdc.newFriend.first_name">
+<p><a class="button is-small is-primary" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
+<div ng-if="sdc.addingFriend">
+    <div class="field">
+        <div class="control">
+            <input class="input" type="text" placeholder="First Name" ng-model="sdc.newFriend.first_name">
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <input class="input" type="text" placeholder="Last Name" ng-model="sdc.newFriend.last_name">
+        </div>
+    </div>
+    <div class="field is-grouped">
+        <div class="control">
+            <button ng-click="sdc.addFriend()" class="button is-primary">Add Friend</button>
+        </div>
+        <div class="control">
+            <a href="/#/register" class="button is-link">Cancel</a>
+        </div>
     </div>
 </div>
-<div class="field">
-    <div class="control">
-        <input class="input" type="text" placeholder="Last Name" ng-model="sdc.newFriend.last_name">
-    </div>
-</div>
-<div class="field is-grouped">
-    <div class="control">
-        <button ng-click="sdc.addFriend()" class="button is-primary">Add Friend</button>
-    </div>
-    <div class="control">
-        <a href="/#/register" class="button is-link">Cancel</a>
-    </div>
-</div>
+
 
 <!-- Friends -->
 <div ng-repeat="friend in sdc.friends.list">{{friend.first_name}} {{friend.last_name}} <a class="button is-small is-danger" ng-click="sdc.deleteFriend(friend.id)">Delete</a></div>

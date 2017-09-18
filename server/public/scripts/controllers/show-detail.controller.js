@@ -39,6 +39,8 @@ app.controller('ShowDetailController', ['$routeParams', 'ShowDetailService', fun
 
     self.newFriend = {};
 
+    self.addingFriend = false;
+
     // GET friends
     ShowDetailService.getFriends($routeParams.id);
 
@@ -47,6 +49,8 @@ app.controller('ShowDetailController', ['$routeParams', 'ShowDetailService', fun
         let currentShowId = self.currentShow.details[0].id;
         self.newFriend.showId = currentShowId;
         ShowDetailService.addFriend(self.newFriend);
+        self.newFriend = {};
+        self.addingFriend = false;
     };
 
     // DELETE friend
