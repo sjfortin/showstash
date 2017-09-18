@@ -1,0 +1,9 @@
+<h1 class="title">
+    {{sdc.currentShow.details[0].artist}}</h1>
+<h1 class="subtitle">{{sdc.currentShow.details[0].show_date | date: fullDate}}</h1>
+<h1 class="title is-5 has-text-weight-light">{{sdc.currentShow.details[0].venue}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</h1>
+<div class="field">
+    <div class="control">
+        <button ng-click="sdc.editingMode = !sdc.editingMode" class="button is-primary is-small"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span><span>Edit Show Specs</span></button>
+    </div>
+</div>

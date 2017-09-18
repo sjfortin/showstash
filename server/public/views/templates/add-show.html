@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="control">
-                    <button class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city)">Seach Shows</button>
+                    <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city)">Search Shows</button>
                 </div>
 
                 <!-- Search Results -->
@@ -85,3 +85,4 @@
         </div>
     </div>
 </section>
+<div ng-include="'views/partials/footer.html'"></div>

@@ -93,7 +93,7 @@ router.post('/addSearchedShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, mbid, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);',
+                client.query('INSERT INTO users_shows (artist, mbid, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning id;',
                     [
                         req.body.artist,
                         req.body.mbid,
@@ -111,7 +111,7 @@ router.post('/addSearchedShow', function (req, res) {
                             console.log('Error making database query', errQuery);
                             res.sendStatus(500);
                         } else {
-                            res.sendStatus(201);
+                            res.send(data.rows);
                         }
                     });
             }

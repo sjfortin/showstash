@@ -6,6 +6,10 @@ textarea {
     font-family: 'Lato', sans-serif;
 }
 
+.home-image img {
+    max-width: 300px;
+}
+
 p.setlist-item {
     padding: 10px 10px 10px 0;
     border-bottom: 1px solid #f1f1f1;
@@ -13,4 +17,29 @@ p.setlist-item {
 
 .card {
     margin-top: 20px;
+}
+
+.footer {
+    background-color: #f5f7fa;
+    padding: 40px 20px;
+}
+
+.footer a,
+.footer a:visited {
+    color: #69707a;
+}
+
+.footer a:hover,
+.footer a:visited:hover {
+    color: #222324;
+}
+
+.footer a:not(.icon),
+.footer a:visited:not(.icon) {
+    border-bottom: 1px solid #d3d6db;
+}
+
+.footer a:not(.icon):hover,
+.footer a:visited:not(.icon):hover {
+    border-bottom-color: #1fc8db;
 }

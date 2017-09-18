@@ -25,7 +25,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             });
     };
 
-    // User POST to users_shows table
+    // Manually add a show
     self.addShow = function (newShow) {
         $http({
             method: 'POST',
@@ -40,6 +40,10 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
 
     // GET Search Results from server
     self.searchShow = function (artist, city) {
+
+        let searchButton = document.querySelector('#search-button');
+        searchButton.classList.add('is-loading');
+
         $http({
             method: 'GET',
             url: '/shows/searchResults',
@@ -51,13 +55,14 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             function (response) {
                 console.log('search response', response);
                 self.searchShowResults.data = response;
+                searchButton.classList.remove('is-loading');
             },
             function (data) {
                 console.log('this is an error', data.config.params);
             });
     };
 
-    // POST from Search Results add button
+    // Add a show from the search results
     self.addSearchedShow = function (artist, mbid, date, venue, city, state, version, sets) {
 
         // Check to see if the show already has been added
@@ -68,10 +73,10 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
         // });
 
         // setlist api date needs to be coverted to proper postgreSQL date format
-        var formattedDate = self.toDate(date);
+        let formattedDate = self.toDate(date);
 
         // Format set data to send to database
-        var formattedSets = getSetData(sets);
+        let formattedSets = getSetData(sets);
 
         $http({
             method: 'POST',
@@ -88,12 +93,9 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             }
         }).then(
             function (response) {
-                console.log('search show add', response);
-                toastr.success('Show added!', 'Keep going!');
-                $location.path('/shows');
-                self.setlist = {
-                    data: []
-                };
+                let showAddedId = response.data[0].id;
+                toastr.success('Show has been added');
+                $location.path('/show/' + showAddedId);
             })
     };
 
@@ -133,7 +135,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
 
     // Create array of songs from the setlist data object
     function getSetData(sets) {
-        var songArray = [];
+        let songArray = [];
         sets.forEach(function (set) {
             set.song.forEach(function (song) {
                 songArray.push(song.name);

@@ -6,13 +6,6 @@ CREATE TABLE users
     first_name VARCHAR(80) NOT NULL,
     last_name VARCHAR(80) NOT NULL
 );
-CREATE TABLE venues
-(
-    id SERIAL PRIMARY KEY,
-    venue_name VARCHAR(80) NOT NULL,
-    venue_city VARCHAR(80) NOT NULL,
-    venue_state VARCHAR(10)
-);
 CREATE TABLE users_shows
 (
     id SERIAL PRIMARY KEY,
@@ -25,19 +18,25 @@ CREATE TABLE users_shows
     state VARCHAR(10),
     notes VARCHAR(256),
     setlist TEXT[],
-    user_id INT REFERENCES users
+    user_id INT REFERENCES users,
 );
-
--- CREATE TABLE friends
--- (
---     id SERIAL PRIMARY KEY,
---     first_name VARCHAR(80) NOT NULL,
---     last_name VARCHAR(80) NOT NULL,
---     user_id INT REFERENCES users
--- );
+CREATE TABLE friends
+(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(80) NOT NULL,
+    last_name VARCHAR(80) NOT NULL,
+    user_show INT REFERENCES users_shows
+);
 -- CREATE TABLE user_show_friends
 -- (
 --     user_show_id INT REFERENCES users_shows,
 --     friend_id INT REFERENCES friends,
 --     PRIMARY KEY (user_show_id, friend_id)
+-- );
+-- CREATE TABLE venues
+-- (
+--     id SERIAL PRIMARY KEY,
+--     venue_name VARCHAR(80) NOT NULL,
+--     venue_city VARCHAR(80) NOT NULL,
+--     venue_state VARCHAR(10)
 -- );

@@ -13,10 +13,10 @@ app.service('UserService', function ($http, $location) {
         self.userObject.last_name = response.data.last_name;
       } else {
         // user has no session, bounce them back to the login page
-        $location.path("/home");
+        $location.path("/login");
       }
     }, function (response) {
-      $location.path("/home");
+      $location.path("/login");
     });
   }
 

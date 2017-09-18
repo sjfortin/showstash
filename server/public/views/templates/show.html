@@ -2,42 +2,28 @@
 <div ng-include="'views/partials/header.html'"></div>
 <section class="section">
     <div class="container">
+        <p>
+            <a ng-href="/#/shows" class="is-size-7"><i class="fa fa-chevron-left" aria-hidden="true"></i> back to my shows</a>
+        </p>
+        <div class="columns">
+            <div class="column is-half">
+                <!-- Show Details -->
+                <div ng-if="!sdc.editingMode" ng-include="'views/partials/show/show-details.html'"></div>
 
-        <!-- Show Information -->
-        <div ng-if="!sdc.editingMode">
-            <p>
-                <a ng-href="/#/shows" class="is-size-7"><i class="fa fa-chevron-left" aria-hidden="true"></i> back to my shows</a>
-            </p>
-            <h1 class="title">{{sdc.currentShow.details[0].artist}}</h1>
-            <h1 class="subtitle">{{sdc.currentShow.details[0].show_date | date: fullDate}}</h1>
-            <h1 class="title is-5 has-text-weight-light">{{sdc.currentShow.details[0].venue}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</h1>
-            <div class="field">
-                <div class="control">
-                    <button ng-click="sdc.editingMode = !sdc.editingMode" class="button is-primary is-small"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span><span>Edit This Show</span></button>
-                </div>
+                <!-- Edit Show Form -->
+                <div ng-if="sdc.editingMode" ng-include="'views/partials/show/edit-show.html'"></div>
+
+                <!-- Setlist Info -->
+                <div ng-include="'views/partials/show/setlist.html'"></div>
+            </div>
+            <div class="column is-half">
+                <!-- Show Notes -->
+                <div ng-include="'views/partials/show/show-notes.html'"></div>
+
+                <!-- Friends -->
+                <div ng-include="'views/partials/show/show-friends.html'"></div>
             </div>
         </div>
-
-        <!-- Edit Show Form -->
-        <div ng-include="'views/partials/edit-show.html'"></div>
-
-        <!-- Setlist Info -->
-        <div ng-if="!sdc.editingMode">
-            <br>
-            <h3 class="is-size-5 has-text-weight-bold" ng-if="sdc.currentShow.details[0].setlist.length">Setlist</h3>
-            <p class="setlist-item" ng-repeat="song in sdc.currentShow.details[0].setlist">{{song}}</p>
-            <p ng-if="!sdc.currentShow.details[0].setlist.length">Setlist not available.</p>
-        </div>
-
-        <!-- Show Notes -->
-        <div>
-            <h1 class="title">Show Notes</h1>
-            <p ng-if="!sdc.addingNote">{{sdc.currentShow.details[0].notes}}</p>
-            <p><a ng-if="!sdc.addingNote" ng-click="sdc.addingNote = !sdc.addingNote">Add Note</a></p>
-            <div ng-include="'views/partials/add-show-notes.html'"></div>
-        </div>
-
-        <!-- Friends -->
-
     </div>
 </section>
+<div ng-include="'views/partials/footer.html'"></div>
