@@ -18,11 +18,11 @@
                 </div>
                 <br>
                 <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
-                    <!-- <figure class="media-left">
+                     <figure class="media-left">
                 <p class="image is-64x64">
-                    <img src="http://bulma.io/images/placeholders/128x128.png">
+                    <img ng-src="{{show.image}}">
                 </p>
-            </figure> -->
+            </figure> 
                     <div class="media-content">
                         <div class="content">
                             <p>

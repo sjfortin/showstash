@@ -18,7 +18,8 @@ CREATE TABLE users_shows
     state VARCHAR(10),
     notes VARCHAR(256),
     setlist TEXT[],
-    user_id INT REFERENCES users,
+    image VARCHAR(256),
+    user_id INT REFERENCES users
 );
 CREATE TABLE friends
 (

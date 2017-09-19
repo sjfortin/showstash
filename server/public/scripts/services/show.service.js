@@ -85,36 +85,41 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
         let formattedSets = getSetData(sets);
 
         $http({
-            method: 'POST',
-            url: '/shows/addSearchedShow',
-            data: {
-                artist: artist,
-                mbid: mbid,
-                show_date: formattedDate,
-                venue: venue,
-                city: city,
-                state: state,
-                version_id: version,
-                setlist: formattedSets
+            method: 'GET',
+            url: '/shows/artistImage',
+            params: {
+                artist: artist
             }
-        }).then(
-            function (response) {
-                // let showAddedId = response.data[0].id;
-                // toastr.success('Show has been added');
-                // $location.path('/show/' + showAddedId);
-                console.log('response.data[0].mbid', response.data[0].artist);
-
-                $http({
-                    method: 'GET',
-                    url: '/shows/artistImage',
-                    params: {
-                        artist: response.data[0].artist
-                    }
-                }).then(function (response) {
-                    console.log('new response from lastfm', response);
-                    
+        }).then(function (response) {
+            let artistMatches = response.data.results.artistmatches.artist;
+            let artistImage;
+            
+            artistImage = artistMatches.find(function (artist) {                
+                return artist.mbid == mbid;
+            }).image[3]['#text'];
+            
+            console.log('artistImage', artistImage);
+            $http({
+                method: 'POST',
+                url: '/shows/addSearchedShow',
+                data: {
+                    artist: artist,
+                    mbid: mbid,
+                    show_date: formattedDate,
+                    venue: venue,
+                    city: city,
+                    state: state,
+                    version_id: version,
+                    setlist: formattedSets,
+                    image: artistImage
+                }
+            }).then(
+                function (response) {
+                    let showAddedId = response.data[0].id;
+                    toastr.success('Show has been added');
+                    $location.path('/show/' + showAddedId);
                 })
-            })
+        })
     };
 
     // DELETE individual show
