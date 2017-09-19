@@ -46,13 +46,13 @@ router.post('/addShowManually', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, show_date, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6);', [req.body.artist, req.body.show_date, req.body.venue, req.body.city, req.body.state, userID], function (errQuery, data) {
+                client.query('INSERT INTO users_shows (artist, show_date, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6) returning id;', [req.body.artist, req.body.show_date, req.body.venue, req.body.city, req.body.state, userID], function (errQuery, data) {
                     done();
                     if (errQuery) {
                         console.log('Error making database query', errQuery);
                         res.sendStatus(500);
                     } else {
-                        res.sendStatus(201);
+                        res.send(data.rows);
                     }
                 });
             }

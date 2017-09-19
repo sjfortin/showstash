@@ -2,9 +2,12 @@
 <div ng-include="'views/partials/header.html'"></div>
 <section class="section">
     <div class="container">
-        <div class="columns">
-            <div class="column is-half">
-                <h1 class="title">Search setlist.fm</h1>
+        <div class="columns" ng-if="!sc.addOwnShow">
+
+            <!-- Search the api -->
+            <div class="column is-6">
+                <h1 class="title">Search for Shows</h1>
+                <p class="subtitle">Search powered by setlist.fm</p>
                 <div class="field">
                     <label class="label">Artist</label>
                     <div class="control">
@@ -17,11 +20,17 @@
                         <input class="input" type="text" placeholder="City" ng-model="sc.searchShow.city">
                     </div>
                 </div>
-                <div class="control">
-                    <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city)">Search Shows</button>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city)">Search Shows</button>
+                    </div>
+                    <div class="control">
+                        <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own Show</a>
+                    </div>
                 </div>
 
                 <!-- Search Results -->
+                <p ng-if="sc.ShowService.zeroSearchResults">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
                 <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
                 <div class="card" ng-repeat="show in sc.searchShowResults.data.data.setlist">
                     <header class="card-header">
@@ -39,9 +48,11 @@
                     </footer>
                 </div>
             </div>
+        </div>
 
-            <!-- Manual add show form -->
-            <div class="column is-half">
+        <!-- Manual add show form -->
+        <div class="columns" ng-if="sc.addOwnShow">
+            <div class="column is-6">
                 <h1 class="title">Add Your Own Show</h1>
                 <div class="field">
                     <label class="label">Artist</label>
@@ -76,9 +87,12 @@
                 </select>
                     </div>
                 </div>
-                <div class="field">
+                <div class="field is-grouped">
                     <div class="control">
                         <button ng-click="sc.addShow()" class="button is-primary">Add Show</button>
+                    </div>
+                    <div class="control">
+                        <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Cancel</a>
                     </div>
                 </div>
             </div>

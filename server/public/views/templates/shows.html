@@ -2,41 +2,47 @@
 <div ng-include="'views/partials/header.html'"></div>
 <section class="section">
     <div class="container">
-        <h1 class="title">My Shows</h1>
-        <div class="field" ng-if="sc.myShows.data.length">
-            <label class="label">Order Shows by:</label>
-            <div class="control">
-                <div class="select is-primary">
-                    <select ng-model="sc.orderShowsBy">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">My Shows</h1>
+                <div class="field" ng-if="sc.myShows.data.length">
+                    <label class="label">Order Shows by:</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                            <select ng-model="sc.orderShowsBy">
                         <option value="-show_date">Date (Most Recent)</option>
                         <option value="show_date">Date (Oldest)</option>
                     </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <br>
-        <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
-            <!-- <figure class="media-left">
+                <br>
+                <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
+                    <!-- <figure class="media-left">
                 <p class="image is-64x64">
                     <img src="http://bulma.io/images/placeholders/128x128.png">
                 </p>
             </figure> -->
-            <div class="media-content">
-                <div class="content">
-                    <p>
-                        <strong>{{show.artist}}</strong> <small>{{show.show_date | date: fullDate}}</small>
-                        <br> {{show.venue}} | {{show.city}}, {{show.state}}
-                    </p>
-                </div>
-                <nav class="level is-mobile">
-                    <div class="level-left">
-                        <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small"><i class="fa fa-music"></i></span> Show Details</a>
-                        <a class="level-item has-text-danger" ng-click="sc.ShowService.deleteShow(show.id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete</a>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{show.artist}}</strong> <small>{{show.show_date | date: fullDate}}</small>
+                                <br> {{show.venue}} | {{show.city}}, {{show.state}}
+                            </p>
+                        </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                                <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small"><i class="fa fa-music"></i></span> Show Details</a>
+                                <a class="level-item has-text-danger" ng-click="sc.ShowService.deleteShow(show.id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete</a>
+                            </div>
+                        </nav>
                     </div>
-                </nav>
+                </article>
+                <div ng-if="!sc.myShows.data.length">
+                    <p>You don't have any shows. <a href="/#/add-show">Add some!</a></p>
+                </div>
             </div>
-        </article>
-        <div ng-if="!sc.myShows.data.length"><p>You don't have any shows. <a href="/#/add-show">Add some!</a></p></div>
+        </div>
     </div>
 </section>
 <div ng-include="'views/partials/footer.html'"></div>

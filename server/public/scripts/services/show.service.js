@@ -12,6 +12,8 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
         details: {}
     }
 
+    self.zeroSearchResults = false;
+
     // List of states for the state dropdown menu
     self.states = {
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
@@ -32,9 +34,10 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             url: '/shows/addShowManually',
             data: newShow
         })
-            .then(function () {
-                toastr.success('Show added!', 'Boo yah!');
-                $location.path('/shows');
+            .then(function (response) {
+                let showAddedId = response.data[0].id;
+                toastr.success('Show has been added');
+                $location.path('/show/' + showAddedId);
             });
     };
 
@@ -53,6 +56,9 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             }
         }).then(
             function (response) {
+                if(response.data === '') {
+                    self.zeroSearchResults = true;
+                }
                 console.log('search response', response);
                 self.searchShowResults.data = response;
                 searchButton.classList.remove('is-loading');
