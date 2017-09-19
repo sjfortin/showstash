@@ -97,6 +97,10 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         // Format set data to send to database
         let formattedSets = getSetData(sets);
 
+        // Loading spinner
+        let addingShowButton = document.querySelector('.addingShow');
+        addingShowButton.classList.add('is-loading');
+
         $http({
             method: 'GET',
             url: '/shows/artistImage',
