@@ -65,7 +65,7 @@ router.post('/addShowManually', function (req, res) {
 router.get('/searchResults', function (req, res) {
     if (req.isAuthenticated()) {
         request({
-            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.artist + '&cityName=' + req.query.city + '&p=1',
+            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.artist + '&cityName=' + req.query.city + '&p=' + req.query.currentPageNumber,
             headers: {
                 'Accept': 'application/json',
                 'x-api-key': setListApiKey,

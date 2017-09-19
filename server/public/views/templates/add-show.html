@@ -22,16 +22,32 @@
                 </div>
                 <div class="field is-grouped">
                     <div class="control">
-                        <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city)">Search Shows</button>
+                        <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, 1)">Search Shows</button>
                     </div>
                     <div class="control">
                         <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own Show</a>
                     </div>
                 </div>
-
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
                 <!-- Search Results -->
                 <p ng-if="sc.ShowService.zeroSearchResults">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
                 <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
+                
+                <!-- Pagination -->
+                <nav class="pagination" role="navigation" aria-label="pagination"
+                    class="is-small" ng-if="sc.searchShowResults.data.data.setlist.length">
+                    <ul class="pagination-list">
+                        <li>Results</li>
+                        <li ng-repeat="page in sc.ShowService.searchResultPages">
+                            <a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, page)" class="pagination-link" aria-label="Goto page {{page}}" ng-class="{true: 'is-current', false:''}[ $index+1==sc.ShowService.currentPageNumber]" >Page {{page}}</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Search Listings -->
                 <div class="card" ng-repeat="show in sc.searchShowResults.data.data.setlist">
                     <header class="card-header">
                         <p class="card-header-title">{{show.artist.name}}</p>

@@ -1,18 +1,13 @@
-app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $location, toastr) {
+app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function ($http, $location, toastr, $compile) {
     var self = this;
 
     // Object to store my shows
     self.myShows = {};
 
-    // Object to store show search results
-    self.searchShowResults = {};
-
     // Object to store current show details
     self.currentShow = {
         details: {}
     }
-
-    self.zeroSearchResults = false;
 
     // List of states for the state dropdown menu
     self.states = {
@@ -42,7 +37,18 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
     };
 
     // GET Search Results from server
-    self.searchShow = function (artist, city) {
+    self.searchShowResults = {};
+    self.zeroSearchResults = false;
+    self.numberOfSearchPages = 0;
+    self.currentPageNumber = 0;
+    
+
+    self.searchShow = function (artist, city, pageNumber) {
+        console.log('pageNumber', pageNumber);
+        
+        self.searchResultPages = [];
+        self.currentPageNumber = pageNumber;
+        console.log('currentPageNumber', self.currentPageNumber);
 
         let searchButton = document.querySelector('#search-button');
         searchButton.classList.add('is-loading');
@@ -52,16 +58,23 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             url: '/shows/searchResults',
             params: {
                 artist: artist,
-                city: city
+                city: city,
+                currentPageNumber: pageNumber
             }
         }).then(
             function (response) {
+                self.numberOfSearchPages = Math.ceil(response.data.total / response.data.itemsPerPage);
+
+                for (var i = 0; i < self.numberOfSearchPages; i++) {
+                    self.searchResultPages.push(i + 1);
+                }                
+
                 if (response.data === '') {
                     self.zeroSearchResults = true;
                 }
-                console.log('search response', response);
                 self.searchShowResults.data = response;
                 searchButton.classList.remove('is-loading');
+                console.log('search response', response);
             },
             function (data) {
                 console.log('this is an error', data.config.params);
@@ -93,11 +106,11 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
         }).then(function (response) {
             let artistMatches = response.data.results.artistmatches.artist;
             let artistImage;
-            
-            artistImage = artistMatches.find(function (artist) {                
+
+            artistImage = artistMatches.find(function (artist) {
                 return artist.mbid == mbid;
             }).image[3]['#text'];
-            
+
             console.log('artistImage', artistImage);
             $http({
                 method: 'POST',
