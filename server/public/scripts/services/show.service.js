@@ -56,7 +56,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             }
         }).then(
             function (response) {
-                if(response.data === '') {
+                if (response.data === '') {
                     self.zeroSearchResults = true;
                 }
                 console.log('search response', response);
@@ -99,9 +99,21 @@ app.service('ShowService', ['$http', '$location', 'toastr', function ($http, $lo
             }
         }).then(
             function (response) {
-                let showAddedId = response.data[0].id;
-                toastr.success('Show has been added');
-                $location.path('/show/' + showAddedId);
+                // let showAddedId = response.data[0].id;
+                // toastr.success('Show has been added');
+                // $location.path('/show/' + showAddedId);
+                console.log('response.data[0].mbid', response.data[0].artist);
+
+                $http({
+                    method: 'GET',
+                    url: '/shows/artistImage',
+                    params: {
+                        artist: response.data[0].artist
+                    }
+                }).then(function (response) {
+                    console.log('new response from lastfm', response);
+                    
+                })
             })
     };
 

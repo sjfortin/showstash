@@ -93,7 +93,7 @@ router.post('/addSearchedShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, mbid, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning id;',
+                client.query('INSERT INTO users_shows (artist, mbid, show_date, venue, city, state, version_id, user_id, setlist) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *;',
                     [
                         req.body.artist,
                         req.body.mbid,
@@ -222,6 +222,29 @@ router.put('/addNote', function (req, res) {
         });
     }
 });
+
+// get mbid information
+router.get('/artistImage', function (req, res) {
+    var artist = req.query.artist;
+    if (req.isAuthenticated()) {
+        request({
+            url: 'http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + artist + '&api_key=17fc707735a64230fe40a6576b115c6a&format=json',
+            headers: {
+                'Accept': 'application/json',
+                'api-key': '17fc707735a64230fe40a6576b115c6a',
+                'User-Agent': 'request'
+            }
+        }, function (error, response, body) {
+            if (response && response.statusCode == 200) {
+                res.send(body);
+            } else {
+                console.log('error', error);
+                res.sendStatus(204);
+            }
+        });
+    }
+});
+
 // clear all server session information about this user
 router.get('/logout', function (req, res) {
     // Use passport's built-in method to log out the user
