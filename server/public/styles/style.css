@@ -15,6 +15,10 @@ textarea {
     padding: 5px 10px;
 }
 
+.header-logo {
+    margin-top: 20px;
+}
+
 p.setlist-item {
     padding: 3px 0;
     border-bottom: 1px solid #f1f1f1;
