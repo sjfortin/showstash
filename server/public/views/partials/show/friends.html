@@ -1,6 +1,6 @@
 <!-- Friends -->
 <div class="box">
-    <div ng-if="!sdc.addingFriend">
+    <div>
         <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
         <hr>
         <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show yet.</em></p>
@@ -19,7 +19,8 @@
     </div>
     <!-- Add a Fried Form -->
     <div ng-if="sdc.addingFriend">
-        <h3 class="title is-5">Add a Friend</h3>
+        <br>
+        <h3 class="title is-6">Add a Friend</h3>
         <div class="field is-grouped">
             <div class="control">
                 <input class="input" type="text" placeholder="First Name" ng-model="sdc.newFriend.first_name">
