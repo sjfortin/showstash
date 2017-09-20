@@ -14,11 +14,32 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
     };
 
+    self.currentShowYear = 2017;
+    self.allShowYears = [];
+
     // GET My Shows from users_shows table
     self.getShows = function () {
         $http.get('/shows/myShows')
             .then(function (response) {
                 self.myShows.data = response.data;
+                self.currentShowYear = 2017;
+
+                // Add a fullYear property to each show
+                var allShows = self.myShows.data;
+                allShows.forEach(function (show) {
+                    var date = new Date(show.show_date);
+                    var fullYear = date.getFullYear();
+                    show.fullYear = fullYear;
+                });
+
+                // Add an array of all years in my shows
+                allShows.forEach(function (show) {
+                    if (!self.allShowYears.includes(show.fullYear)) {
+                        // console.log('already there');
+                        self.allShowYears.push(show.fullYear);
+                    }
+                });
+                self.allShowYears.sort(function (a, b) { return b - a });
             });
     };
 
@@ -41,11 +62,11 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
     self.zeroSearchResults = false;
     self.numberOfSearchPages = 0;
     self.currentPageNumber = 0;
-    
+
 
     self.searchShow = function (artist, city, pageNumber) {
         console.log('pageNumber', pageNumber);
-        
+
         self.searchResultPages = [];
         self.currentPageNumber = pageNumber;
         console.log('currentPageNumber', self.currentPageNumber);
@@ -67,7 +88,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
 
                 for (var i = 0; i < self.numberOfSearchPages; i++) {
                     self.searchResultPages.push(i + 1);
-                }                
+                }
 
                 if (response.data === '') {
                     self.zeroSearchResults = true;
@@ -178,6 +199,11 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
             })
         });
         return songArray;
+    }
+
+    // Switch years being shown in the my shows view
+    self.changeYear = function(year) {
+        self.currentShowYear = year;
     }
 
 }]);
