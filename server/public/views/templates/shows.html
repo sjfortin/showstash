@@ -3,9 +3,10 @@
 <section class="section">
     <div class="container">
         <div class="columns">
-            <div class="column">
-                <h1 class="title">My Shows</h1>
-                <div class="field" ng-if="sc.myShows.data.length">
+            <div class="column is-8 is-offset-2">
+                <div class="box">
+                    <h1 class="title is-1 has-text-centered">My Shows</h1>
+                    <!-- <div class="field" ng-if="sc.myShows.data.length">
                     <label class="label">Order Shows by:</label>
                     <div class="control">
                         <div class="select is-primary">
@@ -15,31 +16,36 @@
                     </select>
                         </div>
                     </div>
-                </div>
-                <br>
-                <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
-                     <figure class="media-left">
-                <p class="image is-64x64">
-                    <img ng-src="{{show.image}}">
-                </p>
-            </figure> 
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>{{show.artist}}</strong> <small>{{show.show_date | date: fullDate}}</small>
-                                <br> {{show.venue}} | {{show.city}}, {{show.state}}
+                </div> -->
+                    <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
+                        <figure class="media-left">
+                            <p class="image is-128x128 is-circle" ng-if="show.image">
+                                <img ng-src="{{show.image}}">
                             </p>
-                        </div>
-                        <nav class="level is-mobile">
-                            <div class="level-left">
-                                <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small"><i class="fa fa-music"></i></span> Show Details</a>
-                                <a class="level-item has-text-danger" ng-click="sc.ShowService.deleteShow(show.id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete</a>
+                            <div class="has-text-centered no-image" ng-if="!show.image">
                             </div>
-                        </nav>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="is-size-4 has-text-weight-bold">{{show.artist}}</span>
+                                    <br> {{show.venue}} | {{show.city}}, {{show.state}}
+                                    <br> {{show.show_date | date: 'fullDate'}}
+                                </p>
+                            </div>
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+                                    <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small" style="margin-right: 5px;"><i class="fa fa-music"></i></span>View Show Details</a>
+                                </div>
+                                <div class="level-right">
+                                    <a class="level-item has-text-danger" ng-click="sc.ShowService.deleteShow(show.id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete</a>
+                                </div>
+                            </nav>
+                        </div>
+                    </article>
+                    <div ng-if="!sc.myShows.data.length">
+                        <p>You don't have any shows. <a href="/#/add-show">Add some!</a></p>
                     </div>
-                </article>
-                <div ng-if="!sc.myShows.data.length">
-                    <p>You don't have any shows. <a href="/#/add-show">Add some!</a></p>
                 </div>
             </div>
         </div>

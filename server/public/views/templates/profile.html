@@ -4,38 +4,41 @@
 <section class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-4">
-                <h1 class="title">My Profile</h1>
-                <h1 class="subtitle is-5">Update your email address and password here.</h1>
-                <form ng-submit="lc.updateProfile()">
-                    <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+            <div class="column is-6 is-offset-3">
+                <div class="box">
+                    <h1 class="title">{{lc.userObject.first_name}} {{lc.userObject.last_name}}</h1>
+                    <h1 class="subtitle is-5">Update your email address and password here.</h1>
+                    <form ng-submit="lc.updateProfile()">
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Old Password</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Old Password" ng-model="lc.user.old_password">
+                        <div class="field">
+                            <label class="label">Old Password</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Old Password" ng-model="lc.user.old_password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">New Password</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="New Password" ng-model="lc.user.password">
+                        <div class="field">
+                            <label class="label">New Password</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="New Password" ng-model="lc.user.password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <button type="submit" class="button is-primary">Update Profile</button>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-primary is-outlined">Update Profile</button>
+                            </div>
+                            <div class="control">
+                                <a ng-href="/#/shows" class="button is-link">Cancel</a>
+                            </div>
                         </div>
-                        <div class="control">
-                            <a ng-href="/#/shows" class="button is-link">Cancel</a>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </section>
+<div ng-include="'views/partials/footer.html'"></div>

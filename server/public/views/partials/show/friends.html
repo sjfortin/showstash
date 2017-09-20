@@ -1,7 +1,7 @@
 <!-- Friends -->
 <div class="box">
     <div>
-        <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
+        <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right is-outlined" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
         <hr>
         <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show yet.</em></p>
         <article class="media" ng-repeat="friend in sdc.friends.list | orderBy: 'first_name'">
@@ -21,20 +21,22 @@
     <div ng-if="sdc.addingFriend">
         <br>
         <h3 class="title is-6">Add a Friend</h3>
-        <div class="field is-grouped">
+        <div class="field">
             <div class="control">
                 <input class="input" type="text" placeholder="First Name" ng-model="sdc.newFriend.first_name">
             </div>
-            <div class="control">
-                <input class="input" type="text" placeholder="Last Name" ng-model="sdc.newFriend.last_name">
+        </div>
+        <div class="field">
+            <div class=" control ">
+                <input class="input " type="text " placeholder="Last Name " ng-model="sdc.newFriend.last_name ">
             </div>
         </div>
-        <div class="field is-grouped">
-            <div class="control">
-                <a ng-click="sdc.addFriend()" class="button is-primary">Add Friend</a>
+        <div class="field is-grouped ">
+            <div class="control ">
+                <a ng-click="sdc.addFriend() " class="button is-primary is-outlined">Add Friend</a>
             </div>
-            <div class="control">
-                <a ng-click="sdc.addingFriend = !sdc.addingFriend" class="button is-link">Cancel</a>
+            <div class="control ">
+                <a ng-click="sdc.addingFriend=! sdc.addingFriend " class="button is-link ">Cancel</a>
             </div>
         </div>
     </div>

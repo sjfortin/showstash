@@ -2,30 +2,32 @@
 <section class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-4 is-offset-4">
-                <h1 class="title">Login</h1>
-                <form ng-submit="lc.login()">
-                    <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+            <div class="column is-6 is-offset-3">
+                <div class="box">
+                    <h1 class="title">Login</h1>
+                    <form ng-submit="lc.login()">
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Password" ng-model="lc.user.password">
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Password" ng-model="lc.user.password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <button type="submit" class="button is-primary">Login</button>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-primary is-outlined">Login</button>
+                            </div>
+                            <div class="control">
+                                <a href="/#/register" class="button is-link">Register</a>
+                            </div>
                         </div>
-                        <div class="control">
-                            <a href="/#/register" class="button is-link">Register</a>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

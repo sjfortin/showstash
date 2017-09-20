@@ -1,6 +1,6 @@
 <div class="box">
     <div ng-if="!sdc.addingNote">
-        <p><span class="title is-5">Notes</span> <a ng-if="!sdc.addingNote" ng-click="sdc.addingNote = !sdc.addingNote" class="button is-small is-primary is-pulled-right">
+        <p><span class="title is-5">Notes</span> <a ng-if="!sdc.addingNote" ng-click="sdc.addingNote = !sdc.addingNote" class="button is-small is-primary is-pulled-right is-outlined">
     <span ng-if="!sdc.currentShow.details[0].notes">Add Notes</span>
     <span ng-if="sdc.currentShow.details[0].notes">Edit Notes</span></a></p>
         <article class="media">
@@ -21,7 +21,7 @@
         </div>
         <div class="field is-grouped">
             <div class="control">
-                <button ng-click="sdc.addNote(); sdc.addingNote = !sdc.addingNote" class="button is-primary">Save Note</button>
+                <button ng-click="sdc.addNote(); sdc.addingNote = !sdc.addingNote" class="button is-primary is-outlined">Save Note</button>
             </div>
             <div class="control">
                 <a ng-click="sdc.addingNote = !sdc.addingNote" class="button is-link">Cancel</a>

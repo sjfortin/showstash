@@ -5,111 +5,119 @@
         <div class="columns" ng-if="!sc.addOwnShow">
 
             <!-- Search the api -->
-            <div class="column is-6">
-                <h1 class="title">Search for Shows</h1>
-                <p class="subtitle">Search powered by setlist.fm and last.fm</p>
-                <div class="field">
-                    <label class="label">Artist</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Artist" ng-model="sc.searchShow.artist">
+            <div class="column is-8 is-offset-2">
+                <div class="box">
+                    <h1 class="title">Search for Shows</h1>
+                    <div class="field">
+                        <label class="label">Artist</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Artist" ng-model="sc.searchShow.artist">
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">City</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="City" ng-model="sc.searchShow.city">
+                    <div class="field">
+                        <label class="label">City</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="City" ng-model="sc.searchShow.city">
+                        </div>
                     </div>
-                </div>
-                <div class="field is-grouped">
-                    <div class="control">
-                        <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, 1)">Search</button>
-                    </div>
-                    <div class="control">
-                        <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own Show</a>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button id="search-button" class="button is-primary is-outlined" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, 1)">Search</button>
+                        </div>
+                        <div class="control">
+                            <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own Show</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="columns">
-            <div class="column">
+            <div class="column is-8 is-offset-2">
 
                 <!-- Search Results -->
                 <p ng-if="sc.ShowService.zeroSearchResults">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
                 <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
-                
+
                 <!-- Pagination -->
-                <nav class="pagination" role="navigation" aria-label="pagination"
-                    class="is-small" ng-if="sc.searchShowResults.data.data.setlist.length">
-                    <ul class="pagination-list">
-                        <li>Results</li>
-                        <li ng-repeat="page in sc.ShowService.searchResultPages">
-                            <a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, page)" class="pagination-link" aria-label="Goto page {{page}}" ng-class="{true: 'is-current', false:''}[ $index+1==sc.ShowService.currentPageNumber]" >Page {{page}}</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div ng-if="sc.searchShowResults.data.data.setlist.length" style="margin-bottom: 20px;">
+                    <nav class="pagination is-small" role="navigation" aria-label="pagination" class="is-small">
+                        <ul class="pagination-list">
+                            <li ng-repeat="page in sc.ShowService.searchResultPages">
+                                <a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, page)" class="pagination-link" aria-label="Goto page {{page}}"
+                                    ng-class="{true: 'is-current', false:''}[ $index+1==sc.ShowService.currentPageNumber]">Page {{page}}</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
 
                 <!-- Search Listings -->
-                <div class="card" ng-repeat="show in sc.searchShowResults.data.data.setlist">
-                    <header class="card-header">
-                        <p class="card-header-title">{{show.artist.name}}</p>
-                    </header>
-                    <div class="card-content">
+                <article class="media search-listings" ng-repeat="show in sc.searchShowResults.data.data.setlist">
+                    <div class="media-content">
                         <div class="content">
-                            <h5 class="title is-6">{{show.eventDate | searchDateFilter | date: fullDate}}</h5>
-                            <h5 class="subtitle is-6">{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}</h5>
+                            <p>
+                                <strong>{{show.artist.name}}</strong>
+                                <span style="float:right;">{{show.eventDate | searchDateFilter | date: fullDate}}</span>
+                                <br>{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}
+                            </p>
                         </div>
+                        <nav class="level">
+                            <div class="level-left">
+                                <a class="level-item" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)">
+                            <span class="icon is-small"><i class="fa fa-plus"></i></span> Add Show
+                            </a>
+                            </div>
+                        </nav>
                     </div>
-                    <footer class="card-footer">
-                        <a ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)"
-                            class="card-footer-item addingShow">Add Show</a>
-                    </footer>
-                </div>
+                </article>
+
             </div>
         </div>
 
         <!-- Manual add show form -->
         <div class="columns" ng-if="sc.addOwnShow">
-            <div class="column is-6">
-                <h1 class="title">Add Your Own Show</h1>
-                <div class="field">
-                    <label class="label">Artist</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Artist" ng-model="sc.newShow.artist" ng-required="true">
+            <div class="column is-6 is-offset-3">
+                <div class="box">
+                    <h1 class="title">Add Your Own Show</h1>
+                    <div class="field">
+                        <label class="label">Artist</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Artist" ng-model="sc.newShow.artist" ng-required="true">
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">Date</label>
-                    <div class="control">
-                        <input class="input" type="date" ng-model="sc.newShow.show_date">
+                    <div class="field">
+                        <label class="label">Date</label>
+                        <div class="control">
+                            <input class="input" type="date" ng-model="sc.newShow.show_date">
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">Venue</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Venue" ng-model="sc.newShow.venue">
+                    <div class="field">
+                        <label class="label">Venue</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Venue" ng-model="sc.newShow.venue">
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">City</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="City" ng-model="sc.newShow.city">
+                    <div class="field">
+                        <label class="label">City</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="City" ng-model="sc.newShow.city">
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">State</label>
-                    <div class="select">
-                        <select ng-model="sc.newShow.state">
+                    <div class="field">
+                        <label class="label">State</label>
+                        <div class="select">
+                            <select ng-model="sc.newShow.state">
                     <option value="" disabled selected>Please Select</option>
                     <option ng-repeat="state in sc.states" ng-value="state">{{state}}</option>
                 </select>
+                        </div>
                     </div>
-                </div>
-                <div class="field is-grouped">
-                    <div class="control">
-                        <button ng-click="sc.addShow()" class="button is-primary">Add Show</button>
-                    </div>
-                    <div class="control">
-                        <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Cancel</a>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button ng-click="sc.addShow()" class="button is-primary is-outlined">Add Show</button>
+                        </div>
+                        <div class="control">
+                            <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link ">Cancel</a>
+                        </div>
                     </div>
                 </div>
             </div>
