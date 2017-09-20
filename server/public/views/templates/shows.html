@@ -6,18 +6,14 @@
             <div class="column is-8 is-offset-2">
                 <div class="box">
                     <h1 class="title is-1 has-text-centered">My Shows</h1>
-                    <!-- <div class="field" ng-if="sc.myShows.data.length">
-                    <label class="label">Order Shows by:</label>
-                    <div class="control">
-                        <div class="select is-primary">
-                            <select ng-model="sc.orderShowsBy">
-                        <option value="-show_date">Date (Most Recent)</option>
-                        <option value="show_date">Date (Oldest)</option>
-                    </select>
-                        </div>
+
+                    <!-- Tabs by Year -->
+                    <div class="years">
+                        <a class="button is-primary is-outlined is-small" ng-repeat="year in sc.ShowService.allShowYears" ng-click="sc.ShowService.changeYear(year)" ng-class="{'is-current': sc.ShowService.currentShowYear==year}">
+                            {{year}}
+                        </a>
                     </div>
-                </div> -->
-                    <article class="media" ng-repeat="show in sc.myShows.data | orderBy: sc.orderShowsBy" ng-href="/#/show/{{show.id}}">
+                    <article class="media" ng-repeat="show in sc.myShows.data | filter: {fullYear: sc.ShowService.currentShowYear}" ng-href="/#/show/{{show.id}}">
                         <figure class="media-left">
                             <p class="image is-128x128 is-circle" ng-if="show.image">
                                 <img ng-src="{{show.image}}">
