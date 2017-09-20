@@ -81,3 +81,9 @@ p.setlist-item {
 article.search-listings:nth-child(odd) {
     background: #f5f7fa;
 }
+
+.button.is-primary:focus:not(:active),
+.button.is-primary.is-focused:not(:active) {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

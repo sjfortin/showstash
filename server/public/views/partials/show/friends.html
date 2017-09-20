@@ -1,7 +1,7 @@
 <!-- Friends -->
 <div class="box">
     <div>
-        <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right is-outlined" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
+        <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
         <hr>
         <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show yet.</em></p>
         <article class="media" ng-repeat="friend in sdc.friends.list | orderBy: 'first_name'">

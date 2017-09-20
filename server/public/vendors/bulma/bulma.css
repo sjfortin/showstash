@@ -1703,7 +1703,7 @@ a.box:active {
 }
 
 .button.is-primary:hover, .button.is-primary.is-hovered {
-  background-color: #00c4a7;
+  background-color: #393395;
   border-color: transparent;
   color: #fff;
 }
@@ -1719,7 +1719,7 @@ a.box:active {
 }
 
 .button.is-primary:active, .button.is-primary.is-active {
-  background-color: #00b89c;
+  background-color: #393395;
   border-color: transparent;
   color: #fff;
 }
@@ -3179,7 +3179,7 @@ a.box:active {
 }
 
 .file.is-primary:hover .file-cta, .file.is-primary.is-hovered .file-cta {
-  background-color: #00c4a7;
+  background-color: #393395;
   border-color: transparent;
   color: #fff;
 }
@@ -3192,7 +3192,7 @@ a.box:active {
 }
 
 .file.is-primary:active .file-cta, .file.is-primary.is-active .file-cta {
-  background-color: #00b89c;
+  background-color: #393395;
   border-color: transparent;
   color: #fff;
 }
@@ -6359,7 +6359,7 @@ a.nav-item:not(.button).is-tab.is-active {
 .navbar.is-primary .navbar-brand > a.navbar-item:hover, .navbar.is-primary .navbar-brand > a.navbar-item.is-active,
 .navbar.is-primary .navbar-brand .navbar-link:hover,
 .navbar.is-primary .navbar-brand .navbar-link.is-active {
-  background-color: #00b89c;
+  background-color: #393395;
   color: #fff;
 }
 
@@ -6381,7 +6381,7 @@ a.nav-item:not(.button).is-tab.is-active {
   .navbar.is-primary .navbar-end > a.navbar-item.is-active,
   .navbar.is-primary .navbar-end .navbar-link:hover,
   .navbar.is-primary .navbar-end .navbar-link.is-active {
-    background-color: #00b89c;
+    background-color: #393395;
     color: #fff;
   }
   .navbar.is-primary .navbar-start .navbar-link::after,
@@ -6390,7 +6390,7 @@ a.nav-item:not(.button).is-tab.is-active {
   }
   .navbar.is-primary .navbar-item.has-dropdown:hover .navbar-link,
   .navbar.is-primary .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: #00b89c;
+    background-color: #393395;
     color: #fff;
   }
   .navbar.is-primary .navbar-dropdown a.navbar-item.is-active {
