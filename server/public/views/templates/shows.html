@@ -16,11 +16,9 @@
                     <h1></h1>
                     <article class="media" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear}" ng-href="/#/show/{{show.id}}">
                         <figure class="media-left">
-                            <p class="image is-128x128 is-circle" ng-if="show.image">
+                            <p class="image is-128x128 is-circle">
                                 <img ng-src="{{show.image}}">
                             </p>
-                            <div class="has-text-centered no-image" ng-if="!show.image">
-                            </div>
                         </figure>
                         <div class="media-content">
                             <div class="content">

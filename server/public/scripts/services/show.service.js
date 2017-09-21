@@ -14,16 +14,15 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
     };
 
-    self.allShowYears = [];
-
     // GET My Shows from users_shows table
     self.getShows = function () {
+        self.allShowYears = [];
         $http.get('/shows/myShows')
             .then(function (response) {
                 self.myShows.data = response.data;
 
                 var allShows = self.myShows.data;
-                
+
                 // Add an array of all years in my shows
                 allShows.forEach(function (show) {
                     if (!self.allShowYears.includes(show.full_year)) {
@@ -39,14 +38,15 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
 
     // Manually add a show
     self.addShow = function (newShow) {
-        var fullYear = newShow.show_date.getFullYear();        
-        
+        var fullYear = newShow.show_date.getFullYear();
+
         $http({
             method: 'POST',
             url: '/shows/addShowManually',
             data: {
                 newShow: newShow,
-                full_year: fullYear
+                full_year: fullYear,
+                image: 'https://i.pinimg.com/originals/9d/23/17/9d2317310b456185ed9663d3d7b87490.jpg'
             }
         })
             .then(function (response) {
@@ -99,7 +99,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
     };
 
     // Add a show from the search results
-    self.addSearchedShow = function (artist, mbid, date, venue, city, state, version, sets) {
+    self.addSearchedShow = function (artist, mbid, date, venue, city, state, version, sets, index) {
 
         // Check to see if the show already has been added
         // self.myShows.data.forEach(function(show){
@@ -108,9 +108,9 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         //     }
         // });
 
-        let addShowButton = document.querySelector('#add-button');
+        let addShowButton = document.querySelector('#add-button' + index);
         addShowButton.classList.add('is-loading');
-        
+
 
         // setlist api date needs to be coverted to proper postgreSQL date format
         let formattedDate = self.toDate(date);
@@ -119,7 +119,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         let formattedSets = getSetData(sets);
         var fullYear = formattedDate.getFullYear();
         console.log('fullYear', fullYear);
-        
+
 
         $http({
             method: 'GET',
@@ -128,14 +128,22 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
                 artist: artist
             }
         }).then(function (response) {
+
+            // Logic to assign image to an artist
             let artistMatches = response.data.results.artistmatches.artist;
             let artistImage;
 
-            artistImage = artistMatches.find(function (artist) {
+            let imageMatches = artistMatches.filter(function (artist) {
                 return artist.mbid == mbid;
-            }).image[3]['#text'];
+            });
 
-            console.log('artistImage', artistImage);
+            if (imageMatches.length != 0) {
+                artistImage = imageMatches[0].image[3]['#text'];
+            } else {
+                artistImage = 'https://i.pinimg.com/originals/9d/23/17/9d2317310b456185ed9663d3d7b87490.jpg';
+            }
+
+            // POST the show information to the server
             $http({
                 method: 'POST',
                 url: '/shows/addSearchedShow',
@@ -207,7 +215,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
     }
 
     // Switch years being shown in the my shows view
-    self.changeYear = function(year) {
+    self.changeYear = function (year) {
         self.currentShowYear = year;
     }
 

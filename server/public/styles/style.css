@@ -54,8 +54,8 @@ p.setlist-item {
 }
 
 .footer {
-    background-color: #f5f7fa;
-    padding: 40px 20px;
+    padding: 60px 20px 20px 0;
+    background: #fff;
 }
 
 .footer a,
@@ -83,7 +83,7 @@ p.setlist-item {
 }
 
 article.search-listings:nth-child(odd) {
-    background: #fafafa;
+    background: #f1f1f1;
 }
 
 .button.is-primary:focus:not(:active),
@@ -94,7 +94,7 @@ article.search-listings:nth-child(odd) {
 
 .years {
     margin: 10px 0 20px 0;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .years a.button {

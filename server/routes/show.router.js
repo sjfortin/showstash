@@ -46,7 +46,7 @@ router.post('/addShowManually', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, show_date, full_year, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) returning id;', [req.body.newShow.artist, req.body.newShow.show_date, req.body.full_year, req.body.newShow.venue, req.body.newShow.city, req.body.newShow.state, userID], function (errQuery, data) {
+                client.query('INSERT INTO users_shows (artist, show_date, full_year, venue, city, state, image, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning id;', [req.body.newShow.artist, req.body.newShow.show_date, req.body.full_year, req.body.newShow.venue, req.body.newShow.city, req.body.newShow.state, req.body.image, userID], function (errQuery, data) {
                     done();
                     if (errQuery) {
                         console.log('Error making database query', errQuery);
