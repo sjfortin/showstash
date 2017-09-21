@@ -78,8 +78,22 @@ router.post('/addShowManually', function (req, res) {
 // GET Search Results from server
 router.get('/searchResults', function (req, res) {
     if (req.isAuthenticated()) {
+
+        // https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.artist + '&cityName=' + req.query.city + '&p=' + req.query.currentPageNumber
+
+        let baseUrl = 'https://api.setlist.fm/rest/1.0/search/setlists?';
+        if(req.query.artist) {
+            baseUrl += 'artistName=' + req.query.artist;
+        }
+        if(req.query.city) {
+            baseUrl += '&cityName=' + req.query.city;
+        }
+        baseUrl += '&p=' + req.query.currentPageNumber;
+
+        console.log('baseUrl', baseUrl);
+        
         request({
-            url: 'https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.artist + '&cityName=' + req.query.city + '&p=' + req.query.currentPageNumber,
+            url: baseUrl,
             headers: {
                 'Accept': 'application/json',
                 'x-api-key': setListApiKey,
