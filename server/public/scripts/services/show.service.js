@@ -64,6 +64,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
 
 
     self.searchShow = function (artist, city, pageNumber) {
+        self.zeroSearchResults = false;
         self.currentPageNumber = pageNumber;
 
         let searchButton = document.querySelector('#search-button');

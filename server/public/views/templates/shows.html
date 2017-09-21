@@ -5,7 +5,7 @@
         <div class="columns">
             <div class="column is-8 is-offset-2">
                 <div class="box">
-                    <h1 class="title is-1 has-text-centered">My Shows</h1>
+                    <h1 class="title has-text-centered">My Shows</h1>
 
                     <!-- Tabs by Year -->
                     <div class="years">
@@ -13,8 +13,8 @@
                             {{year}}
                         </a>
                     </div>
-                    <h1></h1>
-                    <article class="media" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear}" ng-href="/#/show/{{show.id}}">
+                    <h1 class="title is-1 has-text-centered">{{sc.ShowService.currentShowYear}} </h1>
+                    <article class="media my-shows-container" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear} | orderBy: 'show_date'" ng-href="/#/show/{{show.id}}">
                         <figure class="media-left">
                             <p class="image is-128x128 is-circle">
                                 <img ng-src="{{show.image}}">

@@ -6,6 +6,10 @@ textarea {
     font-family: 'Nunito', sans-serif;
 } */
 
+a {
+    color: #66cccc;
+}
+
 .home-image img {
     max-width: 300px;
 }
@@ -37,9 +41,10 @@ p.setlist-item {
     display: inline-block;
 }
 
-.media .content {
+
+/* .media .content {
     margin-top: 10px;
-}
+} */
 
 .is-200x200 {
     width: 200px;
@@ -94,15 +99,54 @@ article.search-listings:nth-child(odd) {
 
 .years {
     margin: 10px 0 20px 0;
-    /* text-align: center; */
+    text-align: center;
 }
 
 .years a.button {
     margin: 3px;
 }
 
+.pagination-link,
+.pagination-next,
+.pagination-previous {
+    border-color: #222;
+}
+
+a.pagination-link {
+    color: #222;
+}
+
 .is-current {
-    background-color: #222 !important;
+    background-color: #66cccc !important;
     border-color: #222 !important;
-    color: #fff !important;
+    color: #222 !important;
+}
+
+.button.is-primary.is-hovered,
+.button.is-primary:hover {
+    background-color: #66cccc;
+    border-color: #222;
+    color: #222;
+}
+
+.button.is-primary.is-outlined:focus,
+.button.is-primary.is-outlined:hover {
+    background-color: #66cccc;
+    color: #222;
+}
+
+.pagination-link:hover,
+.pagination-next:hover,
+.pagination-previous:hover {
+    border-color: #222;
+    color: #222;
+    background: #66cccc;
+}
+
+.my-shows-container .media-content {
+    margin-top: 10px;
+}
+
+.my-shows-container a.level-item {
+    font-weight: bold;
 }

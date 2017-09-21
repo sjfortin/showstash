@@ -3,11 +3,11 @@
         <p><span class="title is-5">Notes</span> <a ng-if="!sdc.addingNote" ng-click="sdc.addingNote = !sdc.addingNote" class="button is-small is-primary is-pulled-right">
     <span ng-if="!sdc.currentShow.details[0].notes">Add Notes</span>
     <span ng-if="sdc.currentShow.details[0].notes">Edit Notes</span></a></p>
-    <hr>
-        <article class="media">
+        <hr>
+        <p ng-if="!sdc.currentShow.details[0].notes"><em>You haven't added any notes for this show.</em></p>
+        <article class="media" ng-if="sdc.currentShow.details[0].notes">
             <div class="media-content">
                 <div class="content">
-                    <p ng-if="!sdc.currentShow.details[0].notes"><em>You haven't added any notes for this show.</em></p>
                     <p>{{sdc.currentShow.details[0].notes}}</p>
                 </div>
             </div>
