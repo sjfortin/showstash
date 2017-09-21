@@ -6,27 +6,30 @@ var pool = require('../modules/pool');
 // https://www.npmjs.com/package/request
 var request = require('request');
 
-var setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
+const setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
 
 // GET My Shows from users_shows table
 router.get('/myShows', function (req, res) {
-    // check if logged in
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
             if (errDatabase) {
                 console.log('Error connecting to database', err);
                 res.sendStatus(500);
             } else {
-                client.query('SELECT * FROM users_shows WHERE user_id=$1;', [req.user.id], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        console.log(data.rows);
-                        res.send(data.rows);
-                    }
-                });
+                client.query('SELECT * FROM users_shows WHERE user_id=$1;',
+                    [
+                        req.user.id
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            console.log(data.rows);
+                            res.send(data.rows);
+                        }
+                    });
             }
         });
     } else {
@@ -46,15 +49,26 @@ router.post('/addShowManually', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, show_date, full_year, venue, city, state, image, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning id;', [req.body.newShow.artist, req.body.newShow.show_date, req.body.full_year, req.body.newShow.venue, req.body.newShow.city, req.body.newShow.state, req.body.image, userID], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        res.send(data.rows);
-                    }
-                });
+                client.query('INSERT INTO users_shows (artist, show_date, full_year, venue, city, state, image, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning id;',
+                    [
+                        req.body.newShow.artist,
+                        req.body.newShow.show_date,
+                        req.body.full_year,
+                        req.body.newShow.venue,
+                        req.body.newShow.city,
+                        req.body.newShow.state,
+                        req.body.image,
+                        userID
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.send(data.rows);
+                        }
+                    });
             }
         });
     }
@@ -130,16 +144,20 @@ router.get('/showDetails', function (req, res) {
                 console.log('Error connecting to database', err);
                 res.sendStatus(500);
             } else {
-                client.query('SELECT * FROM users_shows WHERE id=$1;', [req.query.id], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        console.log(data.rows);
-                        res.send(data.rows);
-                    }
-                });
+                client.query('SELECT * FROM users_shows WHERE id=$1;',
+                    [
+                        req.query.id
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            console.log(data.rows);
+                            res.send(data.rows);
+                        }
+                    });
             }
         });
     } else {
@@ -160,7 +178,9 @@ router.delete('/deleteShow', function (req, res) {
                 res.sendStatus(500);
             } else {
                 client.query('DELETE FROM users_shows WHERE id=$1',
-                    [showID],
+                    [
+                        showID
+                    ],
                     function (errorMakingQuery, result) {
                         done();
                         if (errorMakingQuery) {
@@ -189,15 +209,24 @@ router.put('/editShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('UPDATE users_shows SET artist=$1, show_date=$2, venue=$3, city=$4, state=$5 WHERE id=$6;', [req.body.details[0].artist, req.body.details[0].show_date, req.body.details[0].venue, req.body.details[0].city, req.body.details[0].state, req.body.details[0].id], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        res.sendStatus(201);
-                    }
-                });
+                client.query('UPDATE users_shows SET artist=$1, show_date=$2, venue=$3, city=$4, state=$5 WHERE id=$6;',
+                    [
+                        req.body.details[0].artist,
+                        req.body.details[0].show_date,
+                        req.body.details[0].venue,
+                        req.body.details[0].city,
+                        req.body.details[0].state,
+                        req.body.details[0].id
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(201);
+                        }
+                    });
             }
         });
     }
@@ -211,29 +240,36 @@ router.put('/addNote', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('UPDATE users_shows SET notes=$1 WHERE id=$2;', [req.body.details[0].notes, req.body.details[0].id], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        res.sendStatus(201);
-                    }
-                });
+                client.query('UPDATE users_shows SET notes=$1 WHERE id=$2;',
+                    [
+                        req.body.details[0].notes,
+                        req.body.details[0].id
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(201);
+                        }
+                    });
             }
         });
     }
 });
 
 // get mbid information
+
+const lastFmApiKey = process.env.LASTFM_API_KEY || require('../config.js').lastFmApiKey;
+
 router.get('/artistImage', function (req, res) {
     var artist = req.query.artist;
     if (req.isAuthenticated()) {
         request({
-            url: 'http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + artist + '&api_key=17fc707735a64230fe40a6576b115c6a&format=json',
+            url: 'http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + artist + '&api_key=' + lastFmApiKey + '&format=json',
             headers: {
                 'Accept': 'application/json',
-                'api-key': '17fc707735a64230fe40a6576b115c6a',
                 'User-Agent': 'request'
             }
         }, function (error, response, body) {
