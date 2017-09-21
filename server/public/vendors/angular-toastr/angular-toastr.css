@@ -23,7 +23,7 @@
     float: right;
     font-size: 22px;
     font-weight: bold;
-    color: #222;
+    color: #fff;
     -webkit-text-shadow: 0 1px 0 #ffffff;
     text-shadow: 0 1px 0 #ffffff;
     opacity: 0.8;
@@ -120,7 +120,7 @@ button.toast-close-button {
     /* -moz-box-shadow: 0 0 12px #999999;
   -webkit-box-shadow: 0 0 12px #999999;
   box-shadow: 0 0 12px #999999; */
-    color: #222;
+    color: #fff;
     opacity: 0.9;
 }
 
@@ -167,7 +167,7 @@ button.toast-close-button {
 }
 
 .toast-success {
-    background-color: #66cccc;
+    background-color: #4840bb;
 }
 
 .toast-error {

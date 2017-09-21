@@ -7,7 +7,7 @@ textarea {
 } */
 
 a {
-    color: #66cccc;
+    color: #4840bb;
 }
 
 .home-image img {
@@ -117,30 +117,30 @@ a.pagination-link {
 }
 
 .is-current {
-    background-color: #66cccc !important;
+    background-color: #4840bb !important;
     border-color: #222 !important;
-    color: #222 !important;
+    color: #fff !important;
 }
 
 .button.is-primary.is-hovered,
 .button.is-primary:hover {
-    background-color: #66cccc;
+    background-color: #4840bb;
     border-color: #222;
-    color: #222;
+    color: #fff;
 }
 
 .button.is-primary.is-outlined:focus,
 .button.is-primary.is-outlined:hover {
-    background-color: #66cccc;
-    color: #222;
+    background-color: #4840bb;
+    color: #fff;
 }
 
 .pagination-link:hover,
 .pagination-next:hover,
 .pagination-previous:hover {
     border-color: #222;
-    color: #222;
-    background: #66cccc;
+    color: #fff;
+    background: #4840bb;
 }
 
 .my-shows-container .media-content {

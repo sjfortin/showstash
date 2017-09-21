@@ -17,16 +17,20 @@ router.get('/getFriends', function (req, res) {
                 console.log('Error connecting to database', err);
                 res.sendStatus(500);
             } else {
-                client.query('SELECT * FROM friends WHERE user_show=$1;', [showID], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        console.log(data.rows);
-                        res.send(data.rows);
-                    }
-                });
+                client.query('SELECT * FROM friends WHERE user_show=$1;',
+                    [
+                        showID
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            console.log(data.rows);
+                            res.send(data.rows);
+                        }
+                    });
             }
         });
     } else {
@@ -40,22 +44,28 @@ router.get('/getFriends', function (req, res) {
 // POST friends to friends table
 router.post('/addFriend', function (req, res) {
     console.log('req.body of FRIENDSSSSSS', req.body);
-    
+
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
             if (errDatabase) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO friends (first_name, last_name, user_show) VALUES ($1, $2, $3) returning *;', [req.body.first_name, req.body.last_name, req.body.showId], function (errQuery, data) {
-                    done();
-                    if (errQuery) {
-                        console.log('Error making database query', errQuery);
-                        res.sendStatus(500);
-                    } else {
-                        res.send(data.rows);
-                    }
-                });
+                client.query('INSERT INTO friends (first_name, last_name, user_show) VALUES ($1, $2, $3) returning *;',
+                    [
+                        req.body.first_name,
+                        req.body.last_name,
+                        req.body.showId
+                    ],
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.send(data.rows);
+                        }
+                    });
             }
         });
     }
@@ -71,7 +81,9 @@ router.delete('/deleteFriend', function (req, res) {
                 res.sendStatus(500);
             } else {
                 client.query('DELETE FROM friends WHERE id=$1 returning *',
-                    [friendId],
+                    [
+                        friendId
+                    ],
                     function (errorMakingQuery, data) {
                         done();
                         if (errorMakingQuery) {
