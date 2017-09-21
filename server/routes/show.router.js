@@ -46,7 +46,7 @@ router.post('/addShowManually', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, show_date, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6) returning id;', [req.body.artist, req.body.show_date, req.body.venue, req.body.city, req.body.state, userID], function (errQuery, data) {
+                client.query('INSERT INTO users_shows (artist, show_date, full_year, venue, city, state, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) returning id;', [req.body.newShow.artist, req.body.newShow.show_date, req.body.full_year, req.body.newShow.venue, req.body.newShow.city, req.body.newShow.state, userID], function (errQuery, data) {
                     done();
                     if (errQuery) {
                         console.log('Error making database query', errQuery);
@@ -93,11 +93,12 @@ router.post('/addSearchedShow', function (req, res) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('INSERT INTO users_shows (artist, mbid, show_date, venue, city, state, version_id, user_id, setlist, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *;',
+                client.query('INSERT INTO users_shows (artist, mbid, show_date, full_year, venue, city, state, version_id, user_id, setlist, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *;',
                     [
                         req.body.artist,
                         req.body.mbid,
                         req.body.show_date,
+                        req.body.full_year,
                         req.body.venue,
                         req.body.city,
                         req.body.state,

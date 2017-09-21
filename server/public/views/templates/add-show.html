@@ -22,7 +22,7 @@
                     </div>
                     <div class="field is-grouped">
                         <div class="control">
-                            <button id="search-button" class="button is-primary is-outlined" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, 1)">Search</button>
+                            <button id="search-button" class="button is-primary" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, 1)">Search</button>
                         </div>
                         <div class="control">
                             <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own Show</a>
@@ -62,9 +62,7 @@
                         </div>
                         <nav class="level">
                             <div class="level-left">
-                                <a class="level-item" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)">
-                            <span class="icon is-small"><i class="fa fa-plus"></i></span> Add Show
-                            </a>
+                                <a id="add-button" class="level-item button is-small is-primary" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set)">Add Show</a>
                             </div>
                         </nav>
                     </div>

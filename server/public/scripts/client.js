@@ -74,7 +74,8 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
     });
 
   angular.extend(toastrConfig, {
-    closeButton: true
+    closeButton: true,
+    positionClass: 'toast-bottom-left',
   });
 });
 

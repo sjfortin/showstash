@@ -13,7 +13,8 @@
                             {{year}}
                         </a>
                     </div>
-                    <article class="media" ng-repeat="show in sc.myShows.data | filter: {fullYear: sc.ShowService.currentShowYear}" ng-href="/#/show/{{show.id}}">
+                    <h1></h1>
+                    <article class="media" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear}" ng-href="/#/show/{{show.id}}">
                         <figure class="media-left">
                             <p class="image is-128x128 is-circle" ng-if="show.image">
                                 <img ng-src="{{show.image}}">

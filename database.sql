@@ -13,6 +13,7 @@ CREATE TABLE users_shows
     artist VARCHAR(80) NOT NULL,
     mbid VARCHAR(80),
     show_date DATE NOT NULL,
+    show_date INT,
     venue VARCHAR(120) NOT NULL,
     city VARCHAR(80) NOT NULL,
     state VARCHAR(10),

@@ -1,18 +1,18 @@
-body,
+/* body,
 button,
 input,
 select,
 textarea {
-    font-family: 'Lato', sans-serif;
-}
+    font-family: 'Nunito', sans-serif;
+} */
 
 .home-image img {
     max-width: 300px;
 }
 
 .logo-image {
-    width: 150px;
-    padding: 5px 10px;
+    width: 200px;
+    padding: 15px 0;
 }
 
 .header-logo {
@@ -35,6 +35,10 @@ p.setlist-item {
 
 .show-image {
     display: inline-block;
+}
+
+.media .content {
+    margin-top: 10px;
 }
 
 .is-200x200 {
@@ -79,7 +83,7 @@ p.setlist-item {
 }
 
 article.search-listings:nth-child(odd) {
-    background: #f5f7fa;
+    background: #fafafa;
 }
 
 .button.is-primary:focus:not(:active),
@@ -98,7 +102,7 @@ article.search-listings:nth-child(odd) {
 }
 
 .is-current {
-    background-color: #4840bb !important;
-    border-color: #4840bb !important;
+    background-color: #222 !important;
+    border-color: #222 !important;
     color: #fff !important;
 }

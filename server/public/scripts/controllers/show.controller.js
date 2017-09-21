@@ -17,6 +17,7 @@ app.controller('ShowController', ['$routeParams', 'ShowService', '$http', functi
     self.addShow = function () {
         ShowService.addShow(self.newShow);
         self.newShow = {};
+        
     }   
 
 }]);

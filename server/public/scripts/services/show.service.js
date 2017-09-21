@@ -14,7 +14,6 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         list: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
     };
 
-    self.currentShowYear = 2017;
     self.allShowYears = [];
 
     // GET My Shows from users_shows table
@@ -22,33 +21,33 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         $http.get('/shows/myShows')
             .then(function (response) {
                 self.myShows.data = response.data;
-                self.currentShowYear = 2017;
 
-                // Add a fullYear property to each show
                 var allShows = self.myShows.data;
-                allShows.forEach(function (show) {
-                    var date = new Date(show.show_date);
-                    var fullYear = date.getFullYear();
-                    show.fullYear = fullYear;
-                });
-
+                
                 // Add an array of all years in my shows
                 allShows.forEach(function (show) {
-                    if (!self.allShowYears.includes(show.fullYear)) {
+                    if (!self.allShowYears.includes(show.full_year)) {
                         // console.log('already there');
-                        self.allShowYears.push(show.fullYear);
+                        self.allShowYears.push(show.full_year);
                     }
                 });
                 self.allShowYears.sort(function (a, b) { return b - a });
+
+                self.currentShowYear = self.allShowYears[0];
             });
     };
 
     // Manually add a show
     self.addShow = function (newShow) {
+        var fullYear = newShow.show_date.getFullYear();        
+        
         $http({
             method: 'POST',
             url: '/shows/addShowManually',
-            data: newShow
+            data: {
+                newShow: newShow,
+                full_year: fullYear
+            }
         })
             .then(function (response) {
                 let showAddedId = response.data[0].id;
@@ -65,11 +64,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
 
 
     self.searchShow = function (artist, city, pageNumber) {
-        console.log('pageNumber', pageNumber);
-
-        self.searchResultPages = [];
         self.currentPageNumber = pageNumber;
-        console.log('currentPageNumber', self.currentPageNumber);
 
         let searchButton = document.querySelector('#search-button');
         searchButton.classList.add('is-loading');
@@ -84,6 +79,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
             }
         }).then(
             function (response) {
+                self.searchResultPages = [];
                 self.numberOfSearchPages = Math.ceil(response.data.total / response.data.itemsPerPage);
 
                 for (var i = 0; i < self.numberOfSearchPages; i++) {
@@ -112,11 +108,18 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         //     }
         // });
 
+        let addShowButton = document.querySelector('#add-button');
+        addShowButton.classList.add('is-loading');
+        
+
         // setlist api date needs to be coverted to proper postgreSQL date format
         let formattedDate = self.toDate(date);
 
         // Format set data to send to database
         let formattedSets = getSetData(sets);
+        var fullYear = formattedDate.getFullYear();
+        console.log('fullYear', fullYear);
+        
 
         $http({
             method: 'GET',
@@ -140,6 +143,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
                     artist: artist,
                     mbid: mbid,
                     show_date: formattedDate,
+                    full_year: fullYear,
                     venue: venue,
                     city: city,
                     state: state,
@@ -152,6 +156,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
                     let showAddedId = response.data[0].id;
                     toastr.success('Show has been added');
                     $location.path('/show/' + showAddedId);
+                    addShowButton.classList.remove('is-loading');
                 })
         })
     };

@@ -3,7 +3,7 @@
     <div>
         <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
         <hr>
-        <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show yet.</em></p>
+        <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show.</em></p>
         <article class="media" ng-repeat="friend in sdc.friends.list | orderBy: 'first_name'">
             <div class="media-content">
                 <div class="content">
@@ -33,7 +33,7 @@
         </div>
         <div class="field is-grouped ">
             <div class="control ">
-                <a ng-click="sdc.addFriend() " class="button is-primary is-outlined">Add Friend</a>
+                <a ng-click="sdc.addFriend() " class="button is-primary">Add Friend</a>
             </div>
             <div class="control ">
                 <a ng-click="sdc.addingFriend=! sdc.addingFriend " class="button is-link ">Cancel</a>
