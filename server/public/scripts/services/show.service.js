@@ -63,7 +63,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
     self.currentPageNumber = 0;
 
 
-    self.searchShow = function (artist, city, pageNumber) {
+    self.searchShow = function (artist, city, venue, pageNumber) {
         self.zeroSearchResults = false;
         self.currentPageNumber = pageNumber;
 
@@ -76,6 +76,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
             params: {
                 artist: artist,
                 city: city,
+                venue: venue,
                 currentPageNumber: pageNumber
             }
         }).then(
@@ -182,6 +183,17 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
             console.log('delete response', response.data);
             toastr.success('Show Deleted!');
             self.getShows();
+        });
+    };
+    
+    // GET All users shows
+    self.getAllShows = function (showId) {
+        $http({
+            url: '/shows/getAllShows',
+            method: 'GET'
+        }).then(function (response) {
+            console.log('get all shows', response.data);
+            self.allUserShows = response.data;
         });
     };
 

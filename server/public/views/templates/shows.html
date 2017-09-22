@@ -14,7 +14,7 @@
                         </a>
                     </div>
                     <h1 class="title is-1 has-text-centered">{{sc.ShowService.currentShowYear}} </h1>
-                    <article class="media my-shows-container" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear} | orderBy: 'show_date'" ng-href="/#/show/{{show.id}}">
+                    <article class="media my-shows-container" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear} | orderBy: '-show_date'" ng-href="/#/show/{{show.id}}">
                         <figure class="media-left">
                             <p class="image is-128x128 is-circle">
                                 <img ng-src="{{show.image}}">
@@ -39,7 +39,7 @@
                         </div>
                     </article>
                     <div ng-if="!sc.myShows.data.length">
-                        <p>You don't have any shows. <a href="/#/add-show">Add some!</a></p>
+                        <p class="has-text-centered">You don't have any shows. <a href="/#/add-show">Add some!</a></p>
                     </div>
                 </div>
             </div>

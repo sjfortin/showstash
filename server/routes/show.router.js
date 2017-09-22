@@ -6,7 +6,7 @@ var pool = require('../modules/pool');
 // https://www.npmjs.com/package/request
 var request = require('request');
 
-const setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
+var setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
 
 // GET My Shows from users_shows table
 router.get('/myShows', function (req, res) {
@@ -87,6 +87,9 @@ router.get('/searchResults', function (req, res) {
         }
         if(req.query.city) {
             baseUrl += '&cityName=' + req.query.city;
+        }
+        if(req.query.venue) {
+            baseUrl += '&venueName=' + req.query.venue;
         }
         baseUrl += '&p=' + req.query.currentPageNumber;
 
@@ -274,8 +277,7 @@ router.put('/addNote', function (req, res) {
 });
 
 // get mbid information
-
-const lastFmApiKey = process.env.LASTFM_API_KEY || require('../config.js').lastFmApiKey;
+var lastFmApiKey = process.env.LASTFM_API_KEY || require('../config.js').lastFmApiKey;
 
 router.get('/artistImage', function (req, res) {
     var artist = req.query.artist;
@@ -294,6 +296,36 @@ router.get('/artistImage', function (req, res) {
                 res.sendStatus(204);
             }
         });
+    }
+});
+
+// GET all shows
+router.get('/getAllShows', function (req, res) {
+    // check if logged in
+    if (req.isAuthenticated()) {
+        pool.connect(function (errDatabase, client, done) {
+            if (errDatabase) {
+                console.log('Error connecting to database', err);
+                res.sendStatus(500);
+            } else {
+                client.query('SELECT * FROM users_shows JOIN users ON users_shows.user_id = users.id;',
+                    function (errQuery, data) {
+                        done();
+                        if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            console.log(data.rows);
+                            res.send(data.rows);
+                        }
+                    });
+            }
+        });
+    } else {
+        // failure best handled on the server. do redirect here.
+        console.log('not logged in');
+        // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
+        res.send(false);
     }
 });
 

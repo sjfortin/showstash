@@ -60,6 +60,15 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
         }
       }
     })
+    .when('/allshows', {
+      templateUrl: '/views/templates/all-shows.html',
+      controller: 'AllShowsController as asc',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
     .when('/show/:id', {
       templateUrl: 'views/templates/show.html',
       controller: 'ShowDetailController as sdc',
