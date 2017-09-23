@@ -61,6 +61,9 @@
                     <a ng-click="sdc.editingMode = !sdc.editingMode" class="button is-link">Cancel</a>
                 </div>
             </div>
+            <div>
+                <a class="has-text-danger is-size-7" ng-click="sdc.ShowDetailService.deleteShow(sdc.currentShow.details[0].id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete Show</a>
+            </div>
         </div>
     </div>
 </div>

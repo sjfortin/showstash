@@ -49,10 +49,6 @@ p.setlist-item {
     margin-bottom: 20px;
 }
 
-/* .media .content {
-    margin-top: 10px;
-} */
-
 .is-200x200 {
     width: 200px;
     height: 200px;
@@ -148,10 +144,6 @@ a.pagination-link {
     border-color: #222;
     color: #fff;
     background: #4840bb;
-}
-
-.my-shows-container .media-content {
-    margin-top: 10px;
 }
 
 .my-shows-container a.level-item {

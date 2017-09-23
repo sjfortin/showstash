@@ -34,7 +34,7 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
     // PUT edited show info to users_shows table
     self.editShow = function (currentShow, showId) {
         console.log('edit show show id', showId);
-        
+
         $http({
             method: 'PUT',
             url: '/shows/editShow',
@@ -47,6 +47,22 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
                 console.log('error', error);
                 toastr.error('Edit failed');
             });
+    };
+
+    // DELETE individual show
+    self.deleteShow = function (showId) {
+        $http({
+            url: '/shows/deleteShow',
+            method: 'DELETE',
+            params: {
+                id: showId
+            }
+        }).then(function (response) {
+            console.log('delete response', response.data);
+            toastr.success('Show Deleted');
+            // self.getShows();
+            $location.path('/shows/');
+        });
     };
 
     /*
@@ -69,5 +85,5 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
                 toastr.error('Adding note failed');
             });
     };
-    
+
 }]);

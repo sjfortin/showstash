@@ -9,12 +9,14 @@
 
                     <!-- Tabs by Year -->
                     <div class="years">
-                        <a class="button is-primary is-outlined is-small" ng-repeat="year in sc.ShowService.allShowYears" ng-click="sc.ShowService.changeYear(year)" ng-class="{'is-current': sc.ShowService.currentShowYear==year}">
+                        <a class="button is-primary is-outlined is-small" ng-repeat="year in sc.ShowService.allShowYears" ng-click="sc.ShowService.changeYear(year)"
+                            ng-class="{'is-current': sc.ShowService.currentShowYear==year}">
                             {{year}}
                         </a>
                     </div>
                     <h1 class="title is-1 has-text-centered">{{sc.ShowService.currentShowYear}} </h1>
-                    <article class="media my-shows-container" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear} | orderBy: '-show_date'" ng-href="/#/show/{{show.id}}">
+                    <article class="media my-shows-container" ng-repeat="show in sc.myShows.data | filter: {full_year: sc.ShowService.currentShowYear} | orderBy: '-show_date'"
+                        ng-href="/#/show/{{show.id}}">
                         <figure class="media-left">
                             <p class="image is-128x128 is-circle">
                                 <img ng-src="{{show.image}}">
@@ -24,18 +26,18 @@
                             <div class="content">
                                 <p>
                                     <span class="is-size-4 has-text-weight-bold">{{show.artist}}</span>
-                                    <br> {{show.venue}} | {{show.city}}, {{show.state}}
-                                    <br> {{show.show_date | date: 'fullDate'}}
+                                    <br>{{show.venue}}
+                                    <br>{{show.city}}, {{show.state}}
                                 </p>
                             </div>
                             <nav class="level is-mobile">
                                 <div class="level-left">
                                     <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small" style="margin-right: 5px;"><i class="fa fa-music"></i></span>View Show Details</a>
                                 </div>
-                                <div class="level-right">
-                                    <a class="level-item has-text-danger" ng-click="sc.ShowService.deleteShow(show.id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete</a>
-                                </div>
                             </nav>
+                        </div>
+                        <div class="media-right">
+                            <p>{{show.show_date | date: 'longDate'}}</p>
                         </div>
                     </article>
                     <div ng-if="!sc.myShows.data.length">

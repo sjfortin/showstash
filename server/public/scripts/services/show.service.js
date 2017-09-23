@@ -170,21 +170,6 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         })
     };
 
-    // DELETE individual show
-    self.deleteShow = function (showId) {
-        $http({
-            url: '/shows/deleteShow',
-            method: 'DELETE',
-            params: {
-                id: showId
-            }
-        }).then(function (response) {
-            console.log('delete response', response.data);
-            toastr.success('Show Deleted!');
-            self.getShows();
-        });
-    };
-
     // GET All users shows
     self.getAllShows = function (showId) {
         $http({

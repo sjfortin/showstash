@@ -62,8 +62,8 @@
                         <div class="content">
                             <p>
                                 <strong>{{show.artist.name}}</strong>
-                                <span style="float:right;">{{show.eventDate | searchDateFilter | date: fullDate}}</span>
-                                <br>{{show.venue.name}} | {{show.venue.city.name}}, {{show.venue.city.stateCode}}
+                                <br>{{show.venue.name}}
+                                <br>{{show.venue.city.name}}, {{show.venue.city.stateCode}}
                             </p>
                         </div>
                         <nav class="level">
@@ -71,6 +71,9 @@
                                 <a id="add-button{{$index}}" class="level-item button is-small is-primary" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set, $index)">Add Show</a>
                             </div>
                         </nav>
+                    </div>
+                    <div class="media-right">
+                        <p>{{show.eventDate | searchDateFilter | date: 'longDate'}}</p>
                     </div>
                 </article>
 
