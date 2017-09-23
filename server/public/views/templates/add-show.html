@@ -41,12 +41,12 @@
             <div class="column is-8 is-offset-2">
 
                 <!-- Search Results -->
-                <p ng-if="sc.ShowService.zeroSearchResults">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
-                <h1 class="title" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
+                <p ng-if="sc.ShowService.zeroSearchResults" class="has-text-centered">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
+                <h1 class="title has-text-centered" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
 
                 <!-- Pagination -->
                 <div ng-if="sc.searchShowResults.data.data.setlist.length" style="margin-bottom: 20px;">
-                    <nav class="pagination is-small" role="navigation" aria-label="pagination" class="is-small">
+                    <nav class="pagination is-small is-centered" role="navigation" aria-label="pagination" class="is-small">
                         <ul class="pagination-list">
                             <li ng-repeat="page in sc.ShowService.searchResultPages">
                                 <a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, sc.searchShow.venue, page)" class="pagination-link"
@@ -61,7 +61,8 @@
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <strong>{{show.artist.name}}</strong>
+                                <span class="is-size-4">{{show.artist.name}}</span>
+                                <span style="float:right;">{{show.eventDate | searchDateFilter | date: 'mediumDate'}}</span>
                                 <br>{{show.venue.name}}
                                 <br>{{show.venue.city.name}}, {{show.venue.city.stateCode}}
                             </p>
@@ -71,9 +72,6 @@
                                 <a id="add-button{{$index}}" class="level-item button is-small is-primary" ng-click="sc.ShowService.addSearchedShow(show.artist.name, show.artist.mbid, show.eventDate, show.venue.name, show.venue.city.name, show.venue.city.stateCode, show.versionId, show.sets.set, $index)">Add Show</a>
                             </div>
                         </nav>
-                    </div>
-                    <div class="media-right">
-                        <p>{{show.eventDate | searchDateFilter | date: 'longDate'}}</p>
                     </div>
                 </article>
 
