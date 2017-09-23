@@ -1,4 +1,4 @@
-app.controller('ShowController', ['$routeParams', 'ShowService', '$http', function ($routeParams, ShowService, $http) {
+app.controller('ShowController', ['$routeParams', 'ShowService', '$http', '$scope', function ($routeParams, ShowService, $http, $scope) {
     var self = this;
 
     self.ShowService = ShowService; // access to all things ShowService
@@ -16,8 +16,26 @@ app.controller('ShowController', ['$routeParams', 'ShowService', '$http', functi
     // Manual add show POST call
     self.addShow = function () {
         ShowService.addShow(self.newShow);
-        self.newShow = {};
-        
+        self.newShow = {};   
     }   
+
+    // FileStack Upload
+    self.addArtistImage = function () {
+        filestack.pick({
+            accept: 'image/*',
+            maxSize: 1024 * 1024,
+            fromSources: ['imagesearch', 'url', 'local_file_system'],
+            transformations: {
+                crop: {
+                    aspectRatio: 1 / 1,
+                    force: true
+                }
+            },
+        }).then(function (result) {
+            console.log(JSON.stringify(result.filesUploaded));
+            self.newShow.newImage = result.filesUploaded[0].url;
+            $scope.$apply();
+        });
+    };
 
 }]);

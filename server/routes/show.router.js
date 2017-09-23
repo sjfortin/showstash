@@ -26,7 +26,6 @@ router.get('/myShows', function (req, res) {
                             console.log('Error making database query', errQuery);
                             res.sendStatus(500);
                         } else {
-                            console.log(data.rows);
                             res.send(data.rows);
                         }
                     });
@@ -42,6 +41,7 @@ router.get('/myShows', function (req, res) {
 
 // POST manual shows to users_shows table
 router.post('/addShowManually', function (req, res) {
+
     var userID = req.user.id;
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
@@ -57,7 +57,7 @@ router.post('/addShowManually', function (req, res) {
                         req.body.newShow.venue,
                         req.body.newShow.city,
                         req.body.newShow.state,
-                        req.body.image,
+                        req.body.newShow.newImage,
                         userID
                     ],
                     function (errQuery, data) {
@@ -82,19 +82,19 @@ router.get('/searchResults', function (req, res) {
         // https://api.setlist.fm/rest/1.0/search/setlists?artistName=' + req.query.artist + '&cityName=' + req.query.city + '&p=' + req.query.currentPageNumber
 
         let baseUrl = 'https://api.setlist.fm/rest/1.0/search/setlists?';
-        if(req.query.artist) {
+        if (req.query.artist) {
             baseUrl += 'artistName=' + req.query.artist;
         }
-        if(req.query.city) {
+        if (req.query.city) {
             baseUrl += '&cityName=' + req.query.city;
         }
-        if(req.query.venue) {
+        if (req.query.venue) {
             baseUrl += '&venueName=' + req.query.venue;
         }
         baseUrl += '&p=' + req.query.currentPageNumber;
 
         console.log('baseUrl', baseUrl);
-        
+
         request({
             url: baseUrl,
             headers: {
@@ -115,9 +115,9 @@ router.get('/searchResults', function (req, res) {
 
 // POST from Search Results add button
 router.post('/addSearchedShow', function (req, res) {
-    console.log('this is the search req.body', req.body);
 
     var userID = req.user.id;
+
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
             if (errDatabase) {
@@ -219,20 +219,31 @@ router.delete('/deleteShow', function (req, res) {
 
 // UPDATE user shows from the edit form
 router.put('/editShow', function (req, res) {
-    console.log('req.body', req.body.details[0]);
+
+    console.log('editShow', req.body);
+
+    var imageToInsert;
+
+    if (req.body.details[0].newImage) {
+        imageToInsert = req.body.details[0].newImage;
+    } else {
+        imageToInsert = req.body.details[0].image;
+    }
+
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
             if (errDatabase) {
                 console.log('Error connecting to database', errDatabase);
                 res.sendStatus(500);
             } else {
-                client.query('UPDATE users_shows SET artist=$1, show_date=$2, venue=$3, city=$4, state=$5 WHERE id=$6;',
+                client.query('UPDATE users_shows SET artist=$1, show_date=$2, venue=$3, city=$4, state=$5, image=$6 WHERE id=$7;',
                     [
                         req.body.details[0].artist,
                         req.body.details[0].show_date,
                         req.body.details[0].venue,
                         req.body.details[0].city,
                         req.body.details[0].state,
+                        imageToInsert,
                         req.body.details[0].id
                     ],
                     function (errQuery, data) {

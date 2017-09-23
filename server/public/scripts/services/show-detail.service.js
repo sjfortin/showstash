@@ -24,15 +24,17 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
                 id: showId
             }
         }).then(function (response) {
-            console.log('self.currentShow', self.currentShow.details);
             self.currentShow.details = response.data;
             var newDate = new Date(self.currentShow.details[0].show_date);
             self.currentShow.details[0].show_date = newDate;
+            console.log('self.currentShow', self.currentShow.details);
         });
     };
 
     // PUT edited show info to users_shows table
     self.editShow = function (currentShow, showId) {
+        console.log('edit show show id', showId);
+        
         $http({
             method: 'PUT',
             url: '/shows/editShow',
@@ -40,6 +42,7 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
         })
             .then(function () {
                 toastr.success('Show has been edited');
+                self.getShowDetails(showId);
             }, function (error) {
                 console.log('error', error);
                 toastr.error('Edit failed');

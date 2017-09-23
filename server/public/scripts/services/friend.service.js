@@ -19,7 +19,6 @@ app.service('FriendService', ['$http', '$location', 'toastr', function ($http, $
                 id: showId
             }
         }).then(function (response) {
-            console.log('response', response.data);
             self.friends.list = response.data;
         });
     };

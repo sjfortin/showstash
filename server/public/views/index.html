@@ -16,7 +16,9 @@
     <!-- Angular and Angular-Route -->
     <script type="text/javascript" src="vendors/angular/angular.js"></script>
     <script type="text/javascript" src="vendors/angular-route/angular-route.js"></script>
-
+    
+    <!-- Filestack -->
+    <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
 
     <!-- Client Scripts -->
     <script type="text/javascript" src="scripts/client.js"></script>
@@ -38,6 +40,16 @@
 
     <!-- Angular Toastr -->
     <script src="vendors/angular-toastr/angular-toastr.tpls.js"></script>
+
+    <!-- <script>
+        var client = filestack.init('AXXO3bKGRQoif7usQg4Yfz');
+        function showPicker() {
+            client.pick({
+            }).then(function (result) {
+                console.log(JSON.stringify(result.filesUploaded))
+            });
+        }
+    </script> -->
 </head>
 
 <body ng-app="ShowStashApp">

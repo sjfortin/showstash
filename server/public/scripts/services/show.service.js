@@ -39,14 +39,12 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
     // Manually add a show
     self.addShow = function (newShow) {
         var fullYear = newShow.show_date.getFullYear();
-
         $http({
             method: 'POST',
             url: '/shows/addShowManually',
             data: {
                 newShow: newShow,
-                full_year: fullYear,
-                image: 'https://i.pinimg.com/originals/9d/23/17/9d2317310b456185ed9663d3d7b87490.jpg'
+                full_year: fullYear
             }
         })
             .then(function (response) {
@@ -120,8 +118,6 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
         // Format set data to send to database
         let formattedSets = getSetData(sets);
         var fullYear = formattedDate.getFullYear();
-        console.log('fullYear', fullYear);
-
 
         $http({
             method: 'GET',

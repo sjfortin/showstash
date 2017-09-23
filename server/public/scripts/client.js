@@ -1,4 +1,6 @@
-var app = angular.module('ShowStashApp', ['ngRoute', 'toastr'])
+var app = angular.module('ShowStashApp', ['ngRoute', 'toastr']);
+
+var filestack = filestack.init('AXXO3bKGRQoif7usQg4Yfz');
 
 /// Routes ///
 app.config(function ($routeProvider, $locationProvider, toastrConfig) {
