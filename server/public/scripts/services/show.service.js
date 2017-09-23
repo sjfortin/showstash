@@ -160,8 +160,11 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
             }).then(
                 function (response) {
                     let showAddedId = response.data[0].id;
-                    toastr.success('Show has been added');
-                    $location.path('/show/' + showAddedId);
+                    // toastr.success('Show has been added');
+                    toastr.success('Show added! <a class="button is-small is-black" href="#/show/'+ showAddedId +'">Go to show</a>', {
+                        allowHtml: true
+                    });
+                    // $location.path('/show/' + showAddedId);
                     addShowButton.classList.remove('is-loading');
                 })
         })
@@ -181,7 +184,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
             self.getShows();
         });
     };
-    
+
     // GET All users shows
     self.getAllShows = function (showId) {
         $http({

@@ -25,7 +25,6 @@ app.controller('ShowDetailController', ['$routeParams', 'ShowDetailService', 'Fr
     self.addArtistImage = function () {
         filestack.pick({
             accept: 'image/*',
-            maxSize: 1024 * 1024,
             fromSources: ['imagesearch', 'url', 'local_file_system'],
             transformations: {
                 crop: {

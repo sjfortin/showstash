@@ -86,7 +86,9 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
 
   angular.extend(toastrConfig, {
     closeButton: true,
-    positionClass: 'toast-bottom-left',
+    positionClass: 'toast-top-center',
+    timeOut: 5000,
+    extendedTimeOut: 10000
   });
 });
 

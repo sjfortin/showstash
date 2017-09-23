@@ -23,7 +23,6 @@ app.controller('ShowController', ['$routeParams', 'ShowService', '$http', '$scop
     self.addArtistImage = function () {
         filestack.pick({
             accept: 'image/*',
-            maxSize: 1024 * 1024,
             fromSources: ['imagesearch', 'url', 'local_file_system'],
             transformations: {
                 crop: {
