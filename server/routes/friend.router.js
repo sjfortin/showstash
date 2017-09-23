@@ -27,7 +27,6 @@ router.get('/getFriends', function (req, res) {
                             console.log('Error making database query', errQuery);
                             res.sendStatus(500);
                         } else {
-                            console.log(data.rows);
                             res.send(data.rows);
                         }
                     });
@@ -43,8 +42,6 @@ router.get('/getFriends', function (req, res) {
 
 // POST friends to friends table
 router.post('/addFriend', function (req, res) {
-    console.log('req.body of FRIENDSSSSSS', req.body);
-
     if (req.isAuthenticated()) {
         pool.connect(function (errDatabase, client, done) {
             if (errDatabase) {

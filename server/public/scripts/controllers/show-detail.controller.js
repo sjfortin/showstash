@@ -1,4 +1,4 @@
-app.controller('ShowDetailController', ['$routeParams', 'ShowDetailService', 'FriendService', function ($routeParams, ShowDetailService, FriendService) {
+app.controller('ShowDetailController', ['$routeParams', 'ShowDetailService', 'FriendService', '$scope', function ($routeParams, ShowDetailService, FriendService, $scope) {
     var self = this;
 
     // access to all things ShowDetailService
@@ -17,12 +17,33 @@ app.controller('ShowDetailController', ['$routeParams', 'ShowDetailService', 'Fr
 
     // Edit show PUT call
     self.editShow = function () {
+        console.log('currentshow', self.currentShow);
         ShowDetailService.editShow(self.currentShow, $routeParams.id);
     };
 
-    self.addingNote = false;
+    // Add an image to be sent to the editShow route
+    self.addArtistImage = function () {
+        filestack.pick({
+            accept: 'image/*',
+            maxSize: 1024 * 1024,
+            fromSources: ['imagesearch', 'url', 'local_file_system'],
+            transformations: {
+                crop: {
+                    aspectRatio: 1 / 1,
+                    force: true
+                }
+            },
+        }).then(function (result) {
+            console.log(JSON.stringify(result.filesUploaded));
+            self.currentShow.details[0].newImage = result.filesUploaded[0].url;
+            $scope.$apply();
+        });
+    };
+
 
     // Add show note POST call
+    self.addingNote = false;
+
     self.addNote = function () {
         ShowDetailService.addNote();
     };

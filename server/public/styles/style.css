@@ -45,6 +45,9 @@ p.setlist-item {
     display: inline-block;
 }
 
+.file {
+    margin-bottom: 20px;
+}
 
 /* .media .content {
     margin-top: 10px;
