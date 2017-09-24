@@ -29,16 +29,3 @@ CREATE TABLE friends
     last_name VARCHAR(80) NOT NULL,
     user_show INT REFERENCES users_shows
 );
--- CREATE TABLE user_show_friends
--- (
---     user_show_id INT REFERENCES users_shows,
---     friend_id INT REFERENCES friends,
---     PRIMARY KEY (user_show_id, friend_id)
--- );
--- CREATE TABLE venues
--- (
---     id SERIAL PRIMARY KEY,
---     venue_name VARCHAR(80) NOT NULL,
---     venue_city VARCHAR(80) NOT NULL,
---     venue_state VARCHAR(10)
--- );
