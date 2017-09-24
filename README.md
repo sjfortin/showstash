@@ -71,6 +71,10 @@ CREATE TABLE friends
 <img src="server/public/assets/screenshot3.png" width="600" />
 <img src="server/public/assets/screenshot2.png" width="600" />
 
+### Documentation
+
+[Scope Document](https://docs.google.com/document/d/1ArQQmXNen83VzW5OeJpMc7EoyYDihfCzAjA75ECQ4EY/edit?usp=sharing)
+
 ### Completed Features
 
 - [x] Year-by-year listing of concerts attended
