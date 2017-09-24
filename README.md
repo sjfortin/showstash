@@ -2,7 +2,7 @@
 
 <img src="server/public/assets/showstash-logo-purple.png" width="200" />
 
-ShowStash is a full-stack web application designed to keep a record of a user’s concert history. It will allow users to add and view past concerts that they have attended.
+ShowStash is a full-stack web application that tracks a user’s concert history. It allows users to search, add and view past concerts that they have attended.
 
 [http://showstash.herokuapp.com/](http://showstash.herokuapp.com/)
 
