@@ -24,16 +24,14 @@
                         </figure>
                         <div class="media-content">
                             <div class="content">
-                                <p>
                                     <span class="is-size-4">{{show.artist}}</span>
-                                    <span style="float:right;">{{show.show_date | date: 'mediumDate'}}</span>
-                                    <br>{{show.venue}}
-                                    <br>{{show.city}}, {{show.state}}
-                                </p>
+                                    <span class="show-date">{{show.show_date | date: 'mediumDate'}}</span>
+                                    <div>{{show.venue}}</div>
+                                    <div>{{show.city}}, {{show.state}}</div>
                             </div>
                             <nav class="level is-mobile">
                                 <div class="level-left">
-                                    <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small" style="margin-right: 5px;"><i class="fa fa-music"></i></span>Show Details</a>
+                                <a class="level-item" ng-href="/#/show/{{show.id}}"><span class="icon is-small" style="margin-right: 5px;"><i class="fa fa-music"></i></span>Show Details</a>
                                 </div>
                             </nav>
                         </div>

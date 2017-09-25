@@ -58,7 +58,6 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
                 id: showId
             }
         }).then(function (response) {
-            console.log('delete response', response.data);
             toastr.success('Show Deleted');
             // self.getShows();
             $location.path('/shows/');

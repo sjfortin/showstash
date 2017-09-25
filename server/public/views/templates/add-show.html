@@ -31,7 +31,7 @@
                             <button id="search-button" class="button is-primary is-outlined" ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, sc.searchShow.venue, 1)">Search</button>
                         </div>
                         <div class="control">
-                            <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own Show</a>
+                            <a ng-click="sc.addOwnShow = !sc.addOwnShow" class="button is-link">Or Add Your Own</a>
                         </div>
                     </div>
                 </div>
@@ -60,12 +60,10 @@
                 <article class="media search-listings" ng-repeat="show in sc.searchShowResults.data.data.setlist">
                     <div class="media-content">
                         <div class="content">
-                            <p>
                                 <span class="is-size-4">{{show.artist.name}}</span>
                                 <span style="float:right;">{{show.eventDate | searchDateFilter | date: 'mediumDate'}}</span>
-                                <br>{{show.venue.name}}
-                                <br>{{show.venue.city.name}}, {{show.venue.city.stateCode}}
-                            </p>
+                                <div>{{show.venue.name}}</div>
+                                <div>{{show.venue.city.name}}, {{show.venue.city.stateCode}}</div>
                         </div>
                         <nav class="level">
                             <div class="level-left">

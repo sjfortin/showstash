@@ -149,3 +149,32 @@ a.pagination-link {
 .my-shows-container a.level-item {
     font-weight: bold;
 }
+
+.show-date {
+    float: right;
+    padding-top: 7px;
+}
+
+@media screen and (max-width: 768px) {
+    nav.level .level-left .level-item:not(:last-child),
+    .level-right .level-item:not(:last-child) {
+        margin-right: 0;
+    }
+    nav.level .level-left+.level-right {
+        margin-top: 0;
+    }
+    .show-date {
+        float: none;
+        display: block;
+        padding-top: 0;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    nav.level .level-right .level-item {
+        margin-right: .75em;
+    }
+    .logo-image {
+        margin-left: .75em;
+    }
+}

@@ -88,7 +88,7 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
     closeButton: true,
     positionClass: 'toast-top-center',
     timeOut: 5000,
-    extendedTimeOut: 10000
+    extendedTimeOut: 700
   });
 });
 

@@ -3,10 +3,10 @@
         <img ng-cloak ng-src="{{sdc.currentShow.details[0].image}}" alt="{{sdc.currentShow.details[0].artist}}">
     </div>
     <div class="show-info" ng-if="!sdc.editingMode">
-        <h1 class="title is-1">
+        <h1 class="title is-size-1-desktop is-size-3-touch">
             {{sdc.currentShow.details[0].artist}}</h1>
-        <h1 class="subtitle is-3">{{sdc.currentShow.details[0].venue}} | {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</h1>
-        <h1 class="title is-3 has-text-weight-light">{{sdc.currentShow.details[0].show_date | date: 'fullDate'}}</h1>
+        <h1 class="subtitle is-size-3-desktop is-size-5-touch">{{sdc.currentShow.details[0].venue}} • {{sdc.currentShow.details[0].city}}, {{sdc.currentShow.details[0].state}}</h1>
+        <h1 class="title is-size-3-desktop is-size-5-touch has-text-weight-light">{{sdc.currentShow.details[0].show_date | date: 'fullDate'}}</h1>
         <div>
             <button ng-click="sdc.editingMode = !sdc.editingMode" class="button is-primary is-small"><span>Edit Show Details</span></button>
         </div>

@@ -161,7 +161,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
                 function (response) {
                     let showAddedId = response.data[0].id;
                     // toastr.success('Show has been added');
-                    toastr.success('Show added! <a class="button is-small is-black" href="#/show/'+ showAddedId +'">Go to show</a>', {
+                    toastr.success('<span style="line-height:2;">' + artist + ' show added!</span> <a class="button is-small is-black" href="#/show/'+ showAddedId +'">Go to show</a>', {
                         allowHtml: true
                     });
                     // $location.path('/show/' + showAddedId);
