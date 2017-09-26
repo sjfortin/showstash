@@ -117,6 +117,7 @@ article.search-listings:nth-child(odd) {
 
 a.pagination-link {
     color: #222;
+    width: 60px;
 }
 
 .is-current {
