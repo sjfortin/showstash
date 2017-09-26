@@ -168,6 +168,9 @@ a.pagination-link {
         display: block;
         padding-top: 0;
     }
+    .not-logged-in-header {
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 769px) {

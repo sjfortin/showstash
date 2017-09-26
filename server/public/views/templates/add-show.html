@@ -41,7 +41,7 @@
             <div class="column is-8 is-offset-2">
 
                 <!-- Search Results -->
-                <p ng-if="sc.ShowService.zeroSearchResults" class="has-text-centered">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
+                <p ng-if="sc.ShowService.zeroSearchResults && !sc.addOwnShow" class="has-text-centered">No search results. <a ng-click="sc.addOwnShow = !sc.addOwnShow; sc.ShowService.zeroSearchResults = !sc.ShowService.zeroSearchResults">Add your own show.</a></p>
                 <h1 class="title has-text-centered" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
 
                 <!-- Pagination -->
