@@ -3,7 +3,7 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
 
     // Object to store current show details
     self.currentShow = {
-        details: {}
+        details: []
     }
 
     self.editingMode = {
@@ -30,6 +30,13 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
             console.log('self.currentShow', self.currentShow.details);
         });
     };
+
+    // Clear search results
+    self.clearCurrentShow = function () {
+        self.currentShow = {
+            details: []
+        };
+    }
 
     // PUT edited show info to users_shows table
     self.editShow = function (currentShow, showId) {

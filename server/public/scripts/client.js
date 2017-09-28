@@ -49,6 +49,7 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
           return UserService.getuser();
         },
         clearSearch: function (ShowService) {
+          console.log('do i get this???');
           return ShowService.clearSearchResults();
         }
       }
@@ -71,12 +72,33 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
         }
       }
     })
+    // .when('/show/:id', {
+    //   templateUrl: 'views/templates/show.html',
+    //   controller: 'ShowDetailController as sdc',
+    //   resolve: {
+    //     'showDetails': function () {
+    //       return {
+    //         getuser: function (UserService) {
+    //           return UserService.getuser();
+    //         },
+    //         clearCurrentShow: function (ShowDetailService) {
+    //           console.log('do i get this?');
+
+    //           return ShowDetailService.clearCurrentShow();
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
     .when('/show/:id', {
       templateUrl: 'views/templates/show.html',
       controller: 'ShowDetailController as sdc',
       resolve: {
         getuser: function (UserService) {
           return UserService.getuser();
+        },
+        clearCurrentShow: function (ShowDetailService) {
+          return ShowDetailService.clearCurrentShow();
         }
       }
     })
