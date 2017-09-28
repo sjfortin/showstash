@@ -20,7 +20,7 @@ ShowStash is a full-stack web application that tracks a user’s concert history
 
 ## Getting Started 
 
-To get ShowStash up and running on your local machine for development and testing purposes. 
+Instructions to get ShowStash up and running on your local machine for development and testing purposes. 
 <!-- See deployment for notes on how to deploy the project on a live system. -->
 
 ### Prerequisites
@@ -35,7 +35,7 @@ Steps to get the development environment running.
 CREATE TABLE users
 ( 
     id SERIAL PRIMARY KEY,
-    email VARCHAR(80) NOT NULL UNIQUE,
+    username VARCHAR(80) NOT NULL UNIQUE,
     password VARCHAR(80) NOT NULL,
     first_name VARCHAR(80) NOT NULL,
     last_name VARCHAR(80) NOT NULL

@@ -7,9 +7,9 @@
                     <h1 class="title has-text-centered">Login</h1>
                     <form ng-submit="lc.login()">
                         <div class="field">
-                            <label class="label">Email</label>
+                            <label class="label">Username</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+                                <input class="input" type="text" placeholder="Username" ng-model="lc.user.username">
                             </div>
                         </div>
                         <div class="field">
@@ -28,6 +28,7 @@
                         </div>
                     </form>
                 </div>
+                <div class="notification is-danger" ng-if="lc.message != ''">{{lc.message}}</div>
             </div>
         </div>
     </div>

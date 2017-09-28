@@ -1,40 +1,46 @@
-app.controller('LoginController', function($http, $location, UserService) {
-    var vm = this;
-    vm.user = {
-      email: '',
-      password: '',
-      first_name: '',
-      last_name: ''
-    };
-    vm.message = '';
+app.controller('LoginController', function ($http, $location, UserService) {
+  var vm = this;
+  vm.user = {
+    username: '',
+    password: ''
+  };
+  vm.message = '';
 
-    vm.userObject = UserService.userObject;
+  vm.userObject = UserService.userObject;
 
-    vm.login = function() {
-      if(vm.user.email === '' || vm.user.password === '') {
-        vm.message = "Enter your email and password!";
-      } else {
-        $http.post('/', vm.user).then(function(response) {
-          if(response.data.email) {
-            $location.path('/home');
-          } else {
-            vm.message = "Please try again.";
-          }
-        }).catch(function(response){
-          vm.message = "Please try again.";
-        });
+  vm.login = function () {
+    if (vm.user.username === '' || vm.user.password === '') {
+      if (vm.user.username === '') {
+        vm.message = "Please enter your username.";
+      } else if (vm.user.password === '') {
+        vm.message = "Please enter your password.";
       }
-    };
-
-    vm.registerUser = function() {
-      if (vm.user.email === '' || vm.user.password === '' || vm.user.first_name === '' || vm.user.last_name === '') {
-        vm.message = "Please enter your name, email, or password.";
-      } else {
-        $http.post('/register', vm.user).then(function(response) {
+    } else {
+      $http.post('/', vm.user).then(function (response) {
+        if (response.data.username) {
           $location.path('/home');
-        }).catch(function(response) {
-          vm.message = "Please try again."
-        });
-      }
+        } else {
+          vm.message = "Please try again.";
+        }
+      }).catch(function (response) {
+        vm.message = "Please try again.";
+      });
     }
+  };
+
+  vm.registerUser = function () {
+    if (vm.user.password === '' || vm.user.username === '') {
+      if (vm.user.username === '') {
+        vm.message = "Please enter a username.";
+      } else if (vm.user.password === '') {
+        vm.message = "Please enter a password.";
+      }
+    } else {
+      $http.post('/register', vm.user).then(function (response) {
+        $location.path('/home');
+      }).catch(function (response) {
+        vm.message = "Please try again."
+      });
+    }
+  }
 });

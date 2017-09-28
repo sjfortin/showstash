@@ -7,12 +7,12 @@
             <div class="column is-6 is-offset-3">
                 <div class="box">
                     <h1 class="title">{{lc.userObject.first_name}} {{lc.userObject.last_name}}</h1>
-                    <h1 class="subtitle is-5">Update your email address and password here.</h1>
+                    <h1 class="subtitle is-5">Update your Username and password here.</h1>
                     <form ng-submit="lc.updateProfile()">
                         <div class="field">
-                            <label class="label">Email</label>
+                            <label class="label">Username</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Email" ng-model="lc.user.email">
+                                <input class="input" type="text" placeholder="Username" ng-model="lc.user.username">
                             </div>
                         </div>
                         <div class="field">

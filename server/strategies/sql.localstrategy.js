@@ -47,13 +47,13 @@ passport.deserializeUser(function(id, done) {
 // Does actual work of logging in
 passport.use('local', new localStrategy({
     passReqToCallback: true,
-    usernameField: 'email'
-    }, function(req, email, password, done) {
+    usernameField: 'username'
+    }, function(req, username, password, done) {
 	    pool.connect(function (err, client, release) {
 	    	console.log('called local - pg');
 
-        // assumes the email will be unique, thus returning 1 or 0 results
-        client.query("SELECT * FROM users WHERE email = $1", [email],
+        // assumes the username will be unique, thus returning 1 or 0 results
+        client.query("SELECT * FROM users WHERE username = $1", [username],
           function(err, result) {
             var user = {};
 

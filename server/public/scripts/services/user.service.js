@@ -6,11 +6,9 @@ app.service('UserService', function ($http, $location) {
 
   self.getuser = function () {
     $http.get('/user').then(function (response) {
-      if (response.data.email) {
+      if (response.data.username) {
         // user has a curret session on the server
-        self.userObject.email = response.data.email;
-        self.userObject.first_name = response.data.first_name;
-        self.userObject.last_name = response.data.last_name;
+        self.userObject.username = response.data.username;
       } else {
         // user has no session, bounce them back to the login page
         $location.path("/login");

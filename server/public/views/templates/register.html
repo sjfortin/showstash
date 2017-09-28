@@ -5,42 +5,30 @@
             <div class="column is-6 is-offset-3">
                 <div class="box">
                     <h1 class="title has-text-centered">Register User</h1>
-                    <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
-                        <form ng-submit="lc.registerUser()">
-                            <div class="field">
-                                <label class="label">First Name</label>
-                                <div class="control">
-                                    <input class="input" type="text" placeholder="First Name" ng-model="lc.user.first_name">
-                                </div>
+                    <form ng-submit="lc.registerUser()">
+                        <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Username" ng-model="lc.user.username">
                             </div>
-                            <div class="field">
-                                <label class="label">Last Name</label>
-                                <div class="control">
-                                    <input class="input" type="text" placeholder="Last Name" ng-model="lc.user.last_name">
-                                </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Password" ng-model="lc.user.password">
                             </div>
-                            <div class="field">
-                                <label class="label">Email</label>
-                                <div class="control">
-                                    <input class="input" type="email" placeholder="Email" ng-model="lc.user.email">
-                                </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-primary is-outlined">Register</button>
                             </div>
-                            <div class="field">
-                                <label class="label">Password</label>
-                                <div class="control">
-                                    <input class="input" type="password" placeholder="Password" ng-model="lc.user.password">
-                                </div>
+                            <div class="control">
+                                <a ng-href="/#/login" class="button is-link">Cancel</a>
                             </div>
-                            <div class="field is-grouped">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary is-outlined">Register</button>
-                                </div>
-                                <div class="control">
-                                    <a ng-href="/#/login" class="button is-link">Cancel</a>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
+                    </form>
                 </div>
+                <div class="notification is-danger" ng-if="lc.message != ''">{{lc.message}}</div>
             </div>
         </div>
     </div>
