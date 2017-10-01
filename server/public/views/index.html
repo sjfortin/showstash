@@ -42,18 +42,9 @@
     <!-- Angular Toastr -->
     <script src="vendors/angular-toastr/angular-toastr.tpls.js"></script>
 
-    <!-- <script>
-        var client = filestack.init('AXXO3bKGRQoif7usQg4Yfz');
-        function showPicker() {
-            client.pick({
-            }).then(function (result) {
-                console.log(JSON.stringify(result.filesUploaded))
-            });
-        }
-    </script> -->
 </head>
 
-<body ng-app="ShowStashApp">
+<body ng-app="ShowStashApp" ng-cloak>
 
     <main ng-view></main>
 
