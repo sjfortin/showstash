@@ -10,10 +10,10 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
       templateUrl: '/views/templates/login.html',
       controller: 'LoginController as lc',
     })
-    // .when('/register', {
-    //   templateUrl: '/views/templates/register.html',
-    //   controller: 'LoginController as lc'
-    // })
+    .when('/register', {
+      templateUrl: '/views/templates/register.html',
+      controller: 'LoginController as lc'
+    })
     .when('/home', {
       templateUrl: '/views/templates/home.html',
       controller: 'UserController as uc',

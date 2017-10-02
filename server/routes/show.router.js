@@ -6,7 +6,7 @@ var pool = require('../modules/pool');
 // https://www.npmjs.com/package/request
 var request = require('request');
 
-var setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').setlistApiKey;
+var setListApiKey = process.env.SETLIST_API_KEY || require('../config.js').musicApi.setlistApiKey;
 
 // GET My Shows from users_shows table
 router.get('/myShows', function (req, res) {
@@ -288,7 +288,7 @@ router.put('/addNote', function (req, res) {
 });
 
 // get mbid information
-var lastFmApiKey = process.env.LASTFM_API_KEY || require('../config.js').lastFmApiKey;
+var lastFmApiKey = process.env.LASTFM_API_KEY || require('../config.js').musicApi.lastFmApiKey;
 
 router.get('/artistImage', function (req, res) {
     var artist = req.query.artist;

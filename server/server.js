@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-var passport = require('./strategies/sql.localstrategy');
+var passport = require('./strategies/sql.strategies');
 var sessionConfig = require('./modules/session.config');
 
 // Route includes
