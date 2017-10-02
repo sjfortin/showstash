@@ -6,26 +6,34 @@ var path = require('path');
 
 //when clicking the google button, the user is taken to the following url to login
 router.get('/auth/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email'],
-    prompt: 'select_account'
-  }
-  ));
+passport.authenticate('google', {
+  scope: ['profile', 'email'],
+  prompt: 'select_account'
+}
+));
 
-// router.get('/auth/google/callback',
-//   passport.authenticate('google', {
-//     successRedirect: '#/home',
-//     failureRedirect: '#/login'
+router.get('/auth/google/callback',
+passport.authenticate('google', { failureRedirect: '#/login' }),
+function (req, res) {
+  // absolute path
+  res.redirect('http://localhost:5000/#/home');
+});
+
+// router.get('/auth/facebook',
+//   passport.authenticate('facebook', {
+//     scope: ['profile', 'email'],
+//     prompt: 'select_account'
 //   }
 //   ));
 
-router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '#/login' }),
-  function (req, res) {
-    // absolute path
-    res.redirect('http://localhost:5000/#/home');
-  });
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
+// handle the callback after facebook has authenticated the user
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: 'http://localhost:5000/#/home',
+    failureRedirect: '#/login'
+  }));
 
 // Handles login form POST from index.html
 router.post('/',
