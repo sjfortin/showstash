@@ -3,8 +3,10 @@
     <div class="container">
         <div class="columns">
             <div class="column is-6 is-offset-3">
-                <div class="box">
-                    <h1 class="title has-text-centered">Login</h1>
+                <h1 class="title has-text-centered">Login</h1>
+                    <p class="has-text-centered"><a class="button is-primary" href="/auth/google"><span class="icon"> <i class="fa fa-google"> </i></span> <span> Google Login </span></a>
+                    <a class="button is-primary" href="/auth/facebook"><span class="icon"> <i class="fa fa-facebook"> </i></span> <span> Facebook Login </span></a></p>
+                <!-- <div class="box">
                     <form ng-submit="lc.login()">
                         <div class="field">
                             <label class="label">Username</label>
@@ -27,7 +29,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <div class="notification is-danger" ng-if="lc.message != ''">{{lc.message}}</div>
             </div>
         </div>

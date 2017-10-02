@@ -8,6 +8,8 @@ app.controller('LoginController', function ($http, $location, UserService) {
 
   vm.userObject = UserService.userObject;
 
+  vm.userService = UserService;
+
   vm.login = function () {
     if (vm.user.username === '' || vm.user.password === '') {
       if (vm.user.username === '') {
