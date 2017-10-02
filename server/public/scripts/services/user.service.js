@@ -9,6 +9,8 @@ app.service('UserService', function ($http, $location) {
       if (response.data.username) {
         // user has a curret session on the server
         self.userObject.username = response.data.username;
+        self.userObject.image = response.data.image;
+        self.userObject.name = response.data.name;
       } else {
         // user has no session, bounce them back to the login page
         $location.path("/login");

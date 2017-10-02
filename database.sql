@@ -1,31 +1,31 @@
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(80) NOT NULL UNIQUE,
-    password VARCHAR(80) NOT NULL,
-    first_name VARCHAR(80) NOT NULL,
-    last_name VARCHAR(80) NOT NULL
+    username TEXT NOT NULL UNIQUE,
+    password TEXT,
+    image TEXT,
+    name TEXT
 );
 CREATE TABLE users_shows
 (
     id SERIAL PRIMARY KEY,
-    version_id VARCHAR(80),
-    artist VARCHAR(80) NOT NULL,
-    mbid VARCHAR(80),
+    version_id TEXT,
+    artist TEXT NOT NULL,
+    mbid TEXT,
     show_date DATE NOT NULL,
-    show_date INT,
-    venue VARCHAR(120) NOT NULL,
-    city VARCHAR(80) NOT NULL,
+    full_year INT,
+    venue TEXT NOT NULL,
+    city TEXT NOT NULL,
     state VARCHAR(10),
-    notes VARCHAR(256),
+    notes TEXT,
     setlist TEXT[],
-    image VARCHAR(256),
+    image TEXT,
     user_id INT REFERENCES users
 );
 CREATE TABLE friends
 (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR(80) NOT NULL,
-    last_name VARCHAR(80) NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT,
     user_show INT REFERENCES users_shows
 );

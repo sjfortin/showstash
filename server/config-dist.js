@@ -1,7 +1,10 @@
 var config = {
     songKickApiKey: '',
     setlistApiKey: '',
-    lastFmApiKey: ''
+    lastFmApiKey: '',
+    GOOGLE_CLIENT_ID: '',
+    GOOGLE_CLIENT_SECRET: '',
+    SESSION_KEY: ''
 }
 
 module.exports = config;
