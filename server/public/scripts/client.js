@@ -10,10 +10,10 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
       templateUrl: '/views/templates/login.html',
       controller: 'LoginController as lc',
     })
-    .when('/register', {
-      templateUrl: '/views/templates/register.html',
-      controller: 'LoginController as lc'
-    })
+    // .when('/register', {
+    //   templateUrl: '/views/templates/register.html',
+    //   controller: 'LoginController as lc'
+    // })
     .when('/home', {
       templateUrl: '/views/templates/home.html',
       controller: 'UserController as uc',
@@ -72,24 +72,6 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
         }
       }
     })
-    // .when('/show/:id', {
-    //   templateUrl: 'views/templates/show.html',
-    //   controller: 'ShowDetailController as sdc',
-    //   resolve: {
-    //     'showDetails': function () {
-    //       return {
-    //         getuser: function (UserService) {
-    //           return UserService.getuser();
-    //         },
-    //         clearCurrentShow: function (ShowDetailService) {
-    //           console.log('do i get this?');
-
-    //           return ShowDetailService.clearCurrentShow();
-    //         }
-    //       }
-    //     }
-    //   }
-    // })
     .when('/show/:id', {
       templateUrl: 'views/templates/show.html',
       controller: 'ShowDetailController as sdc',
