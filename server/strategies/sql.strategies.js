@@ -1,14 +1,15 @@
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').OAuth2Strategy;
 var encryptLib = require('../modules/encryption');
 var pool = require('../modules/pool.js');
 
 // Google oAuth2
 passport.use(new GoogleStrategy({
-  clientID: process.env.CLIENT_ID || '1062406729566-ultbrr1mi89cd47innllb942bfuehft0.apps.googleusercontent.com',
-  clientSecret: process.env.CLIENT_SECRET || 'XxJ_xbtsdLmXKNkiQO0xs4HD',
-  callbackURL: process.env.CALLBACK_URL || 'http://localhost:5000/auth/google/callback',
+  clientID: process.env.CLIENT_ID || require('../config.js').GOOGLE_CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET || require('../config.js').GOOGLE_CLIENT_SECRET ,
+  callbackURL: process.env.CALLBACK_URL || require('../config.js').GOOGLE_CALLBACK_URL,
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
   console.log("THIS IS THE PROFILE", profile);
