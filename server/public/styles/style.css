@@ -147,6 +147,32 @@ a.pagination-link {
     background: #4840bb;
 }
 
+.button.is-google {
+    background-color: #dd4b39;
+    border-color: transparent;
+    color: #fff;
+    width: 250px;
+}
+
+.button.is-google.is-hovered,
+.button.is-google:hover {
+    background-color: #c64333;
+    color: #fff;
+}
+
+.button.is-facebook {
+    background-color: #3b5998;
+    border-color: transparent;
+    color: #fff;
+    width: 250px;
+}
+
+.button.is-facebook.is-hovered,
+.button.is-facebook:hover {
+    background-color: #355088;
+    color: #fff;
+}
+
 .my-shows-container a.level-item {
     font-weight: bold;
 }
