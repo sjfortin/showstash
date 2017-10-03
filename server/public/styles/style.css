@@ -183,9 +183,11 @@ a.pagination-link {
 }
 
 @media screen and (max-width: 768px) {
-    nav.level .level-left .level-item:not(:last-child),
     .level-right .level-item:not(:last-child) {
-        margin-right: 0;
+        margin-right: 1.5rem;
+    }
+    .level-right .level-item:first-child {
+        margin-right: .75rem;
     }
     nav.level .level-left+.level-right {
         margin-top: 0;
@@ -197,6 +199,18 @@ a.pagination-link {
     }
     .not-logged-in-header {
         text-align: center;
+    }
+    .logo-image {
+        width: 140px;
+        margin-left: 1.5rem;
+    }
+    .button.is-small-mobile {
+        border-radius: 0;
+        font-size: .75rem;
+    }
+    .hero-body,
+    .section {
+        padding: 1rem 1.5rem;
     }
 }
 

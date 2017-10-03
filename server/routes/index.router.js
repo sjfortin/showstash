@@ -31,7 +31,7 @@ router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' 
 // handle the callback after facebook has authenticated the user
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: 'http://showstash.herokuapp.com/#/home',
+    successRedirect: 'http://localhost:5000/#/home',
     failureRedirect: '#/login'
   }));
 
