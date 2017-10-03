@@ -12,7 +12,7 @@ var registerRouter = require('./routes/register.router');
 var showRouter = require('./routes/show.router');
 var friendRouter = require('./routes/friend.router');
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 // Body parser middleware
 app.use(bodyParser.json());

@@ -16,6 +16,7 @@ a {
 
 .home-image img {
     max-width: 300px;
+    text-align: center;
 }
 
 .logo-image {
