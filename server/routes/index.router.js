@@ -16,7 +16,7 @@ router.get('/auth/google/callback',
 passport.authenticate('google', { failureRedirect: '#/login' }),
 function (req, res) {
   // absolute path
-  res.redirect('http://localhost:5000/#/home');
+  res.redirect('http://showstash.herokuapp.com/#/home');
 });
 
 // router.get('/auth/facebook',
@@ -31,7 +31,7 @@ router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' 
 // handle the callback after facebook has authenticated the user
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: 'http://localhost:5000/#/home',
+    successRedirect: 'http://showstash.herokuapp.com/#/home',
     failureRedirect: '#/login'
   }));
 
