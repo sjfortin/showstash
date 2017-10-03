@@ -7,9 +7,9 @@ var pool = require('../modules/pool.js');
 
 // Google oAuth2
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID || require('../config.js').googleAuth. GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET || require('../config.js').googleAuth. GOOGLE_CLIENT_SECRET ,
-  callbackURL: process.env.GOOGLE_CALLBACK_URL || require('../config.js').googleAuth. GOOGLE_CALLBACK_URL,
+  clientID: process.env.GOOGLE_CLIENT_ID || require('../config.js').googleAuth.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || require('../config.js').googleAuth.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL || require('../config.js').googleAuth.GOOGLE_CALLBACK_URL,
   passReqToCallback: true
 }, function (req, accessToken, refreshToken, profile, done) {
   console.log("THIS IS THE PROFILE", profile);
@@ -59,7 +59,7 @@ passport.use(new GoogleStrategy({
 // Facebook oAuth
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID || require('../config.js').facebookAuth.FACEBOOK_CLIENT_ID,
-  clientSecret: process.env.FACEBOOK_CLIENT_SECRET || require('../config.js').facebookAuth.FACEBOOK_CLIENT_SECRET ,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET || require('../config.js').facebookAuth.FACEBOOK_CLIENT_SECRET,
   callbackURL: process.env.FACEBOOK_CALLBACK_URL || require('../config.js').facebookAuth.FACEBOOK_CALLBACK_URL,
   profileFields: ['email', 'id', 'first_name', 'gender', 'last_name', 'picture', 'displayName']
 }, function (req, accessToken, refreshToken, profile, done) {
@@ -104,8 +104,8 @@ passport.use(new FacebookStrategy({
 
       });
   });
-} 
-)); 
+}
+));
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
