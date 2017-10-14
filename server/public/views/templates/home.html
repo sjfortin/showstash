@@ -10,7 +10,9 @@
                 <a href="#/add-show">add new ones</a>!</p>
             <div class="columns image-preview">
                 <div class="column is-half is-offset-one-quarter">
-                    <img ng-src="{{imageObject.image}}" ng-repeat="imageObject in uc.artistImages.list" style="margin: 5px; border-radius: 50%; width: 50px;">
+                    <a ng-href="#/show/{{imageObject.id}}" ng-repeat="imageObject in uc.artistImages.list">
+                        <img ng-src="{{imageObject.image}}" style="margin: 3px; border-radius: 50%; width: 50px;">
+                    </a>
                 </div>
             </div>
         </div>

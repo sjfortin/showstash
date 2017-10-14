@@ -47,7 +47,7 @@ router.get('/artistImages', function (req, res) {
                 console.log('Error connecting to database', err);
                 res.sendStatus(500);
             } else {
-                client.query('SELECT image FROM users_shows WHERE user_id=$1;',
+                client.query('SELECT * FROM users_shows WHERE user_id=$1;',
                     [
                         req.user.id
                     ],
