@@ -49,7 +49,6 @@ app.config(function ($routeProvider, $locationProvider, toastrConfig) {
           return UserService.getuser();
         },
         clearSearch: function (ShowService) {
-          console.log('do i get this???');
           return ShowService.clearSearchResults();
         }
       }

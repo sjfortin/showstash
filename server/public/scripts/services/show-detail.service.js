@@ -27,7 +27,6 @@ app.service('ShowDetailService', ['$http', '$location', 'toastr', function ($htt
             self.currentShow.details = response.data;
             var newDate = new Date(self.currentShow.details[0].show_date);
             self.currentShow.details[0].show_date = newDate;
-            console.log('self.currentShow', self.currentShow.details);
         });
     };
 

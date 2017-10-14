@@ -1,4 +1,4 @@
-app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function ($http, $location, toastr, $compile) {
+app.service('ShowService', ['$http', '$location', 'toastr', '$compile', 'ArtistImageService', function ($http, $location, toastr, $compile, ArtistImageService) {
     var self = this;
 
     // Object to store my shows
@@ -91,7 +91,6 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
                 }
                 self.searchShowResults.data = response;
                 searchButton.classList.remove('is-loading');
-                console.log('search response', response);
             },
             function (data) {
                 console.log('this is an error', data.config.params);
@@ -165,6 +164,7 @@ app.service('ShowService', ['$http', '$location', 'toastr', '$compile', function
                         allowHtml: true
                     });
                     // $location.path('/show/' + showAddedId);
+                    ArtistImageService.getArtistImages();
                     addShowButton.classList.remove('is-loading');
                 })
         })

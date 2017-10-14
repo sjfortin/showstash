@@ -39,6 +39,37 @@ router.get('/myShows', function (req, res) {
     }
 });
 
+// GET a user's artist images from the database
+router.get('/artistImages', function (req, res) {    
+    if (req.isAuthenticated()) {
+        pool.connect(function (errDatabase, client, done) {
+            if (errDatabase) {
+                console.log('Error connecting to database', err);
+                res.sendStatus(500);
+            } else {
+                client.query('SELECT image FROM users_shows WHERE user_id=$1;',
+                    [
+                        req.user.id
+                    ],
+                    function (errQuery, data) {
+                        done();
+                    if (errQuery) {
+                            console.log('Error making database query', errQuery);
+                            res.sendStatus(500);
+                        } else {
+                            res.send(data.rows);
+                        }
+                    });
+            }
+        });
+    } else {
+        // failure best handled on the server. do redirect here.
+        console.log('not logged in');
+        // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
+        res.send(false);
+    }
+});
+
 // POST manual shows to users_shows table
 router.post('/addShowManually', function (req, res) {
 
