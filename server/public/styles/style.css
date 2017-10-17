@@ -20,6 +20,11 @@ a {
     text-align: center;
 }
 
+.home-show-image-link {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .logo-image {
     width: 200px;
     padding: 15px 0;

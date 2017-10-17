@@ -9,9 +9,9 @@
                 <a href="#/shows">View your past shows</a> or
                 <a href="#/add-show">add new ones</a>!</p>
             <div class="columns image-preview">
-                <div class="column is-half is-offset-one-quarter">
-                    <a ng-href="#/show/{{imageObject.id}}" ng-repeat="imageObject in uc.artistImages.list">
-                        <img ng-src="{{imageObject.image}}" style="margin: 3px; border-radius: 50%; width: 50px;">
+                <div class="column">
+                    <a ng-href="#/show/{{imageObject.id}}" ng-repeat="imageObject in uc.artistImages.list | orderBy: '-show_date'" class="home-show-image-link">
+                        <img ng-src="{{imageObject.image}}" style="margin: 0 3px; border-radius: 50%; width: {{imageObject.homeImageSize}}px;">
                     </a>
                 </div>
             </div>
