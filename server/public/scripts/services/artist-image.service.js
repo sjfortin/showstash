@@ -17,7 +17,7 @@ app.service('ArtistImageService', ['$http', function ($http) {
                 return image.image != '' && image.image != 'https://i.pinimg.com/originals/9d/23/17/9d2317310b456185ed9663d3d7b87490.jpg';
             });
             self.artistImages.list.forEach(function(show){
-                show.homeImageSize = randomImageWidth(40, 70);
+                show.homeImageSize = randomImageWidth(40, 100);
             })
             console.log('self.artistImages.list', self.artistImages.list);
             
