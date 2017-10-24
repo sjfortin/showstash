@@ -67,9 +67,9 @@ CREATE TABLE friends
 
 ## Screen Shots
 
-<img src="server/public/assets/showstash-myshows.png" width="600" />
-<img src="server/public/assets/showstash-show.png" width="600" />
-<img src="server/public/assets/showstash-show.png" width="600" />
+<img src="server/public/assets/showstash-myshows.png" width="800" />
+<img src="server/public/assets/showstash-show.png" width="800" />
+<img src="server/public/assets/showstash-search.png" width="800" />
 
 ### Documentation
 
