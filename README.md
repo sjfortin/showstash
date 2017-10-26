@@ -6,7 +6,7 @@ ShowStash is a full-stack web application that tracks a user’s concert history
 
 [http://showstash.herokuapp.com/](http://showstash.herokuapp.com/)
 
-## Built With
+## Technologies Used
 
 * PostgreSQL
 * Express
@@ -21,7 +21,6 @@ ShowStash is a full-stack web application that tracks a user’s concert history
 ## Getting Started 
 
 Instructions to get ShowStash up and running on your local machine for development and testing purposes. 
-<!-- See deployment for notes on how to deploy the project on a live system. -->
 
 ### Prerequisites
 
@@ -86,10 +85,6 @@ CREATE TABLE friends
 ### Next Steps
 
 - [ ] Upload your concert photos to a concert specific photo gallery.
-
-<!-- ## Deployment
-
-Add additional notes about how to deploy this on a live system -->
 
 ## Authors
 
