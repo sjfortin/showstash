@@ -64,7 +64,7 @@ CREATE TABLE friends
 );
 ```
 
-## Screen Shots
+## App Screen Shots
 
 <img src="server/public/assets/showstash-myshows.png" width="800" />
 <img src="server/public/assets/showstash-show.png" width="800" />
