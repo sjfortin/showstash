@@ -233,3 +233,7 @@ a.pagination-link {
         margin-left: .75em;
     }
 }
+
+.has-text-weight-bold {
+    font-weight: 700;
+}
