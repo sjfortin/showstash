@@ -4,7 +4,8 @@ CREATE TABLE users
     username TEXT NOT NULL UNIQUE,
     password TEXT,
     image TEXT,
-    name TEXT
+    name TEXT,
+    last_login TEXT
 );
 CREATE TABLE users_shows
 (

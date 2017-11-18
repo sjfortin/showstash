@@ -21,7 +21,6 @@ passport.use(
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
-      console.log('THIS IS THE PROFILE', profile);
       pool.connect(function(err, client, release) {
         if (err) {
           console.log('connection err ', err);
@@ -99,7 +98,6 @@ passport.use(
       ]
     },
     function(req, accessToken, refreshToken, profile, done) {
-      console.log('FACEBOOK PROFILE', profile);
       pool.connect(function(err, client, release) {
         if (err) {
           console.log('connection err ', err);

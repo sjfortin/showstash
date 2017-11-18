@@ -84,6 +84,7 @@ CREATE TABLE friends
 
 ### Todos
 
+- [ ] Timestamp added for login via Google or Facebook oAuth
 - [ ] Upload your concert photos to a concert specific photo gallery.
 - [ ] Fetch new setlist information if available for a show
 - [ ] Do not allow duplicate shows to be added
