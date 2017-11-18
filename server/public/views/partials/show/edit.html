@@ -39,17 +39,17 @@
                 <div class="file has-name">
                     <label class="file-label">
                         <input class="file-input" value="Upload" ng-click="sdc.addArtistImage()">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fa fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                    Choose an image...
-                                </span>
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fa fa-upload"></i>
                             </span>
-                            <span class="file-name">
-                                <img ng-src="{{sdc.currentShow.details[0].newImage}}" style="width:25px;height:25px;">
+                            <span class="file-label">
+                                Choose an image...
                             </span>
+                        </span>
+                        <span class="file-name" ng-if="sdc.currentShow.details[0].newImage">
+                            <img ng-src="{{sdc.currentShow.details[0].newImage}}" style="width:25px;height:25px">
+                        </span>
                     </label>
                 </div>
             </div>
@@ -60,9 +60,12 @@
                 <div class="control">
                     <a ng-click="sdc.editingMode = !sdc.editingMode" class="button is-link">Cancel</a>
                 </div>
-            </div>
-            <div>
-                <a class="has-text-danger is-size-7" ng-click="sdc.ShowDetailService.deleteShow(sdc.currentShow.details[0].id)"><span class="icon is-small"><i class="fa fa-trash"></i></span> Delete Show</a>
+                <div class="control">
+                    <a class="has-text-danger is-white button" ng-click="sdc.ShowDetailService.deleteShow(sdc.currentShow.details[0].id)">
+                        <span class="icon is-small">
+                            <i class="fa fa-trash"></i>
+                        </span> <span class="is-size-7" style="text-transform:none;">Delete Show</span></a>
+                </div>
             </div>
         </div>
     </div>

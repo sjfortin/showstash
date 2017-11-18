@@ -1,10 +1,10 @@
 <!-- Friends -->
 <div class="box">
     <div>
-        <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend">Add Friend</a></p>
+        <p><span class="title is-5">Friends</span> <a class="button is-small is-primary is-pulled-right" ng-click="sdc.addingFriend = !sdc.addingFriend" ng-if="!sdc.addingFriend">Add Friend</a></p>
         <hr>
-        <p ng-if="!sdc.friends.list.length"><em>You haven't added any friends to this show.</em></p>
-        <article class="media" ng-repeat="friend in sdc.friends.list | orderBy: 'first_name'">
+        <p ng-if="!sdc.friends.list.length && !sdc.addingFriend"><em>You haven't added any friends to this show.</em></p>
+        <article ng-if="sdc.friends.list.length" class="media" ng-repeat="friend in sdc.friends.list | orderBy: 'first_name'">
             <div class="media-content">
                 <div class="content">
                     <p>
@@ -18,8 +18,7 @@
         </article>
     </div>
     <!-- Add a Fried Form -->
-    <div ng-if="sdc.addingFriend">
-        <br>
+    <div ng-if="sdc.addingFriend" style="margin-top: 20px;">
         <h3 class="title is-6">Add a Friend</h3>
         <div class="field">
             <div class="control">

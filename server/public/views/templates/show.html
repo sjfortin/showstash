@@ -3,7 +3,8 @@
 <section class="section">
     <div class="container">
         <p class="has-text-centered">
-            <a ng-href="/#/shows" class="is-size-6"><i class="fa fa-lg fa-angle-left" aria-hidden="true"></i> back to my shows</a>
+            <a ng-href="/#/shows" class="is-size-6">
+                <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i> back to my shows</a>
         </p>
         <div class="columns">
             <div class="column">
@@ -14,14 +15,15 @@
             </div>
         </div>
         <div class="columns">
-            <div class="column is-half">
+            <div class="column is-one-third">
                 <!-- Friends -->
                 <div ng-include="'views/partials/show/friends.html'"></div>
-                <br>
+            </div>
+            <div class="column is-one-third">
                 <!-- Show Notes -->
                 <div ng-include="'views/partials/show/notes.html'"></div>
             </div>
-            <div class="column is-half">
+            <div class="column is-one-third">
                 <!-- Setlist Info -->
                 <div ng-include="'views/partials/show/setlist.html'"></div>
             </div>
