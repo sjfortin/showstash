@@ -85,7 +85,6 @@ CREATE TABLE friends
 ### Todos
 
 - [ ] Upload your concert photos to a concert specific photo gallery.
-- [ ] Add timestamp when user logs in
 - [ ] Fetch new setlist information if available for a show
 - [ ] Do not allow duplicate shows to be added
 

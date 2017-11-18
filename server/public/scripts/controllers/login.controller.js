@@ -23,8 +23,9 @@ app.controller('LoginController', function($http, $location, UserService) {
         .then(function(response) {
           if (response.data.username) {
             // send a PUT to the user table to update the timestamp
-
-            $location.path('/home');
+            $http.put('/user/timestamp', vm.user).then(function(response) {
+              $location.path('/home');
+            });
           } else {
             vm.message = 'Please try again.';
           }
