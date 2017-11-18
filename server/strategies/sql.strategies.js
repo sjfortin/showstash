@@ -28,13 +28,15 @@ passport.use(
           done(err);
         }
         var user = {};
+        var todayDate = new Date();
         //adding user to database if not already there
         client.query(
-          'INSERT INTO users (username, image, name) VALUES ($1, $2, $3) ON CONFLICT (username) DO UPDATE SET username = $1, image = $2, name = $3;',
+          'INSERT INTO users (username, image, name, last_login) VALUES ($1, $2, $3, $4) ON CONFLICT (username) DO UPDATE SET username = $1, image = $2, name = $3, last_login=$4;',
           [
             profile.emails[0].value,
             profile.photos[0].value,
-            profile.displayName
+            profile.displayName,
+            todayDate
           ],
           function(err, result) {
             // Handle Errors
