@@ -3,25 +3,25 @@
     <div class="container">
         <div class="columns">
             <div class="column is-6 is-offset-3 has-text-centered">
-                <h1 class="title has-text-centered">Login</h1>
-                <div style="margin-bottom: 10px;">
-                    <a class="button is-google" href="/auth/google">
-                        <span class="icon">
-                            <i class="fa fa-google"> </i>
-                        </span>
-                        <span> Sign In with Google </span>
-                    </a>
-                </div>
-                <div>
-                    <a class="button is-facebook" href="/auth/facebook">
-                        <span class="icon">
-                            <i class="fa fa-facebook"> </i>
-                        </span>
-                        <span> Sign In with Facebook </span>
-                    </a>
-                </div>
                 <!-- Login/Register for local testing -->
-                <div class="box" style="margin-top: 20px;">
+                <div class="box">
+                    <h1 class="title has-text-centered">Login</h1>
+                    <div style="margin-bottom: 10px;">
+                        <a class="button is-google" href="/auth/google">
+                            <span class="icon">
+                                <i class="fa fa-google"> </i>
+                            </span>
+                            <span> Sign In with Google </span>
+                        </a>
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <a class="button is-facebook" href="/auth/facebook">
+                            <span class="icon">
+                                <i class="fa fa-facebook"> </i>
+                            </span>
+                            <span> Sign In with Facebook </span>
+                        </a>
+                    </div>
                     <form ng-submit="lc.login()">
                         <div class="field">
                             <label class="label">Username</label>
@@ -46,8 +46,8 @@
                     </form>
                 </div>
                 <div class="notification is-danger" ng-if="lc.message != ''">{{lc.message}}</div>
-                <div>
-                    <p class="has-text-weight-bold">Sample User</p>
+                <div class="is-size-6">
+                    <p class="has-text-weight-bold">Example User</p>
                     <p>Username: user</p>
                     <p>Password: showstash</p>
                 </div>
