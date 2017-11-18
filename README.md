@@ -82,9 +82,11 @@ CREATE TABLE friends
 - [x] Search past concerts to quickly add new shows to your concert history. Search powered by data from setlist.fm and last.fm
 - [x] Upload your own artist avatar to enhance the visual aesthetics of your concert history
 
-### Next Steps
+### Todos
 
 - [ ] Upload your concert photos to a concert specific photo gallery.
+- [ ] Add timestamp when user logs in
+- [ ] Fetch new setlist information if available for a show
 
 ## Authors
 
