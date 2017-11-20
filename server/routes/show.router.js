@@ -295,6 +295,34 @@ router.put('/editShow', function(req, res) {
   }
 });
 
+// UPDATE artist image
+router.put('/updateArtistImage', function(req, res) {
+  console.log('updateArtistImage', req.body);
+
+  if (req.isAuthenticated()) {
+    pool.connect(function(errDatabase, client, done) {
+      if (errDatabase) {
+        console.log('Error connecting to database', errDatabase);
+        res.sendStatus(500);
+      } else {
+        client.query(
+          'UPDATE users_shows SET image=$1 WHERE id=$2;',
+          [req.body.image, req.body.show],
+          function(errQuery, data) {
+            done();
+            if (errQuery) {
+              console.log('Error making database query', errQuery);
+              res.sendStatus(500);
+            } else {
+              res.sendStatus(201);
+            }
+          }
+        );
+      }
+    });
+  }
+});
+
 // Add notes to the users_shows table
 router.put('/addNote', function(req, res) {
   if (req.isAuthenticated()) {

@@ -1,6 +1,6 @@
 <div class="show-container has-text-centered">
     <div class="is-circle image is-200x200 show-image" ng-if="sdc.currentShow.details[0].image">
-        <img ng-src="{{sdc.currentShow.details[0].image}}" alt="{{sdc.currentShow.details[0].artist}}">
+        <img ng-src="{{sdc.currentShow.details[0].image}}" alt="{{sdc.currentShow.details[0].artist}}" ng-click="sdc.updateArtistImage()">
     </div>
     <div class="show-info" ng-if="!sdc.editingMode">
         <h1 class="title is-size-1-desktop is-size-3-touch">
