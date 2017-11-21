@@ -237,3 +237,7 @@ a.pagination-link {
 .has-text-weight-bold {
     font-weight: 700;
 }
+
+.artist-image:hover {
+    cursor: pointer;
+}
