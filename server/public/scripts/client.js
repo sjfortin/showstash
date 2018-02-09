@@ -1,4 +1,8 @@
-var app = angular.module('ShowStashApp', ['ngRoute', 'toastr']);
+var app = angular.module('ShowStashApp', [
+  'ngRoute',
+  'toastr',
+  'angularUtils.directives.dirPagination'
+]);
 
 var filestack = filestack.init('AXXO3bKGRQoif7usQg4Yfz');
 

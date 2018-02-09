@@ -12,6 +12,7 @@ app.controller('ShowController', ['$routeParams', 'ShowService', '$http', '$scop
     self.orderShowsBy = '-show_date'; // default show orderBy
     self.addOwnShow = false; // manual show add form not shown by default
     self.currentShow = ShowService.currentShow; // object for the individual show
+    self.currentPage = 1;
 
     // Manual add show POST call
     self.addShow = function () {

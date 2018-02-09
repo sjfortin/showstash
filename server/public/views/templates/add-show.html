@@ -45,7 +45,7 @@
                 <h1 class="title has-text-centered" ng-if="sc.searchShowResults.data.data.setlist.length">Your Results</h1>
 
                 <!-- Pagination -->
-                <div ng-if="sc.searchShowResults.data.data.setlist.length" style="margin-bottom: 20px;">
+                <!-- <div ng-if="sc.searchShowResults.data.data.setlist.length" style="margin-bottom: 20px;">
                     <nav class="pagination is-small is-centered" role="navigation" aria-label="pagination" class="is-small">
                         <ul class="pagination-list">
                             <li ng-repeat="page in sc.ShowService.searchResultPages">
@@ -53,6 +53,16 @@
                                     aria-label="Goto page {{page}}" ng-class="{true: 'is-current', false:''}[$index+1==sc.ShowService.currentPageNumber]">Page {{page}}</a>
                             </li>
                         </ul>
+                    </nav>
+                </div> -->
+
+                <!-- Pagination -->
+                <div ng-if="sc.searchShowResults.data.data.setlist.length" style="margin-bottom: 20px;">
+                    <nav class="pagination is-small is-centered" role="navigation" aria-label="pagination" class="is-small">
+                        <ul class="pagination-list">
+                            <li dir-paginate="page in sc.ShowService.searchResultPages | itemsPerPage: 10" current-page="sc.currentPage"></li>
+                        </ul>
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/views/templates/pagination-template.html"></dir-pagination-controls>
                     </nav>
                 </div>
 
