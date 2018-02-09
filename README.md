@@ -81,11 +81,12 @@ CREATE TABLE friends
 - [x] Manually add new shows to the list of concerts attended
 - [x] Search past concerts to quickly add new shows to your concert history. Search powered by data from setlist.fm and last.fm
 - [x] Upload your own artist avatar to enhance the visual aesthetics of your concert history
+- [x] Timestamp added for login via Google or Facebook oAuth
 
 ### Todos
 
-- [x] Timestamp added for login via Google or Facebook oAuth
-- [ ] Upload your concert photos to a concert specific photo gallery.
+- [ ] Cleanup pagination to not show every page of results
+- [ ] Upload your concert photos to a concert specific photo gallery. Explore alternative to filestack
 - [ ] Fetch new setlist information if available for a show
 - [ ] Do not allow duplicate shows to be added
 - [ ] Edit artist image by clicking on current image
