@@ -50,14 +50,18 @@
                         <ul class="pagination-list">
                             <li ng-repeat="page in sc.ShowService.searchResultPages">
                                 <a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, sc.searchShow.venue, page)" class="pagination-link"
-                                    aria-label="Goto page {{page}}" ng-class="{true: 'is-current', false:''}[$index+1==sc.ShowService.currentPageNumber]">Page {{page}}</a>
+                                    aria-label="Goto page {{page}}" ng-class="{true: 'is-current', false:''}[$index+1==sc.ShowService.currentPageNumber]">{{page}}</a>
                             </li>
                         </ul>
                     </nav>
+                    <div class="has-text-centered" style="margin: 20px 0; overflow: hidden;">
+                        <div class="is-pulled-left" ng-if="sc.ShowService.currentPageNumber != 1"><a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, sc.searchShow.venue, sc.ShowService.currentPageNumber - 1)" class="button is-primary is-outlined">Previous</a></div>
+                        <div class="is-pulled-right" ng-if="sc.ShowService.currentPageNumber != sc.ShowService.searchResultPages.length"><a ng-click="sc.ShowService.searchShow(sc.searchShow.artist, sc.searchShow.city, sc.searchShow.venue, sc.ShowService.currentPageNumber + 1)" class="button is-primary is-outlined">Next</a></div>
+                    </div>
                 </div>
 
                 <!-- Search Listings -->
-                <article class="media search-listings" ng-repeat="show in sc.searchShowResults.data.data.setlist">
+                <article class="media search-listings" style="clear:both;" ng-repeat="show in sc.searchShowResults.data.data.setlist">
                     <div class="media-content">
                         <div class="content">
                                 <span class="is-size-4">{{show.artist.name}}</span>
