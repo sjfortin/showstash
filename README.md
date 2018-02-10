@@ -85,13 +85,13 @@ CREATE TABLE friends
 
 ### Todos
 
-- [ ] Cleanup pagination to not show every page of results
+- [ ] Cleanup pagination to not show everys page of results
+- [ ] Pagination moved to bottom of search results. Top have a page x out of x
 - [ ] Upload your concert photos to a concert specific photo gallery. Explore alternative to filestack
 - [ ] Fetch new setlist information if available for a show
 - [ ] Do not allow duplicate shows to be added
 - [ ] Edit artist image by clicking on current image
 - [ ] Auto suggest in the search shows feature
-- [ ] Pagination moved to bottom of search results. Top have a page x out of x
 
 ## Authors
 
